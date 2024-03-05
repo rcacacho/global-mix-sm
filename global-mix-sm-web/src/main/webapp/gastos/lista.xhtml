@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"                
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"    
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:shiro="http://shiro.apache.org/tags"
+    template="/templates/template.xhtml">
+
+    <f:metadata> 
+    </f:metadata>
+
+    <ui:define name="pageTitle">        
+        <h:outputLabel value="Buzón de gastos" style="float: left;"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="frm_material">
+            <h:panelGrid columns="1" styleClass="panelLateralDerechoFormularioDinamico">                    
+                <p:commandButton id="btnAgregar" value="" title="Registro" onstart="start();" oncomplete="stop();" 
+                                 actionListener="#{listaGastosMB.verRegistro()}" immediate="true" ajax="false"
+                                 update=":frm_grupo:pginfo" class="boton boton-img-32 b-gris4 icon-agregar-archivo" process="@this"
+                                 style="background-position: 5px 3px !important; background-size: 32px 32px !important;">
+                </p:commandButton>
+            </h:panelGrid>         
+
+            <p:outputPanel class="content_centrado">  
+                <p:panelGrid styleClass="no-border" style="margin-left:2%; margin-right: 5%; margin-top: 10px; width: 95%">
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Fecha inicio" style="font-weight: bold;" />
+                        </p:column>
+
+                        <p:column>
+                            <p:outputLabel value="Fecha fin" style="font-weight: bold;" />
+                        </p:column>                      
+                    </p:row>
+                    <p:row> 
+                        <p:column>
+                            <p:calendar id="cal_fechaInicio" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
+                                        value="#{listaGastosMB.fechaInicio}" navigator="true">  
+                                <p:ajax event="dateSelect" process="@this" />
+                            </p:calendar>
+                        </p:column>
+
+                        <p:column>
+                            <p:calendar id="cal_fechaFin" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
+                                        value="#{listaGastosMB.fechaFin}" navigator="true">  
+                                <p:ajax event="dateSelect" process="@this" />
+                            </p:calendar>
+                        </p:column>
+                    </p:row>
+
+                    <p:row> 
+                        <p:column>
+                        </p:column>
+                        <p:column>
+
+                        </p:column>
+                        <p:column >
+                            <p:commandButton value="Buscar" title="Buscar" onstart="inicio();" oncomplete="fin();"
+                                             actionListener="#{listaGastosMB.buscarFiltro()}" update=":frm_material"
+                                             class="boton boton-imgtxt-16 b-gris4 icon-buscar-expediente" process="@this"
+                                             style="margin-top: 4px;background-size: 20px 20px !important;
+                                             background-position: 4px 1px !important;"/>  
+
+                            <p:commandButton  value="Limpiar" title="Limpiar" 
+                                              action="#{listaGastosMB.limpiarCampos()}" class="boton boton-imgtxt-16 b-gris4 icon-limpiar"
+                                              onstart="inicio();" oncomplete="fin();"
+                                              style="margin-top: 4px; background-size: 20px 20px !important; background-position: 4px 1px !important;" 
+                                              update=":frm_material"  >
+                            </p:commandButton> 
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                <br />
+                <p:tabView id="tab_table">
+                    <p:tab title="Gastos (#{listaGastosMB.listGasto.size()})">
+                        <div align="center" style="margin-top: 5px; font-size: 13px;">
+                        </div>
+
+                        <p:dataTable id="dt_gasto" emptyMessage="No hay materiales registrados" styleClass="tabla-mp"
+                                     var="gast" value="#{listaGastosMB.listGasto}"
+                                     rows="20" paginator="#{listaGastosMB.listGasto.size()>20}" paginatorPosition="bottom"
+                                     rowIndexVar="rowId" style="width: 100%;" editable="true"
+                                     widgetVar="wv_gasto" filteredValue="#{listaGastosMB.listGastoFiltrado}">
+
+                            <p:column headerText="No." style="width: 5%;">
+                                #{rowId+1}
+                            </p:column>
+
+                            <p:column headerText="Gasto" width="15%" style="text-align: center;" filterMatchMode="contains"  
+                                      filterBy="#{gast.tipogasto}" filterStyle="width: 100%">                               
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <p:outputLabel value="#{gast.tipogasto}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText  value="#{gast.tipogasto}" style="width: 160px;"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Total" width="10%">
+                                <p:outputLabel value="#{mate.idunidadmedida.unidadmedida}"/>
+                            </p:column>
+
+                            <p:column headerText="Por día" width="7%">
+                                <p:outputLabel value="#{mate.existenciainicial}"/>
+                            </p:column>
+
+                            <p:column headerText="Por siete días" width="7%" filterMatchMode="contains"  
+                                      filterBy="#{mate.valor}" filterStyle="width: 100%">
+                                <p:outputLabel value="#{mate.valor}"/>
+                            </p:column>
+
+                            <p:column headerText="Fecha ingreso" width="7%">
+                                <p:outputLabel value="#{mate.fechacreacion}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </p:outputLabel>
+                            </p:column>
+
+                            <p:column width="9%" exportable="false" >
+                                <p:rowEditor style="background-position: 7px 7px !important; background-size: 18px 18px !important; float: right;"/>
+                                <p:commandButton value="" action="#{listaGastosMB.verDetalle(mate.idmaterial)}" 
+                                                 title="Ver detalle" 
+                                                 class="boton boton-img-24 b-gris4 icon-buscar-expediente" onstart="start();" onsuccess="stop();"
+                                                 style="background-position: 7px 6px !important; background-size: 18px 18px !important; float: right;"/>
+
+                                <p:commandButton action="#{listaGastosMB.eliminarMaterial(mate)}" title="Eliminar"
+                                                 onstart="start();" onsuccess="stop();" process="@this" value=""
+                                                 immediate="true" update="frm_material" class="boton boton-img-16 b-gris4 icon-trash" 
+                                                 style="background-position: 4px 3px !important; background-size: 16px 16px !important; padding-right: 5px;"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:tab>
+                </p:tabView>
+            </p:outputPanel>
+        </h:form>
+
+        <h:form id="frm_grupo">
+            <p:dialog widgetVar="dlgRegistro" id="dlgRegistro" showEffect="clip" hideEffect="clip" header="Registro de gasto"
+                      resizable="false" draggable="false" closable="true" modal="true" width="550px" position="top">
+
+                <p:panelGrid id="pginfo" columns="2" styleClass="no-border" style="width: 100%; margin-top: 10px;">
+                    <p:outputLabel value="Gasto:" style="font-weight: bold;" />              
+                    <p:outputLabel value="Total:" style="font-weight: bold;"/>
+
+                    <p:inputText value="#{listaGastosMB.gastoRegistro.tipogasto}" style="width: 220px;"   
+                                 placeholder="(ingrese el nombre)">
+                    </p:inputText>
+
+                    <p:inputText value="#{listaGastosMB.gastoRegistro.total}" style="width: 220px;"   
+                                 placeholder="(ingrese un valor)">
+                    </p:inputText>
+
+                </p:panelGrid> 
+
+                <p:commandButton value="Cancelar" process="@this" 
+                                 style="float: right; margin-right: 10px; margin-bottom: 10px; margin-top: 10px"
+                                 class="boton boton-imgtxt-16 b-gris4 icon-cancelar-cerrar"
+                                 onclick="PF('dlgRegistro').hide();"/>
+
+                <p:commandButton value="Guardar" 
+                                 class="boton boton-imgtxt-16 b-gris4 icon-guardar"
+                                 style="float: right; margin-right: 10px; margin-bottom: 10px; margin-top: 10px"       
+                                 action="#{listaGastosMB.registrarGasto()}" onstart="start();" oncomplete="stop();"
+                                 update="frm_material"/>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -107,11 +107,11 @@ public class Detallepedido implements Serializable {
         this.iddetallepedido = iddetallepedido;
     }
 
-    public double getCantidad() {
+    public Double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(double cantidad) {
+    public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
     }
 

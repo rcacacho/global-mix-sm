@@ -1,0 +1,272 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"                
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"    
+    xmlns:p="http://primefaces.org/ui"
+    template="/templates/template.xhtml">    
+
+    <f:metadata>
+        <f:viewParam name="idPedido" value="#{editarPedidoMB.idPedido}"/>
+        <f:event type="preRenderView" listener="#{editarPedidoMB.cargarDatos()}" />
+    </f:metadata>
+
+    <ui:define name="pageTitle">        
+        <h:outputLabel value="Edición programación pedido" style="float: left;"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <p:outputPanel class="content_centrado">
+
+            <h:form id="form"> 
+                <h:panelGrid columns="1" styleClass="panelLateralDerechoFormularioDinamico">  
+                    <p:button  value="&nbsp;" title="Regresar"  
+                               outcome="lista.xhtml" class="boton boton-img-24 b-gris4 icon-flecha-anterior"
+                               style="background-position: 5px 3px !important; background-size: 24px 24px !important;" >                             
+                    </p:button>
+                </h:panelGrid> 
+
+                <p:outputLabel value="1. Datos de la obra" 
+                               class="tituloCuatro" style="margin-left: 15px" />
+
+                <p:outputPanel >
+                    <hr class="line-separator"   />
+                </p:outputPanel>
+
+                <p:panelGrid id="pgInfo" styleClass="no-border" style="width: 96%; margin-left: 30px;">
+                    <p:row>       
+                        <p:column>
+                            <p:outputLabel value="Asesor" style="font-weight: bold;" />
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Cliente" style="font-weight: bold; "/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Obra" style="font-weight: bold; "/>
+                        </p:column>
+                    </p:row>   
+                    <p:row>
+                        <p:column>
+                            <p:selectOneMenu  value="#{editarPedidoMB.pedido.idasesor}" style="width: 250px;" converter="entityConverter"
+                                              filter="true" filterMatchMode="contains">    
+                                <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                <f:selectItems value="#{editarPedidoMB.listAsesor}" var="asesor" itemLabel="#{asesor.nombres} #{asesor.apellidos}" itemValue="#{asesor}" />
+                            </p:selectOneMenu>
+                        </p:column>
+                        <p:column >
+                            <p:selectOneMenu  value="#{editarPedidoMB.pedido.idcliente}" style="width: 250px;" converter="entityConverter"
+                                              filter="true" filterMatchMode="contains">    
+                                <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                <f:selectItems value="#{editarPedidoMB.listClientes}" var="cliente" itemLabel="#{cliente.nombres} #{cliente.apellidos}" itemValue="#{cliente}" />
+                            </p:selectOneMenu>
+                        </p:column>                      
+                        <p:column >
+                            <p:inputText id="txtObra" value="#{editarPedidoMB.pedido.obra}" style="width: 95%;"  placeholder="(Obra)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>   
+                    </p:row>      
+                    <p:row>
+                        <p:column >
+                            <p:outputLabel value="Tipo pago" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Cantidad pagada" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Elemento" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:selectOneMenu  value="#{editarPedidoMB.pedido.idtipopago}" style="width: 250px;" converter="entityConverter"
+                                              filter="true" filterMatchMode="contains">    
+                                <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                <f:selectItems value="#{editarPedidoMB.listTipoPago}" var="tipo" itemLabel="#{tipo.tipopago}" itemValue="#{tipo}" />
+                            </p:selectOneMenu>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="txtCantidad" value="#{editarPedidoMB.pedido.cantidadpagada}" style="width: 95%;"  placeholder="(Cantidad pagada)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="txtElemento" value="#{editarPedidoMB.pedido.elemento}" style="width: 95%;"  placeholder="(Elemento)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Volumen" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Fraguado" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Kg/cm3" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:inputText id="txtVolumen" value="#{editarPedidoMB.pedido.volumen}" style="width: 95%;"  placeholder="(Volumen)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="txtFraguado" value="#{editarPedidoMB.pedido.fraguado}" style="width: 95%;"  placeholder="(Fraguado)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="txtCm" value="#{editarPedidoMB.pedido.kgcm3}" style="width: 95%;"  placeholder="(kg/cm3)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Agregado" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Rev./pulg" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Frec" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:inputText id="txtAgregado" value="#{editarPedidoMB.pedido.agregado}" style="width: 95%;"  placeholder="(Agregado)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="txtRev" value="#{editarPedidoMB.pedido.revpulg}" style="width: 95%;"  placeholder="(Rev./pulg)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="txtFrec" value="#{editarPedidoMB.pedido.frec}" style="width: 95%;"  placeholder="(Frec)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Bombeo" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Dir/Bomb." style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Tuberia" style="font-weight: bold;"/>
+                        </p:column>                        
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:selectOneMenu  value="#{editarPedidoMB.pedido.bombeo}" style="width:250px;" 
+                                              filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="(Seleccione)" itemValue="" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Si" itemValue="Si" />
+                                <f:selectItem itemLabel="No" itemValue="No" />
+                            </p:selectOneMenu>
+                        </p:column>           
+                        <p:column>
+                            <p:inputText id="txtDir" value="#{editarPedidoMB.pedido.dirbom}" style="width: 95%;"  placeholder="(Dir/Bomb.)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText> 
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="txtTuberia" value="#{editarPedidoMB.pedido.tuberia}" style="width: 95%;"  placeholder="(tuberia)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>                             
+                        </p:column>                  
+                    </p:row>
+                    <p:row>
+                        <p:column >
+                            <p:outputLabel value="Colocado" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="Tipo colocado" rendered="#{editarPedidoMB.mostrarColocado}" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Colocador" rendered="#{editarPedidoMB.mostrarColocado}" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Cantidad cobrada en colocado" rendered="#{editarPedidoMB.mostrarColocado}" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:selectOneMenu  value="#{editarPedidoMB.pedido.colocado}" style="width:250px;" 
+                                              filter="true" filterMatchMode="contains">
+                                <p:ajax listener="#{editarPedidoMB.cargarColocado()}" update=":form:pgInfo"/>
+                                <f:selectItem itemLabel="(Seleccione)" itemValue="" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Si" itemValue="Si"  />
+                                <f:selectItem itemLabel="No" itemValue="No" />
+                            </p:selectOneMenu>
+                        </p:column>
+                        <p:column rendered="#{editarPedidoMB.mostrarColocado}">
+                            <p:selectOneMenu id="somTipo" value="#{editarPedidoMB.pedido.colocado}" style="width:250px;" 
+                                             filter="true" filterMatchMode="contains">
+                                <f:selectItem itemLabel="(Seleccione)" itemValue="" noSelectionOption="true" />
+                                <f:selectItem itemLabel="M|2" itemValue="M|2" />
+                                <f:selectItem itemLabel="M|3" itemValue="M|3" />
+                            </p:selectOneMenu>
+                        </p:column>
+                        <p:column rendered="#{editarPedidoMB.mostrarColocado}">
+                            <p:inputText id="txtColocador" value="#{editarPedidoMB.pedido.colocador}" style="width: 95%;"  placeholder="(Colocador)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>
+                        <p:column rendered="#{editarPedidoMB.mostrarColocado}">
+                            <p:inputText id="txtCobro" value="#{editarPedidoMB.pedido.colocador}" style="width: 95%;"  placeholder="(Colocador)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column >
+                            <p:outputLabel value="Laboratorio" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Fecha y hora del pedido" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:inputText id="txtLabo" value="#{editarPedidoMB.pedido.laboratorio}" style="width: 95%;"  placeholder="(laboratorio)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>
+                        <p:column>
+                            <p:calendar id="fInicial" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy HH:mm" mask ="true"                          
+                                        value="#{listaPedidosMB.fechaInicioReporte}" navigator="true">  
+                                <p:ajax event="dateSelect" process="@this" />
+                            </p:calendar>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>        
+
+
+                <div align="right" style="width: 100%; margin-bottom: 15px; margin-top: 15px; width: 98%" >
+                    <table >
+                        <tr>                                       
+                            <td>
+                                <p:commandButton value="Actualizar" 
+                                                 class="boton boton-imgtxt-16 b-gris4 icon-guardar"
+                                                 style="float: right; margin-right: 10px; margin-bottom: 10px; margin-top: 10px"       
+                                                 action="#{editarPedidoMB.actualizarProgramacion()}" onstart="start();" oncomplete="stop();"
+                                                 update="@form"/>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+            </h:form>
+        </p:outputPanel>
+    </ui:define>
+</ui:composition>

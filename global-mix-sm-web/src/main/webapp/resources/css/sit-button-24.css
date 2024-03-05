@@ -1,0 +1,27 @@
+/*Boton solo con texto*/
+.boton-txt-24{
+	height: 32px;
+    font-size:19px !important;
+}
+
+/*Boton con texto e imagen*/
+.boton-imgtxt-24{
+    height: 32px;
+    cursor:pointer !important;
+    padding: 0px 5px 0px 35px !important;  
+    /*float: left;*/  
+    background-position: 6px 2px !important;
+    background-repeat: no-repeat !important;
+    background-size: 26px 26px !important;
+    font-size:19px !important;
+    font-weight: normal !important;
+}
+
+/*Boton solo con imagen*/
+.boton-img-24{
+	height: 32px;
+	width: 34px;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: 24px 24px !important;
+}

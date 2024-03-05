@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"                
+    template="main-template.xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"    
+    xmlns:shiro="http://shiro.apache.org/tags">
+
+    <ui:define name="main-procesos">       
+    </ui:define>    
+
+    <ui:define name="content">
+        <div style="overflow-y: scroll;">
+            <div class = "fieldset-menu" style="height: 130px;">
+                <div class="main-menu-title">
+                    <div class="menu-title-container">
+                        <h2>Inventario</h2>            
+                    </div>
+                    <div class="main-menu-title-triangle"></div>
+                </div>
+
+                <center>                    
+                    <table  style="width: 50%; margin-top: 20px; float: left;">
+                        <tr>
+                            <td style="text-align: center;">  
+                                <p:link outcome="/material/lista.xhtml">
+                                    <img src="../resources/images/material.png" height="64" width="64"/>      
+                                </p:link>
+                            </td> 
+                            <td style="text-align: center;">  
+                                <p:link outcome="/reportes/material.xhtml">
+                                    <img src="../resources/images/inventario.png" height="64" width="64"/>      
+                                </p:link>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <br />
+                                <p:outputLabel value="Materiales" class="title-icon-menu"/> 
+                            </td>      
+
+                            <td style="text-align: center;">
+                                <br />
+                                <p:outputLabel value="Reporte" class="title-icon-menu"/> 
+                            </td>      
+                        </tr>
+                    </table>
+                </center>
+            </div>
+
+            <div class = "fieldset-menu" style="height: 130px;">
+                <div class="main-menu-title">
+                    <div class="menu-title-container">
+                        <h2>Clientes</h2>            
+                    </div>
+                    <div class="main-menu-title-triangle"></div>
+                </div>
+
+                <center>                    
+                    <table style="width: 70%; margin-top: 20px; float: left;">
+                        <tr>
+                            <td style="text-align: center;">  
+                                <p:link outcome="/cliente/lista.xhtml">
+                                    <img src="../resources/images/clientes.png" height="64" width="64"/>      
+                                </p:link>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <br />
+                                <p:outputLabel value="Buzón clientes" class="title-icon-menu"/> 
+                            </td>                                                      
+                        </tr>
+                    </table>
+                </center>
+            </div>      
+
+            <div class = "fieldset-menu" style="height: 130px;">
+                <div class="main-menu-title">
+                    <div class="menu-title-container">
+                        <h2>Asesores</h2>            
+                    </div>
+                    <div class="main-menu-title-triangle"></div>
+                </div>
+
+                <center>                    
+                    <table  style="width: 50%; margin-top: 20px; float: left;">
+                        <tr>
+                            <td style="text-align: center;">  
+                                <p:link outcome="/asesor/lista.xhtml">
+                                    <img src="../resources/images/asesor.png" height="64" width="64"/>      
+                                </p:link>
+                            </td>
+                            <td style="text-align: center;">    
+                                <p:link outcome="/camion/lista.xhtml">
+                                    <img src="../resources/images/camion-hormigonera.png" height="70" width="70"/>      
+                                </p:link>
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <br />
+                                <p:outputLabel value="Asesores" class="title-icon-menu"/> 
+                            </td>
+                            <td style="text-align: center;">
+                                <br />
+                                <p:outputLabel value="Camiones" class="title-icon-menu"/> 
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+            </div>
+
+            <div class = "fieldset-menu" style="height: 130px;">
+                <div class="main-menu-title">
+                    <div class="menu-title-container">
+                        <h2>Pedidos</h2>            
+                    </div>
+                    <div class="main-menu-title-triangle"></div>
+                </div>
+
+                <center>                    
+                    <table  style="width: 70%; margin-top: 20px; float: left;">
+                        <tr>
+                            <td style="text-align: center;" colspan="2">    
+                                <p:link outcome="/pedidos/lista.xhtml">
+                                    <img src="../resources/images/pedidos.png" height="64" width="64"/>      
+                                </p:link>
+                            </td>
+                          
+                            <td style="text-align: center;" colspan="2">    
+                                <p:link outcome="/despacho/lista.xhtml">
+                                    <img src="../resources/images/despacho.png" height="64" width="64"/>      
+                                </p:link>
+                            </td>
+
+                            <td style="text-align: center;" colspan="2">    
+                                <p:link outcome="/gastos/lista.xhtml">
+                                    <img src="../resources/images/reporte.png" height="64" width="64"/>      
+                                </p:link>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;" colspan="2">
+                                <br />
+                                <p:outputLabel value="Pedidos" class="title-icon-menu"/> 
+                            </td>
+                           
+                            <td style="text-align: center;" colspan="2">
+                                <br />
+                                <p:outputLabel value="Despachos" class="title-icon-menu"/> 
+                            </td>
+
+                            <td style="text-align: center;">
+                                <br />
+                                <p:outputLabel value="Compras" class="title-icon-menu"/> 
+                            </td>
+                        </tr>
+                    </table>
+                </center> 
+            </div>
+
+            <div class = "fieldset-menu" style="height: 130px;">
+                <div class="main-menu-title">
+                    <div class="menu-title-container" style="width: 175px;">
+                        <h2>Reportes</h2>            
+                    </div>
+                    <div class="main-menu-title-triangle"></div>
+                </div>
+
+                <center>                    
+                    <table  style="width: 50%; margin-top: 20px; float: left;">
+                        <tr>
+                            <td style="text-align: center;" >    
+                                <p:link outcome="/reportes/resumen.xhtml">
+                                    <img src="../resources/images/hormigon.png" height="70" width="70"/>      
+                                </p:link>
+                            </td> 
+
+                            <td style="text-align: center;">  
+                                <p:link outcome="/reportes/resumen-diario.xhtml">
+                                    <img src="../resources/images/resumen.png" height="64" width="64"/>      
+                                </p:link>
+                            </td>        
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <br />
+                                <p:outputLabel value="Resumen general" class="title-icon-menu"/> 
+                            </td>
+
+                            <td style="text-align: center;">
+                                <br />
+                                <p:outputLabel value="Resumen diario" class="title-icon-menu"/> 
+                            </td>   
+                        </tr>
+                    </table>
+                </center> 
+            </div>
+
+            <div class = "fieldset-menu" style="height: 130px;">
+                <div class="main-menu-title">
+                    <div class="menu-title-container" style="width: 175px;">
+                        <h2>Configuración</h2>            
+                    </div>
+                    <div class="main-menu-title-triangle"></div>
+                </div>
+
+                <center>                    
+                    <table  style="width: 50%; margin-top: 20px; float: left;">
+                        <tr>
+                            <td style="text-align: center;" >    
+                                <p:link outcome="/usuario/lista.xhtml">
+                                    <img src="../resources/images/usuario.png" height="70" width="70"/>      
+                                </p:link>
+                            </td> 
+
+                            <td style="text-align: center;">    
+                                <p:link outcome="/configuracion/unidadmedida/lista.xhtml">
+                                    <img src="../resources/images/unidadmedida.png" height="70" width="70"/>      
+                                </p:link>
+                            </td> 
+
+                            <td style="text-align: center;">    
+                                <p:link outcome="/configuracion/diesel/lista.xhtml">
+                                    <img src="../resources/images/bomba-de-gas.png" height="70" width="70"/>      
+                                </p:link>
+                            </td> 
+
+                            <td style="text-align: center;">  
+                                <p:link outcome="/configuracion/kilogramo/lista.xhtml">
+                                    <img src="../resources/images/kilogramos.png" height="64" width="64"/>      
+                                </p:link>
+                            </td>     
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <br />
+                                <p:outputLabel value="Usuarios" class="title-icon-menu"/> 
+                            </td>
+
+                            <td style="text-align: center;">
+                                <br />
+                                <p:outputLabel value="Unidad de medida" class="title-icon-menu"/> 
+                            </td>
+
+                            <td style="text-align: center;">
+                                <br />
+                                <p:outputLabel value="Diésel" class="title-icon-menu"/> 
+                            </td>
+
+                            <td style="text-align: center;">
+                                <br />
+                                <p:outputLabel value="Kilogramos" class="title-icon-menu"/> 
+                            </td> 
+                        </tr>
+                    </table>
+                </center> 
+            </div>
+        </div>
+    </ui:define>   
+</ui:composition>

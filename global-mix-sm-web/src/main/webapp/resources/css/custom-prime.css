@@ -1,0 +1,788 @@
+.row-fix {
+    margin-left: -15px;
+}
+
+.futura {
+    font-family: futuraCondensed;
+}
+
+.fieldset-menu:first-child {
+    margin-top: 15px;
+}
+
+.clear {
+    clear: both;
+}
+
+.ui-widget {    
+    font-size: 1.1em;
+}
+
+
+.fieldset-menu {
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+    float: right;
+    padding: 0;
+    -moz-border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    border-radius: 0px !important;
+    -webkit-box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.75);
+}
+
+.fieldset-menu-2:nth-child(even) {
+    right: -14px;
+}
+
+.fieldset-menu-2 {
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 18px;
+    margin-right: 11px;
+    width: 47%;
+    padding: 0;
+    -moz-border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    border-radius: 0px !important;
+    -webkit-box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.75);
+    overflow: visible;
+}
+
+.ui-fieldset-legend {
+    background: none !important;
+}
+
+.ui-button{
+    background-color: white !important;
+}
+
+.fieldset-menu .main-menu-title {
+    display: inline-block;
+    float: left;
+    vertical-align: middle;
+    color: white;
+    height: 100%;
+    position: relative;
+    top: -1px;
+    left: -1px;
+    text-align: center;
+    margin-bottom: -2px;
+}
+
+.fieldset-menu-2 .main-menu-title {
+    display: inline-block;
+    float: left;
+    vertical-align: middle;
+    color: white;
+    height: 100%;
+    position: relative;
+    top: -1px;
+    left: -20px;
+    text-align: center;
+    margin-bottom: -2px;
+}
+
+.fieldset-menu-2 .main-menu-title h2 {
+    vertical-align: middle;
+    width: 105px;
+    margin-top: 30px;
+    font-family: "futuraCondensed" !important;
+    font-size: 20px;
+}
+
+.fieldset-menu .main-menu-title h2 {
+    vertical-align: middle;
+    width: 150px;
+    margin-top: 45px;
+    font-family: "futuraCondensed" !important;
+}
+
+.fieldset-menu-2 .menu-title-container {
+    height: 90px;
+    background-color: #337AB7;
+    float: left;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.fieldset-menu .menu-title-container {
+    height: 120px;
+    background-color: #337AB7;
+    float: left;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.fieldset-menu-2 .main-menu-title-triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 45.5px 0px 45.5px 35px;
+    border-color: transparent transparent transparent #337AB7;
+    display: inline-block;
+    float: right;
+}
+
+.fieldset-menu .main-menu-title-triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 60.5px 0 60.5px 50px;
+    border-color: transparent transparent transparent #337AB7;
+    display: inline-block;
+    float: right;
+}
+
+.ui-radiobutton-icon {
+    margin-left: 0px !important;
+    margin-top: -1px !important;
+}
+
+.ui-selectonemenu .ui-selectonemenu-trigger {
+    margin-right: 0px;
+    width: auto !important;
+}
+
+.headerContainer {
+    background: #3A3736 !important;
+    width: 100%;
+}
+
+.text-white {
+    color: white;
+}
+
+.helpTextContainer {
+    margin-top: 20px;
+    padding-right: 0px;
+    font-family: futuraCondensed;
+}
+
+.headerTextContainer {
+    margin-top: 10px;
+    padding-right: 0px;
+    font-family: futuraCondensed;
+}
+
+.mpText {
+    margin: 0px;
+}
+
+.helpText {
+    font-size: 18px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.descrText {
+    font-size: 14px !important;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+
+.headerTitle {
+    font-family: futuraCondensed;
+    color: white;
+    margin-top: 9px !important;
+    margin-bottom: 9px !important;
+    font-size: 56px !important;
+    text-shadow: 3px 3px 2px #000;
+}
+
+.margin-right-zero {
+    margin-right: 0px !important;
+}
+
+.margin-left-zero {
+    margin-right: 0px !important;
+}
+
+.margin-bottom-zero {
+    margin-right: 0px !important;
+}
+
+.margin-top-zero {
+    margin-right: 0px !important;
+}
+
+.page-width {
+    margin: 0 auto;
+    width: 1024px;
+}
+
+.futura .form-group .inputLabel {
+    font-weight: 100;
+    font-size: 16px;
+}
+
+.icon-button {
+    padding-left: 25px !important;
+    background-position: 10px !important;
+}
+
+div.form-control {
+    width: auto !important;
+}
+
+
+.no-border {
+    border: none !important;
+}
+
+.btn-login {
+    margin-bottom: 5px;
+}
+
+.no-button-shadow:hover {
+    box-shadow: none !important;
+}
+
+.form-control .ui-inputfield {
+    box-shadow: none !important;
+}
+
+.info-noticias {
+    position: fixed;
+    bottom: 0px;
+    left:0px;
+    width: 70%;
+    border-bottom: medium none;
+    border-right: medium none;
+    border-left: medium none;
+    border-radius: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+.ui-icon-alert {
+    background-image: url("../images/menuIcons/Informacion.png")
+        !important;
+    background-size: 20px 20px !important;
+    background-position: 0px 0px;
+    border-radius: 0px !important;
+    width: 26px;
+    height: 20px;
+    margin-top: -4px;
+}
+
+
+.ui-datatable .ui-paginator, .ui-datatable .ui-paginator {
+    padding: 2px;
+    margin-top: 10px;
+}
+
+.procesoPenalContainer {
+    background-color: #99A1B2;
+    padding: 5px;
+    display: table-cell;
+    float: none;
+}
+
+.procesoPenalClasificacionTitle {
+    font-family: futuraCondensed;
+    font-weight: 100;
+    width: 100%;
+    margin: 0 auto;
+    color: #fff;
+    text-align: center;
+}
+
+.procesoPenalPanelRelleno {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 15px 5px;
+}
+
+.procesoPenalClasificacionTitle h4 {
+    margin: 10px auto 0px;
+    padding: 10px 0px;
+    width: 90%;
+    background-color: rgb(58, 55, 54);
+}
+
+.procesoPenalSubClasificacionTitle {
+    font-family: futuraCondensed;
+    font-weight: 80;
+    width: 80%;
+    margin-left: 10px;
+    color: #000;
+}
+
+.procesoPenalEventoButton {
+    margin: 3px 5px;
+    padding: 0;
+    width: 95%;
+    height: 40px;
+    background-image: none !important;
+    box-shadow: none !important;
+    float: left;
+}
+
+.procesoPenalEventoButtonHalf {
+    margin: 3px 5px;
+    padding: 0;
+    width: 46%;
+    height: 40px;
+    background-image: none !important;
+    box-shadow: none !important;
+    float: left;
+}
+
+.procesoPenalEventoButton span, .procesoPenalEventoButtonHalf span {
+    font-weight: 300;
+    color: #000;
+    text-shadow: none;
+}
+
+.ui-datatable {
+
+}
+
+.ui-datatable .ui-widget-header .ui-state-default {
+    /*background: none;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 2px solid #000;*/
+    font-family: futuraCondensed;
+    font-weight: 100;
+    font-size: 16px;
+    color: rgb(58, 55, 54);
+}
+
+.ui-datatable thead th, .ui-datatable tfoot td{
+    background: none !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 2px solid #000;
+    font-family: futuraCondensed;
+    font-weight: 100 !important;
+    font-size: 16px !important;
+    color: rgb(58, 55, 54);
+}
+
+.ui-datatable tr.ui-state-hover {
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background-color: rgba(185, 159, 48, 0.45) !important;
+}
+
+.ui-datatable tr.ui-state-highlight {
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background-color: rgba(185, 159, 48, 1) !important;
+    color: rgb(58, 55, 54);
+    text-shadow: none !important;
+}
+
+.ui-datatable .ui-widget-header .ui-state-default:first-child {
+    text-align: left;
+}
+
+.ui-datatable tbody td {
+    border: none !important;
+    text-align: center;
+    font-size: 11px;
+}
+
+.ui-datatable tbody td:first-child {
+    text-align: left;
+}
+
+.ui-datatable .ui-widget-content {
+    border-right: none !important;
+    border-left: none !important;
+}
+
+.ui-datatable .ui-datatable-odd {
+    background-color: #FFF;
+}
+
+.ui-datatable table {
+    width: 97% !important;
+}
+
+.ui-paginator-pages {
+    padding-top: 0 !important;
+}
+
+.ui-paginator-pages .ui-state-default {
+    background: rgb(58, 55, 54) !important;
+    color: #ffa300 !important;
+    background-image: none !important;
+    border: none !important;
+    border-radius: 0;
+    text-shadow: none !important;
+    width: 20px;
+    height: 20px;
+    text-align: center !important;
+    line-height: 20px;
+    box-shadow: none !important;
+    font-size: 10px !important;
+}
+
+.ui-paginator .ui-state-hover {
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.ui-paginator .ui-state-focus {
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.ui-paginator .ui-state-active {
+    color: rgb(58, 55, 54) !important;
+    background: #ffa300 !important;
+}
+
+.ui-paginator-rpp-options {
+    display: none !important;
+}
+
+.ui-paginator-last {
+    background-color: rgb(58, 55, 54) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    height: 20px;
+    width: 20px;
+    vertical-align: top;
+    box-shadow: none !important;
+}
+
+.ui-paginator-next {
+    background-color: rgb(58, 55, 54) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    height: 20px;
+    width: 20px;
+    vertical-align: top;
+    box-shadow: none !important;
+}
+
+
+.ui-paginator-prev {
+    background-color: rgb(58, 55, 54) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    height: 20px;
+    width: 20px;
+    vertical-align: top;
+    box-shadow: none !important;
+}
+
+.ui-paginator-first {
+    background-color: rgb(58, 55, 54) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    height: 20px;
+    width: 20px;
+    vertical-align: top;
+    box-shadow: none !important;
+}
+
+.ui-icon-seek-end {
+    background: url(#{resource['css/images/Ultima.png']}) no-repeat !important; 
+    background-size: 10px 10px !important;
+    background-position: 1px 3px !important;
+}
+
+.ui-icon-seek-next {
+    background: url(#{resource['css/images/Siguiente.png']}) no-repeat !important; 
+    background-size: 10px 10px !important;
+    background-position: 1px 3px !important;
+}
+
+
+.ui-icon-seek-prev {
+    background: url(#{resource['css/images/Anterior.png']}) no-repeat !important; 
+    background-size: 10px 10px !important;
+    background-position: 1px 3px !important;
+}
+
+.ui-icon-seek-first {
+    background: url(#{resource['css/images/Primera.png']}) no-repeat !important; 
+    background-size: 10px 10px !important;
+    background-position: 1px 3px !important;
+}
+
+.menuBuzonCasos {
+    float: none !important;
+    padding-left: 3px;
+}
+
+.inputText100 {
+    width: 100px;
+}
+
+.inputText125 {
+    width: 125px;
+}
+
+.inputText150 {
+    width: 150px;
+}
+
+.ui-autocomplete input {
+    background-color: rgba(255,255,255) !important;
+
+
+} 
+
+#soporteAutoComplete {
+    background-color: rgba(255,255,255) !important;
+    width: 182px;
+
+
+}
+
+.ui-accordion .ui-accordion-header {
+
+    font: futura !important;
+    border-radius: 10px 10px 0px 0px;
+    font-family: futuraCondensed;	
+    font-weight: 100;
+    font-size: 14px;
+    color: rgb(58, 55, 54);
+    text-shadow: none !important;
+}
+
+.ui-accordion .ui-accordion-content {
+    border-radius: 5px 5px 0px 0px;
+}
+
+.ui-tabs .ui-tabs-nav li {		
+    font-family: futuraCondensed;
+    font-weight: 100;
+    font-size: 15px;
+    color: #fff;	
+}
+
+.ui-tabs.ui-tabs-top > .ui-tabs-nav li.border-green {
+    border-color: #5CB85C !important;
+}
+
+.ui-tabs.ui-tabs-top > .ui-tabs-nav li.border-blue {
+    border-color: #337AB7 !important;
+}
+
+.ui-tabs.ui-tabs-top > .ui-tabs-nav li.border-yellow {
+    border-color: #F0AD4E !important;
+}
+
+.ui-tabs.ui-tabs-top > .ui-tabs-nav li.border-red {
+    border-color: #D9534F !important;
+}
+
+.ui-tabs.ui-tabs-top > .ui-tabs-nav li.carpet-size{
+    width: 205px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.ui-growl-item-container {
+    opacity: 1;
+}
+
+.fc-header-title h2{
+    font-family: futuraCondensed;
+    font-weight: 100 !important;
+}
+
+.fc-grid .fc-day-number{
+    font-family: futuraCondensed;
+    font-weight: 100 !important;
+}
+
+.fc-event-inner{
+    background-color: #0071BD !important;
+}
+
+.fc-header .fc-button{
+    font-family: futuraCondensed;
+    font-weight: 100 !important;
+}
+
+.offBorderHeaderGrid.ui-panelgrid>*>tr,
+.offBorderHeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+    border: none;
+}
+
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield{
+    box-shadow:none !important;
+
+}
+
+.ui-tree{
+    border:none; 	
+}
+
+.ui-tree {
+    position: none !important;
+    width: auto !important;
+}
+
+
+.ui-widget-header{
+    background: none;	
+}
+
+.ui-draggable{
+    z-index:1000;
+}
+
+.ui-tree .ui-tree-container{
+    overflow:visible !important;
+}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 0px;
+}
+
+.spantooltip{
+    z-index:1000;
+}
+
+.ui-selectonemenu-panel .ui-selectonemenu-items-wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.ui-selectonemenu-label {
+    width: auto !important;
+}
+
+.ui-tabs .ui-tabs-nav {
+    background: #FFF -moz-linear-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0% 0%;
+    border-radius: 0px;
+}
+
+.ui-tabs-scrollable .ui-tabs-nav {
+    width: auto !important ;
+}
+
+.ui-widget-header {
+    border: 0px solid #A8A8A8 !important;
+}
+
+.ui-paginator .ui-paginator-current{
+    display: block;
+}
+
+.sinmargin.ui-tabs {
+    position: relative !important;
+    padding: 0 !important;
+}
+
+
+.ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
+    opacity: 0.35;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {    
+    color: #4f4f4f;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+}
+
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem {
+    list-style: none;
+    white-space: nowrap;
+    font-family: futuraCondensed;
+    font-weight: 100;
+    font-size: 16px;
+}
+
+.textcheck.ui-chkbox .ui-chkbox-label {
+    margin: 0px 5px 0px 3px;
+    float:left;
+    cursor: pointer;
+    outline: medium none;
+    z-index: 1;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.ui-treenode-content > .ui-treenode-icon{
+    border-radius: 0px !important;
+}
+
+.ui-button-text-only .ui-button-text {
+    padding: 0px !important;
+}
+
+.ui-state-default {
+
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+
+}
+
+.ui-datatable tr.ui-state-highlight{
+    background-color: #FAD7A0 !important;
+}
+
+.ui-datatable tr.ui-state-hover{
+    background-color: #FDEBD0 !important;
+}
+
+.ui-progressbar .ui-progressbar-label{
+    border-top: 1px solid #C0C0C0 !important; 
+    border-left: 1px solid #C0C0C0 !important;
+    border-right: 1px solid #C0C0C0 !important;
+    border-radius:2px !important; 
+
+}
+
+.ui-selectonemenu .ui-selectonemenu-trigger{
+    margin-right: 17px !important;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    font-weight: normal !important;
+    color: #4f4f4f;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+}
+
+.title-icon-menu
+{
+    vertical-align: middle;
+    width: 150px;
+    margin-top: 45px;
+    font-family: futuraCondensed !important; font-size: 14px;
+}
+
+.ui-selectcheckboxmenu .ui-selectcheckboxmenu-trigger {
+    width: 21px !important;
+}
+
+
+.ui-selectonemenu .ui-selectonemenu-trigger {
+    width: 21px !important;
+    margin-right: 0px !important;
+}
+
+.ui-growl-icon-close{
+    background: url(#{resource['css/images/app/cerrar_message.png']}) no-repeat !important;
+        width: 24px !important;
+        height: 24px !important;
+        }
+
+
+        @font-face {
+        font-family: futuraCondensed;
+        src: url(#{resource['css/fonts/4004.ttf']});	 
+        }
+

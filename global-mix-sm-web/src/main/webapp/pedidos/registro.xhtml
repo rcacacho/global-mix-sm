@@ -1,0 +1,628 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"                
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"    
+    xmlns:p="http://primefaces.org/ui"
+    template="/templates/template.xhtml">    
+
+    <f:metadata>
+        <f:viewParam name="idPedido" value="#{registroPedidoMB.idPedido}"/>
+        <f:event type="preRenderView" listener="#{registroPedidoMB.cargarDatos()}" />
+    </f:metadata>
+
+    <ui:define name="pageTitle">        
+        <h:outputLabel value="Registro de pedidos" style="float: left;"/>
+        <h:outputLabel value="Obra #{registroPedidoMB.pedido.obra}" style="float: right; color: #000000"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <p:outputPanel class="content_centrado">
+
+            <h:form id="form"> 
+                <h:panelGrid columns="1" styleClass="panelLateralDerechoFormularioDinamico">  
+                    <p:button  value="&nbsp;" title="Regresar"  
+                               outcome="lista.xhtml" class="boton boton-img-32 b-gris4 icon-flecha-anterior"
+                               style="background-position: 5px 3px !important; background-size: 32px 32px !important;" >                             
+                    </p:button>
+                    <p:commandButton id="btnAvanzar" value="" title="Enviar a despacho" onstart="start();" oncomplete="stop();" 
+                                     actionListener="#{registroPedidoMB.enviarDespacho()}" immediate="true" ajax="false"
+                                     update=":frm_grupo:pginfo" class="boton boton-img-32 b-gris4 icon-guardar" process="@this"
+                                     style="background-position: 5px 3px !important; background-size: 32px 32px !important;"
+                                     rendered="#{registroPedidoMB.pedido.idestadopedido.idestadopedido eq 1}">
+                    </p:commandButton>
+                    <p:commandButton value="" title="Imprimir pedido" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+                                     style="background-position: 5px 3px !important; background-size: 32px 32px !important;"
+                                     class="boton boton-img-32 b-gris4 icon-imprimir">
+                        <p:fileDownload value="#{registroPedidoMB.generReporte()}" />
+                    </p:commandButton>
+                </h:panelGrid> 
+
+                <p:outputLabel value="1. Datos de la obra" 
+                               class="tituloCuatro" style="margin-left: 15px" />
+
+                <p:outputPanel >
+                    <hr class="line-separator"   />
+                </p:outputPanel>
+
+                <p:panelGrid id="pgInfo" styleClass="no-border" style="width: 96%; margin-left: 30px;">
+                    <p:row>       
+                        <p:column>
+                            <p:outputLabel value="Cliente" style="font-weight: bold;" />
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Asesor" style="font-weight: bold; "/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Ubicación" style="font-weight: bold; "/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Fecha" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>   
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value=" #{registroPedidoMB.pedido.idcliente.nombres} #{registroPedidoMB.pedido.idcliente.apellidos}"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="#{registroPedidoMB.pedido.idasesor.nombres} #{registroPedidoMB.pedido.idasesor.apellidos}"/>
+                        </p:column>                      
+                        <p:column >
+                            <p:outputLabel value="#{registroPedidoMB.pedido.obra}"/>
+                        </p:column>   
+                        <p:column>
+                            <p:outputLabel value="#{registroPedidoMB.pedido.fechacreacion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </p:outputLabel>
+                        </p:column>
+                    </p:row>      
+                    <p:row>
+                        <p:column >
+                            <p:outputLabel value="Material" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Tipo obra" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Bombeo" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Colocado" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Concreto #{registroPedidoMB.pedido.kgcm3} PSI de #{registroPedidoMB.pedido.agregado} REV de #{registroPedidoMB.pedido.revpulg}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{registroPedidoMB.pedido.elemento}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{registroPedidoMB.pedido.bombeo == 'Si' ? 'Con bombeo' : 'Sin bombeo'}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{registroPedidoMB.pedido.colocado == 'Si' ? 'Con colocado' : 'Sin colocado'}"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>     
+                        <p:column >
+                            <p:outputLabel value="M|3 Encargados" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Estado" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Pago" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Fecha y hora envío" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="#{registroPedidoMB.pedido.volumen}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{registroPedidoMB.pedido.idestadopedido.estado}" style="font-weight: bold; color: red;"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{registroPedidoMB.pedido.cantidadpagada}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{registroPedidoMB.pedido.fechapedido}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                            </p:outputLabel>
+                        </p:column>                        
+                    </p:row> 
+                    <p:row>
+                        <p:column >
+                            <p:outputLabel value="Estado del pago" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="#{registroPedidoMB.pedido.idtipopago.tipopago}"/>
+                        </p:column>
+                    </p:row>                    
+                </p:panelGrid>        
+
+                <br />
+                <p:outputLabel value="2. Datos del material" 
+                               class="tituloCuatro" style="margin-left: 15px" />
+
+                <p:outputPanel >
+                    <hr class="line-separator"   />
+                </p:outputPanel>
+                <p:tabView id="tab_registro">
+                    <p:tab title="Registro normal">
+                        <p:panelGrid id="pgMaterial" styleClass="no-border" style="width: 96%; margin-left: 30px;">
+                            <p:row>       
+                                <p:column>
+                                    <p:outputLabel value="Camión" style="font-weight: bold;" />
+                                </p:column>
+                                <p:column >
+                                    <p:outputLabel value="Cemento" style="font-weight: bold; "/>
+                                </p:column>
+                                <p:column >
+                                    <p:outputLabel value="Arena" style="font-weight: bold; "/>
+                                </p:column>
+                                <p:column >
+                                    <p:outputLabel value="Piedrín" style="font-weight: bold;"/>
+                                </p:column>
+                            </p:row>   
+                            <p:row>
+                                <p:column>
+                                    <p:selectOneMenu  value="#{registroPedidoMB.idCamion}" style="width: 250px;" converter="entityConverter"
+                                                      filter="true" filterMatchMode="contains">
+                                        <p:ajax event="itemSelect"/>
+                                        <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                        <f:selectItems value="#{registroPedidoMB.listCamion}" var="camion" itemLabel="#{camion.numero}" itemValue="#{camion}" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                                <p:column >
+                                    <p:inputText id="txtCemento" value="#{registroPedidoMB.cantidadCemento}" style="width: 95%;"  placeholder="(Cemento)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>
+                                </p:column>                      
+                                <p:column >
+                                    <p:inputText id="txtArena" value="#{registroPedidoMB.cantidadArena}" style="width: 63%;"  placeholder="(Arena)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>
+                                </p:column> 
+                                <p:column>
+                                    <p:selectOneMenu  value="#{registroPedidoMB.idPiedrin}" style="width: 250px;" converter="entityConverter"
+                                                      filter="true" filterMatchMode="contains">    
+                                        <p:ajax event="itemSelect"/>
+                                        <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                        <f:selectItems value="#{registroPedidoMB.listPiedrin}" var="piedrin" itemLabel="#{piedrin.material}" itemValue="#{piedrin}" />
+                                    </p:selectOneMenu>                                   
+                                </p:column>
+                            </p:row>      
+                            <p:row>
+                                <p:column >
+                                    <p:outputLabel value="Cantidad de piedrín" style="font-weight: bold;"/>
+                                </p:column>
+                                <p:column >
+                                    <p:outputLabel value="Aditivo" style="font-weight: bold;"/>
+                                </p:column>
+                                <p:column >
+                                    <p:outputLabel value="Cantidad Aditivo" style="font-weight: bold;"/>
+                                </p:column>
+                                <p:column>
+                                    <p:outputLabel value="Agua" style="font-weight: bold;"/>
+                                </p:column>              
+                            </p:row>
+                            <p:row>                 
+                                <p:column>
+                                    <p:inputText id="txtPiedrin" value="#{registroPedidoMB.cantidadPiedrin}" style="width: 95%;"  placeholder="(Piedrín)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>                                              
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu  value="#{registroPedidoMB.idAditivo}" style="width: 250px;" converter="entityConverter"
+                                                      filter="true" filterMatchMode="contains">    
+                                        <p:ajax event="itemSelect"/>
+                                        <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                        <f:selectItems value="#{registroPedidoMB.listAditivo}" var="aditivo" itemLabel="#{aditivo.material}" itemValue="#{aditivo}" />
+                                    </p:selectOneMenu>    
+                                </p:column>
+                                <p:column>
+                                    <p:inputText id="txtAditivo" value="#{registroPedidoMB.cantidadAditivo}" style="width: 63%;"  placeholder="(Aditivo)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>
+                                </p:column>
+                                <p:column>
+                                    <p:inputText id="txtAgua" value="#{registroPedidoMB.cantidadAgua}" style="width: 95%;"  placeholder="(Agua)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>
+                                </p:column>
+                            </p:row>       
+                            <p:row>
+                                <p:column >
+                                    <p:outputLabel value="M|3 despachados" style="font-weight: bold;"/>
+                                </p:column>    
+                            </p:row> 
+                            <p:row>
+                                <p:column >
+                                    <p:inputText id="txtDespachada" value="#{registroPedidoMB.cantidadDespachada}" style="width: 95%;"  placeholder="(Cantidad)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>              
+                        <div align="right" style="width: 100%; margin-bottom: 15px; margin-top: 15px; width: 98%" >
+                            <table >
+                                <tr>                                       
+                                    <td>
+                                        <p:commandButton value="Guardar" 
+                                                         class="boton boton-imgtxt-16 b-gris4 icon-guardar"
+                                                         style="float: right; margin-right: 10px; margin-bottom: 10px; margin-top: 10px"       
+                                                         action="#{registroPedidoMB.registroPedido()}" onstart="start();" oncomplete="stop();"
+                                                         update="@form" process="@this" immediate="true"/>
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="Cancelar" 
+                                                         class="boton boton-imgtxt-16 b-gris4 icon-cancelar-cerrar "
+                                                         actionListener="#{registroPedidoMB.limpiarCampos()}"
+                                                         style="background-position: 5px 3px !important; background-size: 16px 16px !important;"
+                                                         update="pgMaterial" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </p:tab>
+                    <p:tab title="Registro personalizado">
+                        <p:panelGrid id="pgMaterialPer" styleClass="no-border" style="width: 96%; margin-left: 30px;">
+                            <p:row>       
+                                <p:column>
+                                    <p:outputLabel value="Camión" style="font-weight: bold;" />
+                                </p:column>
+                                <p:column >
+                                    <p:outputLabel value="Cemento" style="font-weight: bold; "/>
+                                </p:column>
+                                <p:column >
+                                    <p:outputLabel value="Arena" style="font-weight: bold; "/>
+                                </p:column>
+                                <p:column >
+                                    <p:outputLabel value="Piedrín" style="font-weight: bold;"/>
+                                </p:column>
+                            </p:row>   
+                            <p:row>
+                                <p:column>
+                                    <p:selectOneMenu  value="#{registroPedidoMB.idCamion}" style="width: 250px;" converter="entityConverter"
+                                                      filter="true" filterMatchMode="contains">   
+                                        <p:ajax event="itemSelect"/>
+                                        <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                        <f:selectItems value="#{registroPedidoMB.listCamion}" var="camion" itemLabel="#{camion.numero}" itemValue="#{camion}" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                                <p:column >
+                                    <p:inputText id="txtCementoPer" value="#{registroPedidoMB.cantidadCementoPer}" style="width: 95%;"  placeholder="(Cemento)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>
+                                </p:column>                      
+                                <p:column >
+                                    <p:inputText id="txtArenaPer" value="#{registroPedidoMB.cantidadArenaPer}" style="width: 63%;"  placeholder="(Arena)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>
+                                </p:column> 
+                                <p:column>
+                                    <p:selectOneMenu  value="#{registroPedidoMB.idPiedrin}" style="width: 250px;" converter="entityConverter"
+                                                      filter="true" filterMatchMode="contains">   
+                                        <p:ajax event="itemSelect"/>
+                                        <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                        <f:selectItems value="#{registroPedidoMB.listPiedrin}" var="piedrin" itemLabel="#{piedrin.material}" itemValue="#{piedrin}" />
+                                    </p:selectOneMenu>                                   
+                                </p:column>
+                            </p:row>      
+                            <p:row>
+                                <p:column >
+                                    <p:outputLabel value="Cantidad de piedrín" style="font-weight: bold;"/>
+                                </p:column>
+                                <p:column >
+                                    <p:outputLabel value="Aditivo" style="font-weight: bold;"/>
+                                </p:column>
+                                <p:column >
+                                    <p:outputLabel value="Cantidad Aditivo" style="font-weight: bold;"/>
+                                </p:column>
+                                <p:column>
+                                    <p:outputLabel value="Agua" style="font-weight: bold;"/>
+                                </p:column>              
+                            </p:row>
+                            <p:row>                 
+                                <p:column>
+                                    <p:inputText id="txtPiedrinPer" value="#{registroPedidoMB.cantidadPiedrinPer}" style="width: 95%;"  placeholder="(Piedrín)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>                                              
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu  value="#{registroPedidoMB.idAditivo}" style="width: 250px;" converter="entityConverter"
+                                                      filter="true" filterMatchMode="contains">  
+                                        <p:ajax event="itemSelect"/>
+                                        <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                        <f:selectItems value="#{registroPedidoMB.listAditivo}" var="aditivo" itemLabel="#{aditivo.material}" itemValue="#{aditivo}" />
+                                    </p:selectOneMenu>    
+                                </p:column>
+                                <p:column>
+                                    <p:inputText id="txtAditivoPer" value="#{registroPedidoMB.cantidadAditivoPer}" style="width: 63%;"  placeholder="(Aditivo)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>
+                                </p:column>
+                                <p:column>
+                                    <p:inputText id="txtAguaPer" value="#{registroPedidoMB.cantidadAguaPer}" style="width: 95%;"  placeholder="(Agua)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>
+                                </p:column>
+                            </p:row>       
+                            <p:row>
+                                <p:column >
+                                    <p:outputLabel value="Otros materiales" style="font-weight: bold;"/>
+                                </p:column>
+                                <p:column >
+                                    <p:outputLabel value="Cantidad otros materiales" style="font-weight: bold;"/>
+                                </p:column>
+                                <p:column >
+                                    <p:outputLabel value="M|3 despachados" style="font-weight: bold;"/>
+                                </p:column>    
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <p:selectOneMenu  value="#{registroPedidoMB.detalleOtro.idmaterial}" style="width: 250px;" converter="entityConverter"
+                                                      filter="true" filterMatchMode="contains">    
+                                        <p:ajax event="itemSelect"/>
+                                        <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                        <f:selectItems value="#{registroPedidoMB.listOtro}" var="otros" itemLabel="#{otros.material}" itemValue="#{otros}" />
+                                    </p:selectOneMenu>    
+                                </p:column>    
+                                <p:column>
+                                    <p:inputText id="txtOtros" value="#{registroPedidoMB.detalleOtro.cantidad}" style="width: 63%;"  placeholder="(Cantidad)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>                                   
+                                    <p:commandButton id="btnAgregar" value="" title="Registro" onstart="start();" oncomplete="stop();" 
+                                                     actionListener="#{registroPedidoMB.registrarOtroMaterial()}" immediate="true"
+                                                     update=":form:tab_table:tabOtro"  style="background-position: 5px 3px !important; 
+                                                     background-size: 18px 18px !important; margin-left: 5px;"
+                                                     class="boton boton-img-24 b-gris4 icon-agregar-archivo" process="@this">
+                                    </p:commandButton>
+                                </p:column>
+                                <p:column >
+                                    <p:inputText id="txtDespachadaPer" value="#{registroPedidoMB.cantidadDespachadaPer}" style="width: 95%;"  placeholder="(Cantidad)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>                                    
+                                </p:column>               
+                            </p:row> 
+                        </p:panelGrid>              
+                        <div align="right" style="width: 100%; margin-bottom: 15px; margin-top: 15px; width: 98%" >
+                            <table >
+                                <tr>                                       
+                                    <td>
+                                        <p:commandButton value="Guardar" 
+                                                         class="boton boton-imgtxt-16 b-gris4 icon-guardar"
+                                                         style="float: right; margin-right: 10px; margin-bottom: 10px; margin-top: 10px"       
+                                                         action="#{registroPedidoMB.registroPedidoPersonalizado()}" onstart="start();" oncomplete="stop();"
+                                                         update="@form"/>
+                                    </td>
+                                    <td>
+                                        <p:commandButton value="Cancelar" 
+                                                         class="boton boton-imgtxt-16 b-gris4 icon-cancelar-cerrar "
+                                                         actionListener="#{registroPedidoMB.limpiarPersonalizadoCampos()}"
+                                                         style="background-position: 5px 3px !important; background-size: 16px 16px !important;"
+                                                         update="pgMaterial" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </p:tab>
+                </p:tabView>
+
+                <br />
+                <p:tabView id="tab_table">
+                    <p:tab title="Material (#{registroPedidoMB.listDetallePedido.size()})">
+                        <div align="center" style="margin-top: 5px; font-size: 13px;">
+                        </div>
+
+                        <p:outputLabel value="2.1 Listado de materiales" 
+                                       class="tituloCuatro" style="margin-left: 15px" />
+
+                        <p:outputPanel >
+                            <hr class="line-separator"   />
+                        </p:outputPanel>
+
+                        <p:dataTable id="dt_detalle" emptyMessage="No hay registros" styleClass="tabla-mp"
+                                     var="det" value="#{registroPedidoMB.listDetallePedido}"
+                                     rows="20" paginator="#{registroPedidoMB.listDetallePedido.size()>20}" paginatorPosition="bottom"
+                                     rowIndexVar="rowId" style="width: 100%;" editable="true"
+                                     widgetVar="wv_detalle" filteredValue="#{registroPedidoMB.listDetallePedidoFilter}">
+
+                            <p:ajax event="rowEdit" listener="#{registroPedidoMB.onRowEditDetallePedido}" update=":form:tab_table:dt_detalle" />
+
+                            <p:column headerText="No." style="width: 5%; text-align: center;">
+                                #{rowId+1}
+                            </p:column>
+
+                            <p:column headerText="Camion" width="8%" style="text-align: left;">                                
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <p:outputLabel value="#{det.idcamion.numero}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:selectOneMenu  value="#{det.idcamion}" style="width:100px;" converter="entityConverter"
+                                                          filter="true" filterMatchMode="contains">   
+                                            <p:ajax event="itemSelect"/>
+                                            <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                            <f:selectItems value="#{registroPedidoMB.listCamion}" var="camion" itemLabel="#{camion.numero}" itemValue="#{camion}" />
+                                        </p:selectOneMenu>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Cemento" width="9%" filterMatchMode="contains" style="text-align: center;">                                     
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <p:outputLabel value="#{det.cantidadcemento}"/> 
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText  value="#{det.cantidadcemento}" style="width: 100px;"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Arena" width="8%" style="text-align: left;">                               
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <p:outputLabel value="#{det.cantidadarena}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText  value="#{det.cantidadarena}" style="width: 100px;"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Piedrín" width="8%" style="text-align: left;">                                
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <p:outputLabel value="#{det.cantidadpiedrin}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText  value="#{det.cantidadpiedrin}" style="width: 100px;"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Aditivo" width="8%" style="text-align: left;">                               
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <p:outputLabel value="#{det.cantidadaditivo}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText  value="#{det.cantidadaditivo}" style="width: 100px;"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Agua" width="8%" style="text-align: left;">                              
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <p:outputLabel value="#{det.cantidadagua}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText  value="#{det.cantidadagua}" style="width: 100px;"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Otro material" width="8%" style="text-align: left;">                                
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <p:outputLabel value="#{det.cantidadotromaterial}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText  value="#{det.cantidadotromaterial}" style="width: 100px;"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Fecha registro" width="7%">
+                                <p:outputLabel value="#{det.fechacreacion}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </p:outputLabel>
+                            </p:column>
+
+                            <p:column headerText="" width="6%" style="text-align: left;">
+                                <p:rowEditor style=" float: right;"/>
+                                <p:commandButton value="" title="Imprimir Remisión" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+                                                 style="background-position: 5px 3px !important; background-size: 18px 18px !important;"
+                                                 class="boton boton-img-24 b-gris4 icon-imprimir" process="@this" immediate="true">
+                                    <p:fileDownload value="#{registroPedidoMB.generReporteRemision(det)}" />
+                                </p:commandButton>
+                            </p:column>
+
+                            <p:columnGroup   type="footer">
+                                <p:row >
+                                    <p:column colspan="1" styleClass="no-border" style="font-weight: bold; text-align: center; font-size: 12px !important;" footerText="" />
+                                    <p:column styleClass="no-border" style="font-weight: bold; text-align: center; font-size: 12px !important;" footerText="Totales" />
+                                    <p:column  styleClass="no-border" style="font-weight: bold; text-align: center!important; font-size: 11px !important; " footerText="#{registroPedidoMB.totalCemento}" />
+                                    <p:column  styleClass="no-border" style="font-weight: bold; text-align: center!important; font-size: 11px !important; " footerText="#{registroPedidoMB.totalArena}" />
+                                    <p:column styleClass="no-border"  style="font-weight: bold; text-align: center; font-size: 11px !important; " footerText="#{registroPedidoMB.totalPiedrin}" />
+                                    <p:column styleClass="no-border"  style="font-weight: bold; text-align: center; font-size: 11px !important; " footerText="#{registroPedidoMB.totalAditivo}" />
+                                    <p:column styleClass="no-border"  style="font-weight: bold; text-align: center; font-size: 11px !important; " footerText="#{registroPedidoMB.totalAgua}" />
+                                    <p:column styleClass="no-border"  style="font-weight: bold; text-align: center; font-size: 11px !important; " footerText="#{registroPedidoMB.totalOtroMaterial}" />
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                    </p:tab>
+                    <p:tab id="tabOtro" title="Otro Material (#{registroPedidoMB.listDetalleOtro.size()})">
+
+                        <p:outputLabel value="2.2 Listado de otros materiales" 
+                                       class="tituloCuatro" style="margin-left: 15px" />
+
+                        <p:outputPanel >
+                            <hr class="line-separator"   />
+                        </p:outputPanel>
+
+                        <p:dataTable id="dt_otro" emptyMessage="No hay registros" styleClass="tabla-mp"
+                                     var="det" value="#{registroPedidoMB.listDetalleOtro}"
+                                     rows="20" paginator="#{registroPedidoMB.listDetalleOtro.size()>20}" paginatorPosition="bottom"
+                                     rowIndexVar="rowId" style="width: 100%;" editable="true"
+                                     widgetVar="wv_detalleOtro">
+
+                            <p:ajax event="rowEdit" listener="#{registroPedidoMB.onRowEditDetallePedido}" update=":form:tab_table:dt_detalle" />
+
+                            <p:column headerText="No." style="width: 5%; text-align: center;">
+                                #{rowId+1}
+                            </p:column>
+
+                            <p:column headerText="Material" width="9%" filterMatchMode="contains" style="text-align: center;">                                     
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <p:outputLabel value="#{det.idmaterial.material}"/> 
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:selectOneMenu  value="#{det.idmaterial}" style="width: 250px;" converter="entityConverter"
+                                                          filter="true" filterMatchMode="contains">    
+                                            <p:ajax event="itemSelect"/>
+                                            <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                            <f:selectItems value="#{registroPedidoMB.listOtro}" var="otros" itemLabel="#{otros.material}" itemValue="#{otros}" />
+                                        </p:selectOneMenu>   
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Cantidad" width="8%" style="text-align: left;">                               
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <p:outputLabel value="#{det.cantidad}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText  value="#{det.cantidad}" style="width: 100px;"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Fecha registro" width="7%">
+                                <p:outputLabel value="#{det.fechacreacion}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </p:outputLabel>
+                            </p:column>
+
+                            <p:column headerText="" width="6%" style="text-align: left;">
+                                <p:rowEditor style=" float: right;"/>                              
+                            </p:column>
+
+                            <p:columnGroup   type="footer">
+                                <p:row >
+                                    <p:column colspan="1" styleClass="no-border" style="font-weight: bold; text-align: center; font-size: 12px !important;" footerText="" />
+                                    <p:column styleClass="no-border" style="font-weight: bold; text-align: center; font-size: 12px !important;" footerText="Total" />
+                                    <p:column  styleClass="no-border" style="font-weight: bold; text-align: center!important; font-size: 11px !important; " footerText="#{registroPedidoMB.totalOtroMaterial}" />
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                    </p:tab>
+                </p:tabView>
+            </h:form>
+        </p:outputPanel>
+    </ui:define>
+</ui:composition>

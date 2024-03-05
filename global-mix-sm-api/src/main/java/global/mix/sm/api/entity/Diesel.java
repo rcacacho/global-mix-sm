@@ -125,11 +125,11 @@ public class Diesel implements Serializable {
         this.fechaconsumo = fechaconsumo;
     }
 
-    public double getCantidadconsumida() {
+    public Double getCantidadconsumida() {
         return cantidadconsumida;
     }
 
-    public void setCantidadconsumida(double cantidadconsumida) {
+    public void setCantidadconsumida(Double cantidadconsumida) {
         this.cantidadconsumida = cantidadconsumida;
     }
 

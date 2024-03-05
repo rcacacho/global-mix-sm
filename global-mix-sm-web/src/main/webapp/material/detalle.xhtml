@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"                
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"    
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions"
+    xmlns:shiro="http://shiro.apache.org/tags"
+    template="/templates/template.xhtml">    
+
+    <f:metadata>
+        <f:viewParam name="idMaterial" value="#{detalleMaterialMB.idMaterial}"/>
+        <f:event type="preRenderView" listener="#{detalleMaterialMB.cargarDatos()}" />
+    </f:metadata>
+
+    <ui:define name="pageTitle">        
+        <h:outputLabel value="Material" style="float: left;"/>
+        <h:outputLabel value="#{detalleMaterialMB.material.material}" style="float: right; color: #000000"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <p:outputPanel class="content_centrado">
+
+            <h:form id="form"> 
+                <h:panelGrid columns="1" styleClass="panelLateralDerechoFormularioDinamico">                    
+                </h:panelGrid> 
+
+                <table style="width: 95%; margin-right: 20px; margin-left:  20px; margin-top: 2px; ">
+                    <tr>
+                        <td style="width: 75%;">
+
+                        </td>
+                        <td style="width: 29%;vertical-align: bottom;text-align: right!important; font-size: 13px;">
+
+                        </td>
+                        <td style="width: 2%;vertical-align: bottom;text-align: right!important; font-size: 13px;">
+                            <p:button  value="&nbsp;" title="Regresar"  
+                                       outcome="lista.xhtml" class="boton boton-img-24 b-gris4 icon-flecha-anterior"
+                                       style="background-position: 5px 3px !important; background-size: 24px 24px !important;" >                             
+                            </p:button> 
+                        </td>
+                    </tr>
+                </table>
+
+                <p:panelGrid id="pgInfo" styleClass="no-border" style="width: 96%; margin-left: 30px;">
+                    <p:row>       
+                        <p:column>
+                            <p:outputLabel value="Material" style="font-weight: bold;" />
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Unidad de medida" style="font-weight: bold; "/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Existencia actual" style="font-weight: bold; "/>
+                        </p:column>
+                    </p:row>   
+                    <p:row>
+                        <p:column style=" width: 30%; ">
+                            <p:outputLabel value="#{detalleMaterialMB.material.material}"   />
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="#{detalleMaterialMB.material.idunidadmedida.unidadmedida}"/>
+                        </p:column>                      
+                        <p:column >
+                            <p:outputLabel value="#{detalleMaterialMB.material.existenciainicial}"/>
+                        </p:column>   
+                    </p:row>     
+                    <p:row>       
+                        <p:column>
+                            <p:outputLabel value="Valor factura" style="font-weight: bold;" />
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Valor neto" style="font-weight: bold; "/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Fecha creación" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column style=" width: 30%; ">
+                            <p:outputLabel value="#{detalleMaterialMB.material.valor}"  />
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="#{detalleMaterialMB.material.valorneto}"/>
+                        </p:column>  
+                        <p:column>
+                            <p:outputLabel value="#{detalleMaterialMB.material.fechacreacion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </p:outputLabel>
+                        </p:column>
+                    </p:row> 
+                    <p:row>              
+                        <p:column >
+                            <p:outputLabel value="Usuario creación" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>                      
+                        <p:column>
+                            <p:outputLabel value="#{detalleMaterialMB.material.usuariocreacion}"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
+                <p:dataTable id="dt_detalle" emptyMessage="No hay movimientos registrados" styleClass="tabla-mp"
+                             var="det" value="#{detalleMaterialMB.listDetalle}"
+                             rows="20" paginator="#{detalleMaterialMB.listDetalle.size()>20}" paginatorPosition="bottom"
+                             rowIndexVar="rowId" style="width: 100%;" 
+                             widgetVar="wv_material" filteredValue="#{detalleMaterialMB.listDetalleFilter}">
+
+                    <p:column headerText="No." style="width: 5%;">
+                        #{rowId+1}
+                    </p:column>
+
+                    <p:column headerText="Material" width="15%" style="text-align: center;" filterMatchMode="contains"  
+                              filterBy="#{det.idmaterial.material}" filterStyle="width: 100%">
+                        <p:outputLabel value="#{det.idmaterial.material}"/>
+                    </p:column>
+
+                    <p:column headerText="Existencia actual" width="7%">
+                        <p:outputLabel value="#{det.existenciaActual}"/>
+                    </p:column>
+
+                    <p:column headerText="Ingresos" width="7%">
+                        <p:outputLabel value="#{det.ingreso}"/>
+                    </p:column>
+
+                    <p:column headerText="Egresos" width="7%">
+                        <p:outputLabel value="#{det.egreso}"/>
+                    </p:column>
+
+                    <p:column headerText="Total" width="6%" >
+                        <p:outputLabel value="#{det.total}"/>
+                    </p:column>  
+
+                    <p:column headerText="Fecha ingreso" width="7%">
+                        <p:outputLabel value="#{det.fechacreacion}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </p:outputLabel>
+                    </p:column>     
+                    <p:columnGroup   type="footer">
+                        <p:row >
+                            <p:column colspan="2" styleClass="no-border" style="font-weight: bold; text-align: center; font-size: 12px !important;" footerText="" />
+                            <p:column styleClass="no-border" style="font-weight: bold; text-align: center; font-size: 12px !important;" footerText="Totales" />
+                            <p:column  styleClass="no-border" style="font-weight: bold; text-align: center!important; font-size: 11px !important; " footerText="#{detalleMaterialMB.totalIngresos}" />
+                            <p:column  styleClass="no-border" style="font-weight: bold; text-align: center!important; font-size: 11px !important; " footerText="#{detalleMaterialMB.totalEgresos}" />
+                            <p:column styleClass="no-border"  style="font-weight: bold; text-align: center; font-size: 11px !important; " footerText="#{detalleMaterialMB.total}" />
+                        </p:row>
+                    </p:columnGroup>
+                </p:dataTable>
+            </h:form>
+        </p:outputPanel>
+    </ui:define>
+</ui:composition>

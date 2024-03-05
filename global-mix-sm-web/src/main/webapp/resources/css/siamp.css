@@ -1,0 +1,632 @@
+
+.headerTitle {    
+
+    font-family: futuraCondensed;
+    color: #FFFFFF;
+    margin-top: 0px;
+    font-size: 56px !important;
+    text-shadow: 3px 3px 2px #000;
+    position: absolute;
+    left: 45%;
+    top: 5px;  
+}
+
+.hr-mp {
+    border-width: 0.5px!important;
+    color: #fafafa!important;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.alignTop {
+    vertical-align: top;
+}
+
+.preformatted {
+    white-space: pre-wrap;
+}
+
+.iconHelp{
+    width: 20px;
+    height: 20px; 
+    margin-right: 475px;
+    border-radius: 10px;
+}
+
+#circle {
+    width: 30px;
+    height: 30px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px; 
+}
+
+#rectangle {
+    width: 15px;
+    height: 15px;
+}
+
+.big {
+    font-size: 115% !important;
+}
+
+.big .ui-widget, .big .ui-widget .ui-widget{
+    font-size: 115% !important;
+}
+
+.label-subtitulo{
+    width: 500px; 
+    font-size: 16px; 
+    text-align: left; 
+    color: #000; 
+    display: block;
+    margin-bottom: 5px;
+}
+
+.vertical-center-container {
+    text-align: center;
+}
+
+.vertical-center-container:before {
+    content: '';
+    display: inline-block;
+    height: 100%; 
+    vertical-align: middle;
+    margin-right: -0.25em; /* Adjusts for spacing */
+
+}
+
+.vertical-center {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px 15px;
+}
+
+.dashboard-panel{
+    width: 160px;
+    height: 140px;
+    text-align: center;     
+}
+
+.dashboard-label{
+    height: 100%;
+    width: 100%;
+    font-size: 100px;
+    color: #124A88;
+    /*font-weight: bold;*/
+    font-family: fantasy;
+}
+
+.ui-panel .ui-panel-content  {
+    padding: 0px !important;
+    border: none !important;
+}
+
+.clean-grid .ui-panelgrid-cell{
+    padding: 0px !important;
+}
+
+.no-header table thead tr {
+    display: none;
+}
+
+.colorTitulo{
+    color: #8D8686 !important;
+    text-decoration: none;
+}
+
+.links{
+    text-decoration: none; 
+    margin-right: 10px; 
+    margin-left: 10px; 
+    color: dodgerblue !important;
+    font-size: 14px !important;
+}
+
+.detalleTitulo{
+    color: #8D8686 !important;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.detalleDescripcion{
+    text-decoration: none;
+    font-size: 16px!important;;
+}
+
+.detalleDecripcion{
+    text-decoration: none;
+    font-size: 16px!important;
+}
+
+.rowColorVerdeClaro{
+    background: none !important;
+    background-color: #CAFFCA !important; /*verde*/
+}
+
+.rowColorGrisClaro{
+    background: none !important;
+    background-color: #EFEFEF !important;   /*gris claro*/
+}
+
+.rowColorAnaranjado{
+    background: none !important;
+    background-color: #F7BF8D !important;   /*anaranjado */
+}
+
+.rowColorBlanco{
+    background: none !important;
+    background-color: #FFFFFF !important; /*blanco*/
+}
+
+.rowColorAmarillo{
+    background: none !important;
+    background-color: #F6F7BB !important;    /*amarillo*/
+}
+
+.rowColorRojo{
+    background: none !important;
+    background-color: #FFD1D1 !important;  /*rojo */
+    color: black;
+    font-weight: bold;
+}
+
+.rowColorCeleste{
+    background: none !important;
+    background-color: #C6E9FF !important;   /*azul */
+}
+
+.rowColorGris{
+    background: none !important;
+    background-color: #CBC7C7 !important;   /*gris */
+}
+
+.rowColorLila{
+    background: none !important;
+    background-color: #FBBDF5 !important; /* lila */
+}
+
+
+.rowColorVerdeObscuro{
+    background: none !important;
+    background-color: #89BA89 !important; /* verde oscuro */
+    color: #000;
+}
+
+.sala0 .fc-event-skin {
+    background: #BAA9AF;
+    color:black;
+}
+
+.public-event, .public-event .fc-event-skin, .public-event a{
+    background-color: green; 
+    color: black;
+    border-color: greenyellow;
+}
+
+.no-header .ui-widget-header{
+    background: none !important;
+    border: none !important;
+    margin: 0 0 0 0!important;
+    padding: 0 0 0 0!important;
+}
+
+.no-header {
+    background: none !important;
+    border: none !important;
+    margin: 0 0 0 0!important;
+    padding: 0 0 0 0!important;
+}
+
+.clear{
+    clear:both;
+}
+
+.no-border, .no-border tr, .no-border td{
+    border: none !important;
+    padding-left: 0 !important;
+    padding-right: 10px !important;
+}
+
+.content-info, .content-info tr, .content-info td{
+    border: none !important;
+    padding-left: 0 !important;
+    padding-right: 10px !important;
+    background-color: #e4e6e9!important;
+}
+
+.colw800{
+    width: 800px !important;
+    height: auto;
+}
+
+.colw700{
+    width: 700px !important;
+    height: auto;
+}
+
+.colw600{
+    width: 600px !important;
+    height: auto;
+}
+
+.colw500{
+    width: 500px !important;
+    height: auto;
+}
+
+.colw400{
+    width: 400px !important;
+    height: auto;
+}
+
+.colw300{
+    width: 300px;
+    height: auto;
+} 
+
+.colw200{
+    width: 200px;
+    height: auto;
+} 
+
+.colw180{
+    width: 180px;
+    height: auto;
+} 
+
+.colw150{
+    width: 150px;
+    height: auto;
+} 
+
+.colw120{
+    width: 120px;
+    height: auto;
+} 
+
+.colw50{
+    width: 50px;
+    height: auto;
+}
+
+.colw30{
+    width: 30px !important;
+    height: auto;
+}
+
+.colw20{
+    width: 20px !important;
+    height: auto;
+}
+
+.colw10{
+    width: 10px !important;
+    height: auto;
+}
+
+.colw85p{
+    width: 90% !important;
+    height: auto;
+}
+
+.colw15p{
+    width: 10% !important;
+    height: auto;
+    vertical-align: bottom;
+    text-align: right;
+}
+
+.ui-fileupload-content{
+    border-top-width: 0;
+    display: none;
+    padding: 0.2em 0.4em;
+}
+
+root { 
+    display: block;
+}
+
+html, body {
+    background-color: #e4e6e9 !important;    
+    margin:0px;
+    padding:0px;
+    font: 12px arial !impotahomartant;
+}
+
+
+#container {
+    min-height:100%;
+    position:relative;
+}
+
+table {
+    empty-cells: show;
+}
+
+#top {
+    text-align:left;    
+    height:80px;
+    color: #ffffff;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-top: -14px;
+    background-color: #0096DE;
+    box-shadow: -1px 12px 12px -9px #a7c6e3 !important;
+    width: 100%;
+}
+#botonesIni{
+    margin-top: 15px;
+    width: 1110px;
+    margin: 0 auto;  
+}
+
+#mainProcesos{
+    margin: 15px auto;
+    width: 1110px;
+}
+
+#pageTitle {
+    font-family: futuraCondensed !important;
+    font-size: 28px !important;
+    color: #337AB7 !important;
+    font-weight: bold;
+    margin: 0 auto;
+    width: 1110px;
+    margin-top: 60px;
+    height: 40px;
+}
+
+#content{
+    height:auto !important;
+    margin-top: 20px;
+    width: 1110px;
+    margin: 0 auto;
+}
+
+#contentInfo
+{
+    height:auto !important;
+    margin-top: 10px;
+    width: 1110px;
+    margin: 0 auto;
+}
+
+#tab-menu
+{
+    height:auto !important;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 10px;
+}
+
+#botonInicio {
+    margin-top: 15px;
+    margin: 0 auto;
+    width: 1110px;
+}
+
+.helpLabel{    
+    background-color: #F6F7BB; 
+    padding: 4px;  
+    width: 960px;
+    border-radius: 5px; 
+    display: block;
+    position: relative;
+    margin: 0 auto;
+
+}
+
+#content-with-help {
+    position:relative;
+    margin:0 auto;	
+    width:700px;
+    padding-top:10px;
+    min-height:  580px;    
+    display: table-cell;
+}
+
+#content-help {
+    position:relative;    
+    margin:0 auto;	
+    width:260px;
+    padding-top:10px;
+    min-height:  580px;    
+    display: table-cell;
+}
+
+#bottom {    
+    position:absolute;
+    bottom:0px;
+    width:100%;   
+    text-align:center;
+    height: 75px;
+    background-color: #004B91;
+    color: #ffffff;
+}
+
+.section-title{
+    display: block;
+    font-size: 16px;
+    margin-top: 25px;
+    text-align: left;
+    width: 100%;
+}
+
+.expand{
+    width: 100%
+}
+
+.section-title{
+    display: block;
+    font-size: 16px;
+    margin-top: 15px;
+    text-align: left;
+    width: 100%;
+}
+
+.link {
+    color: dodgerblue;
+    font-size: 14px !important;
+    margin-left: 10px;    
+    text-decoration: none;
+}
+
+.field-label {    
+    
+    font-size: 12px !important;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.data-value{
+    font-size: 16px !important;
+}
+
+.dark-field-label {    
+    color: #464646;
+    font-size: 14px !important;
+    margin-bottom: 5px;
+}
+
+.line-separator {
+    border-width: 0.5px;
+    color: #fafafa;
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.ql-align-center {
+    text-align: center;
+}
+
+.ql-align-left {
+    text-align: left;
+}
+
+.ql-align-right {
+    text-align: right;
+}
+
+.ql-align-justify {
+    text-align: justify;
+}
+
+
+/** El estilo utilizado para los tooltips cuando es un tooltip para un bot�n. */
+div.toolTip {
+    position:relative;
+}
+
+div.toolTip:hover {
+    position:relative;
+}
+
+div.toolTip span {
+    display: none;
+}
+
+div.toolTip:hover span {
+    z-order: 25;
+    display: inline;
+    position: absolute;
+    border: 1px solid #000000;
+    font: 9px tahoma !important;
+    background-color: #FFEC8B;
+    top: 23px;
+    left: 20px;
+    text-align: left;
+}
+
+td div.ui-outputpanel{
+    display:inline-block !important;
+}
+
+.panelLateralDerechoFormularioDinamico{
+    height:auto;
+    border: 1px solid #9E9E9E;
+    right:0;
+    width: 52px;
+    top: 175px;
+    position: fixed;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 3px; 
+}
+
+.table-grid-1 tr td {
+    padding: 5px 0;
+}
+
+.alertaNumberNewHeader{
+    border: 1px solid #C0C0C0;	
+    font-size: 17px !important;
+    font-family: futuraCondensed !important;
+    border-radius:3px;
+    background-color: #FFFFFF;
+} 
+
+.finalizado{
+    border: 1px solid;
+    font-size: 17px !important;
+    font-family: futuraCondensed !important;
+    border-radius:1px;
+    background-color:	#e8e0b5; 	
+} 
+
+.produccion{
+    border: 1px solid;
+    font-size: 17px !important;
+    font-family: futuraCondensed !important;
+    border-radius:1px;
+    background-color:		#9bd777; 	
+}
+
+.alertaNumberNew{
+    border: 1px solid;
+    font-size: 14px;
+    font-family: futuraCondensed !important;
+    border-radius:4px;
+    border:none !important; 
+    height:35px; 
+    background-color: transparent;
+}
+
+.alertaNumberNewCantidad{
+    float: center;
+    border-radius:0px;
+    width:30px !important;
+    height: 24px;
+    padding-right:5px;
+    padding-left:5px;    
+}
+
+.alertaNumberNewTitulo{
+    text-decoration: none;
+}
+
+.CodeMirror { 
+
+    height: 200px;
+    width:100%;
+    border:1px solid #C0C0C0;
+    float:right;
+}
+
+
+/* El estilo aplicado al footer. */
+#footer {    
+    height:30px;
+    margin: 5px auto;
+    padding: 5px;
+    display: block;
+}
+
+#footerAuto{
+    height:30px;
+    margin: 5px auto;
+    padding: 5px;
+    border: 1px solid #d9d9d9;
+    display: block;
+}

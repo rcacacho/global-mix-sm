@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"                
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"    
+    xmlns:p="http://primefaces.org/ui"
+    template="/templates/template.xhtml">    
+
+    <f:metadata>
+        <f:viewParam name="idPedido" value="#{detallePedidoMB.idPedido}"/>
+        <f:event type="preRenderView" listener="#{detallePedidoMB.cargarDatos()}" />
+    </f:metadata>
+
+    <ui:define name="pageTitle">        
+        <h:outputLabel value="Detalle del pedido" style="float: left;"/>
+        <h:outputLabel value="Obra #{detallePedidoMB.pedido.obra}" style="float: right; color: #000000"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <p:outputPanel class="content_centrado">
+
+            <h:form id="form"> 
+                <h:panelGrid columns="1" styleClass="panelLateralDerechoFormularioDinamico">  
+                    <p:button  value="&nbsp;" title="Regresar"  
+                               outcome="lista.xhtml" class="boton boton-img-32 b-gris4 icon-flecha-anterior"
+                               style="background-position: 5px 3px !important; background-size: 32px 32px !important;" >                             
+                    </p:button>                   
+                </h:panelGrid> 
+
+                <p:outputLabel value="1. Datos de la obra" 
+                               class="tituloCuatro" style="margin-left: 15px" />
+
+                <p:outputPanel >
+                    <hr class="line-separator"   />
+                </p:outputPanel>
+
+                <p:panelGrid id="pgInfo" styleClass="no-border" style="width: 96%; margin-left: 30px;">
+                    <p:row>       
+                        <p:column>
+                            <p:outputLabel value="Cliente" style="font-weight: bold;" />
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Asesor" style="font-weight: bold; "/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Ubicación" style="font-weight: bold; "/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Fecha" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>   
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value=" #{detallePedidoMB.pedido.idcliente.nombres} #{detallePedidoMB.pedido.idcliente.apellidos}"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="#{detallePedidoMB.pedido.idasesor.nombres} #{detallePedidoMB.pedido.idasesor.apellidos}"/>
+                        </p:column>                      
+                        <p:column >
+                            <p:outputLabel value="#{detallePedidoMB.pedido.obra}"/>
+                        </p:column>   
+                        <p:column>
+                            <p:outputLabel value="#{detallePedidoMB.pedido.fechacreacion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </p:outputLabel>
+                        </p:column>
+                    </p:row>      
+                    <p:row>
+                        <p:column >
+                            <p:outputLabel value="Material" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Tipo obra" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Bombeo" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Colocado" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Concreto #{detallePedidoMB.pedido.kgcm3} PSI de #{detallePedidoMB.pedido.agregado} REV de #{detallePedidoMB.pedido.revpulg}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{detallePedidoMB.pedido.elemento}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{detallePedidoMB.pedido.bombeo == 'Si' ? 'Con bombeo' : 'Sin bombeo'}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{detallePedidoMB.pedido.colocado == 'Si' ? 'Con colocado' : 'Sin colocado'}"/>
+                        </p:column>
+                    </p:row>
+
+                    <p:row>     
+                        <p:column >
+                            <p:outputLabel value="M|3 Encargados" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Estado" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Pago" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="#{detallePedidoMB.pedido.volumen}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{detallePedidoMB.pedido.idestadopedido.estado}" style="font-weight: bold; color: red;"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{detallePedidoMB.pedido.cantidadpagada}"/>
+                        </p:column>                        
+                    </p:row>                    
+                </p:panelGrid>        
+                
+                <br />
+                <p:tabView id="tab_table">
+                    <p:tab title="Material (#{detallePedidoMB.listDetallePedido.size()})">
+                        <div align="center" style="margin-top: 5px; font-size: 13px;">
+                        </div>
+
+                        <p:outputLabel value="2. Listado de materiales" 
+                                       class="tituloCuatro" style="margin-left: 15px" />
+
+                        <p:outputPanel >
+                            <hr class="line-separator"   />
+                        </p:outputPanel>
+
+                        <p:dataTable id="dt_detalle" emptyMessage="No hay registros" styleClass="tabla-mp"
+                                     var="det" value="#{detallePedidoMB.listDetallePedido}"
+                                     rows="20" paginator="#{detallePedidoMB.listDetallePedido.size()>20}" paginatorPosition="bottom"
+                                     rowIndexVar="rowId" style="width: 100%;" editable="true"
+                                     widgetVar="wv_detalle" filteredValue="#{detallePedidoMB.listDetallePedidoFilter}">
+
+                            <p:column headerText="No." style="width: 5%; text-align: center;">
+                                #{rowId+1}
+                            </p:column>
+
+                            <p:column headerText="Camion" width="8%" style="text-align: left;">                                
+                                <p:outputLabel value="#{det.idcamion.numero}"/>
+                            </p:column>
+
+                            <p:column headerText="Cemento" width="9%" filterMatchMode="contains" style="text-align: center;">
+                                <p:outputLabel value="#{det.cantidadcemento}"/>                               
+                            </p:column>
+
+                            <p:column headerText="Arena" width="8%" style="text-align: left;">
+                                <p:outputLabel value="#{det.cantidadarena}"/>
+                            </p:column>
+
+                            <p:column headerText="Piedrín" width="8%" style="text-align: left;">
+                                <p:outputLabel value="#{det.cantidadarena}"/>
+                            </p:column>
+
+                            <p:column headerText="Aditivo" width="8%" style="text-align: left;">
+                                <p:outputLabel value="#{det.cantidadaditivo}"/>
+                            </p:column>
+
+                            <p:column headerText="Agua" width="8%" style="text-align: left;">
+                                <p:outputLabel value="#{det.cantidadagua}"/>
+                            </p:column>
+
+                            <p:column headerText="Otro material" width="8%" style="text-align: left;">
+                                <p:outputLabel value="#{det.cantidadotromaterial}"/>
+                            </p:column>
+
+                            <p:column headerText="Fecha registro" width="7%">
+                                <p:outputLabel value="#{det.fechacreacion}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </p:outputLabel>
+                            </p:column>
+
+                            <p:columnGroup   type="footer">
+                                <p:row >
+                                    <p:column colspan="1" styleClass="no-border" style="font-weight: bold; text-align: center; font-size: 12px !important;" footerText="" />
+                                    <p:column styleClass="no-border" style="font-weight: bold; text-align: center; font-size: 12px !important;" footerText="Totales" />
+                                    <p:column  styleClass="no-border" style="font-weight: bold; text-align: center!important; font-size: 11px !important; " footerText="#{detallePedidoMB.totalCemento}" />
+                                    <p:column  styleClass="no-border" style="font-weight: bold; text-align: center!important; font-size: 11px !important; " footerText="#{detallePedidoMB.totalArena}" />
+                                    <p:column styleClass="no-border"  style="font-weight: bold; text-align: center; font-size: 11px !important; " footerText="#{detallePedidoMB.totalPiedrin}" />
+                                    <p:column styleClass="no-border"  style="font-weight: bold; text-align: center; font-size: 11px !important; " footerText="#{detallePedidoMB.totalAditivo}" />
+                                    <p:column styleClass="no-border"  style="font-weight: bold; text-align: center; font-size: 11px !important; " footerText="#{detallePedidoMB.totalAgua}" />
+                                    <p:column styleClass="no-border"  style="font-weight: bold; text-align: center; font-size: 11px !important; " footerText="#{detallePedidoMB.totalOtroMaterial}" />
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                    </p:tab>
+                </p:tabView>
+            </h:form>
+        </p:outputPanel>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,51 @@
+/*Boton solo con texto*/
+.boton{
+    border: 1px solid #0071BD !important;
+    border-radius: 3px; 
+    font-family: futuraCondensed !important;
+    text-decoration:none !important;
+}
+
+.boton:hover{
+    -moz-box-shadow: 1px 1px 1px -1px black !important;
+    -webkit-box-shadow: 1px 1px 1px -1px black !important;
+    box-shadow: 1px 1px 1px -1px black !important;
+}
+
+.boton:active {
+    position:relative;
+    background-color:#C3D9FF !important;
+    top:1px;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.boton2-left{
+    border-radius: 0px;
+    border-right: 1px solid #C0C0C0 !important;
+    border-top: none !important;
+    border-left:none !important;
+    border-bottom:none !important;
+    font-family: futuraCondensed !important;
+    text-decoration:none !important;
+}
+
+.boton2-right{
+    border-radius: 0px;
+    border-left: 1px solid #C0C0C0 !important;
+    border-top: none !important;
+    border-right:none !important;
+    border-bottom:none !important; 
+    font-family: futuraCondensed !important;
+    text-decoration:none !important;
+
+}
+
+.boton2-left:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.boton2-right:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}

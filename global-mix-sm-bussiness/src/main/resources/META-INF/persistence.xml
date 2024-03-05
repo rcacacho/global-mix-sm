@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="GlobalMixSmPU" transaction-type="JTA">
+        <jta-data-source>jdbc/globalmixsm</jta-data-source>
+        <class>globa.mix.api.entity.Asesor</class>
+        <class>globa.mix.api.entity.Camion</class>
+        <class>globa.mix.api.entity.Cliente</class>
+        <class>globa.mix.api.entity.Confirmacionpago</class>
+        <class>globa.mix.api.entity.Detallematerial</class>
+        <class>globa.mix.api.entity.Detallepedido</class>
+        <class>globa.mix.api.entity.Detallepedidonormal</class>
+        <class>globa.mix.api.entity.Diesel</class>
+        <class>globa.mix.api.entity.Despachos</class>
+        <class>globa.mix.api.entity.Estadopedido</class>
+        <class>globa.mix.api.entity.Estadodespacho</class>
+        <class>globa.mix.api.entity.Gastos</class>
+        <class>globa.mix.api.entity.Kilogramo</class>
+        <class>globa.mix.api.entity.Material</class>
+        <class>globa.mix.api.entity.Pedidos</class>
+        <class>globa.mix.api.entity.Secuenciapedido</class>
+        <class>globa.mix.api.entity.Tipopago</class>
+        <class>globa.mix.api.entity.Tipousuario</class>
+        <class>globa.mix.api.entity.Unidadmedida</class>
+        <class>globa.mix.api.entity.Usuario</class>        
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <shared-cache-mode>NONE</shared-cache-mode>
+        <properties>
+            <property name="eclipselink.logging.level.sql" value="OFF"/>
+            <property name="eclipselink.logging.parameters" value="false"/>
+            <property name="eclipselink.jdbc.sequence-connection-pool" value="true"/>
+            <property name="eclipselink.target-database" value="MySQL"/>
+        </properties>
+    </persistence-unit>
+</persistence>

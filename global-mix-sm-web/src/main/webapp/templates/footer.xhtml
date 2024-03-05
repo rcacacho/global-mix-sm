@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <div style="margin-left:-16px; " >
+        <table class="panel panel-primary info-noticias no-padding" style="width: 30%; background-color:#0096DE; height:37px; ">
+            <tr>
+                <td align="left">
+                    <h:outputLabel style="margin-left:4px; color:#FFFFFF; " value="#{loginMB.nombreUsuario}" class="h5" />
+                </td>
+                <td align="right" style="position: relative">                 
+                    <h:graphicImage library="images" name="constructor.png" style="height: 37px;"/>
+                </td>
+            </tr>
+        </table>        
+        <p:panel id="Nuevo" styleClass="panel panel-primary info-noticias no-padding" style="margin-left:30%; height: 38px;" >
+            <table style="width: 100%;">
+                <tr>
+                    <td>
+                        <marquee SCROLLAMOUNT="5" >     
+                        </marquee>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>            
+        </p:panel>
+    </div>
+</ui:composition>

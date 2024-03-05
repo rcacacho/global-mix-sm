@@ -1,0 +1,137 @@
+/* BOTONES CUSTOMIZADOS */
+
+.bdashboard{/** boton para el dashboard  64x64 */
+    height : 80px;
+    width: 80px;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid #848484;
+    margin-left:20px !important;
+    margin-right:20px !important;
+    border-radius:50px;
+    -moz-border-radius:50px;	/** firefox */
+    margin: 10px 6px 0px 6px;
+    background-position: center !important;
+}
+
+
+.db-white{	
+    background-color: #ffffff !important;
+    color: black;
+    border: solid grey;
+    font: 13px tahoma;
+    font-weight: bold; 
+    display: block; 
+    border: 1px solid;
+    border-color: #CCCCCC;
+    vertical-align:text-bottom;
+}
+
+.glow {
+    display: inline-block;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow;
+    transition-property: box-shadow;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+.glow:hover {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+.fieldset-menu:first-child {
+    margin-top: 15px;
+}
+
+.fieldset-menu {
+    border: 1px solid #a8a8a8;
+    background: #ffffff;
+    padding: 0 !important;
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+    float: left;
+    -moz-border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    border-radius: 0px !important;
+    -webkit-box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.75);
+}
+
+.ui-fieldset-legend {
+    background: none !important;
+}
+
+.fieldset-menu td{
+    vertical-align: top !important;
+    valing: top !important;
+}
+
+.fieldset-menu .main-menu-title {
+    display: :inline-block;
+    float: left;
+    vertical-align: middle;
+    color: white;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    margin-bottom: -2px;
+}
+
+.fieldset-menu .main-menu-title h1 {
+    vertical-align: middle;
+    width: 150px;
+    font-weight: normal !important;
+    margin-top: 40px;
+    font-family: futuraCondensed !important;
+}
+
+.fieldset-menu .main-menu-title h2 {
+	vertical-align: middle;
+	width: 150px;
+	margin-top: 45px;
+	font-family: "futuraCondensed" !important;
+}
+
+
+.fieldset-menu .menu-title-container {
+    height: 130px;
+    background-color: #337AB7;
+    float: left;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.fieldset-menu .main-menu-title-triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 65.5px 0 65.5px 50px;
+    border-color: transparent transparent transparent #337AB7;
+    display: inline-block;
+    float: right;
+}
+
+.content_panel{
+    background-color: #FFFFFF; 
+    border-radius: 1px;
+    border:1px solid #B8B8B8; 
+    padding:3px 10px 3px 10px;
+}
+
+.panelLateralDerechoFormularioDinamico{
+    height:auto;
+    border: 1px solid #9E9E9E;
+    right:0;
+    width: 52px;
+    top: 175px;
+    position: fixed;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 3px; 
+}

@@ -1,0 +1,22 @@
+@CHARSET "ISO-8859-1";
+
+/**
+ * Vertical spacing between your rows
+ * Usage: Add class row-grid to your rows
+ */
+.row-grid + .row-grid {
+    margin-top: 5px;
+}
+
+/**
+ *
+ */
+.row-no-padding {
+	margin-left: 0;
+	margin-right: 0;	
+}
+
+.row-no-padding > [class^="col-"] {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}

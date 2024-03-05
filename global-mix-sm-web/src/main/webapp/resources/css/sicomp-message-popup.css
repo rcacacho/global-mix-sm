@@ -1,0 +1,539 @@
+/* Los siguientes estilos para el manejo de los popups */
+.genericPopUp {
+	position: absolute;
+	z-index: 1001;	
+	top:0%;
+	left:0%;
+	border: 1px solid;
+}
+.corePopup {
+	position: absolute;
+	z-index: 1001;
+	width: 250px;
+	height: 150px;
+	top: 60%;
+	left: 40%;
+}
+
+.corePopupError {
+	position: absolute;
+	z-index: 1001;
+	width: 300px;
+	height: 175px;
+	top: 60%;
+	left: 40%;
+}
+
+.corePopupIngresoHechos {
+	position: absolute;
+	z-index: 1001;
+	width: 964px;
+	height: 310px;
+	top: 68px;
+	left: 12px;
+}
+
+.corePopupDenunciasClaro {
+	position: absolute;
+	z-index: 1001;
+	width: 800px;
+	height: 600px;
+	top: 68px;
+	left: 12px;
+}
+
+.corePopupInformacion {
+	position: absolute;
+	z-index: 1001;
+	width: 600px;
+	height: 240px;
+	top: 68px;
+	left: 262px;
+}
+
+.corePopupIngresoDetenido {
+	position: absolute;
+	z-index: 980;
+	width: 980px;
+	height: 215px;
+	top: 0px;
+	left: 0px;
+}
+
+.corePopupSolicitudNotasPnc {
+	position: absolute;
+	z-index: 980;
+	width: 980px;
+	height: 400px;
+	top: 35px;
+	left: 0px;
+}
+
+.corePopupIngresoAutoProcesamiento {
+	position: absolute;
+	z-index: 980;
+	width: 965px;
+	height: 240px;
+	top: 5x;
+	left: 20px;
+}
+
+.popupBody {
+	margin-top: 5px;
+	width: 100%;
+	height: 104px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.popupHeaderEcAsociacionPersonaWrapper {
+	text-align: center;
+	vertical-align: middle;
+	height: 600px;
+	widht: 930px;
+}
+
+.popupMovimientoCasos {
+	text-align: center;
+	vertical-align: middle;
+	height: 350px;
+}
+
+.popupHeaderText {
+	float: left;
+}
+
+.popupHeaderImage {
+	float: right;
+	margin-top: 2px;
+	margin-right: 2px;
+}
+
+.msgTable {
+	height: 100%;
+	width: 100%;
+}
+
+.msgTblButtonRow {
+	height: 30px;
+	width: 100%;
+}
+
+.msgTblCausaRow {
+	height: 300px;
+	width: 100%;
+}
+
+.msgTblCausaRowAgenda {
+	height: 300px;
+	width: 100%;
+}
+
+.popupCausaBody {
+	margin-top: 5px;
+	width: 400px;
+	height: 530px;		
+}
+
+
+.popupConexionBody {
+	margin-top: 5px;
+	width: 300px;
+	height: 300px;		
+}
+
+.popupReportAgendaBody  {
+	margin-top: 5px;
+	width: 400px;
+	height: 230px;		
+}
+
+.coreCausaPopup {
+	position: absolute;
+	z-index: 1001;
+	width: 420px;
+	height: 340px;
+	top: 60%;
+	left: 40%;
+}
+
+.coreConexionPopup {
+	
+	z-index: 1001;
+	width: 320px;
+	height: 300px;
+	top: 60%;
+	left: 40%;
+}
+
+.coreMultimediaPopup {
+	position: absolute;
+	z-index: 1001;
+	width: 605px;
+	height: 500px;
+	top: 60%;
+	left: 40%;
+}
+
+.coreVideoPopup {
+	position: absolute;
+	z-index: 1001;
+	width: 820px;
+	height: 530px;
+	top: 60%;
+	left: 40%;
+}
+
+.coreAsociacioncasoPopup {
+	position: absolute;
+	z-index: 1001;
+	width: 930px;
+	height: 530px;
+	top: 60%;
+	left: 40%;
+}
+
+.coreAudioPopup {
+	position: absolute;
+	z-index: 1001;
+	width: 500px;
+	height: 600px;
+	top: 60%;
+	left: 40%;
+}
+
+.coreFotosOCPopup{
+	position: absolute;
+	z-index: 1001;
+	width: 1020px;
+	height; 600px;
+}
+.coreImagenPersonaPopup {
+	position: absolute;
+	z-index: 1001;
+	width: 510px;
+	height: 440px;
+	top: 40%;
+	left: 40%;
+}
+
+.coreMedidasSeguridadPopup {
+	position: absolute;
+	z-index: 1001;
+	width: 840px !important;
+	height: 800px;
+}
+
+.coreArbolTramitePopup {
+	position: absolute;
+	z-index: 1001;
+	width: 500px;
+	height: 500px;
+	top: 60%;
+	left: 40%;
+}
+
+.coreArbolAdministracionPopup {
+	position: absolute;
+	z-index: 1001;
+	width: 500px;
+	height: 500px;
+	top: 60%;
+	left: 40%;
+}
+
+.coreTextControlPopup {
+	position: absolute;
+	z-index: 1001;
+	width: 1015px;
+	height: 600px;
+	margin-left:-508px; /* Esto para centrar el popup en el browser */
+	top: 60px;
+	left: 50%;	
+}
+
+.popupTextControlBody {
+	margin-top: 0px;
+	width: 1000px;
+	height: 580px;		
+}
+
+.coreReportesPopup {
+	position: absolute;
+	z-index: 1001;
+	width: 985px;
+	height: 400px;
+	top: 60%;
+	left: 40%;
+}
+
+.coreReportesPopupPrime {
+	position: fixed;
+	z-index: 1001;
+	width: 985px;
+	height: 640px !important;
+	}
+
+.popupReportesBody {
+	margin-top: 0px;
+	width: 970px;
+	height: 390px;		
+}
+
+
+/** Los estilos para el popup que presenta el arbol de eventos. */
+.corePopupEventos {
+	width: 450px;
+	height: 480px;
+}
+
+.popupBodyEventos {
+	width: 100%;
+	height: 450px;
+	vertical-align: middle;
+}
+
+.popupTreeEventos {
+	height: 420px;
+	width: 100%;
+    border: 1px solid #d9d9d9;
+	overflow: auto;
+}
+
+/** Los estilos para el popup que presenta la tabla de entes en diligencias. */
+.corePopupEntes {
+	width: 520px;
+	height: 300px;
+}
+
+.popupBodyEntes {
+	width: 100%;
+	height: 270px;
+	vertical-align: middle;
+}
+
+.popupBodySearch {
+	width: 100%;
+	height: 100%px;
+	vertical-align: middle;
+}
+
+.popupTableEntes {
+	height: 240px;
+	width: 100%;
+    /*border: 1px solid #d9d9d9;*/
+}
+
+/** Los estilos para el popup que presenta la tabla de sindicados en proceso penal */
+.corePopupSindicados {
+	width: 400px;
+	height: 200px;
+}
+
+.popupBodySindicados {
+	width: 100%;
+	height: 270px;
+	vertical-align: middle;
+}
+
+.popupTableSindicados {
+	height: 240px;
+	width: 100%;
+}
+/**Los estilos para el popup que muestra la tabla de personas provistas por el servicio web de RENAP*/
+.popupTablePersonasRENAP {
+	height: 300px;
+	width: 100%;
+}
+
+/** Los estilos para el popup que presenta la tabla de delitos en Proceso Penal. */
+.corePopupDelitos {
+	width: 520px;
+	height: 350px;
+}
+
+.popupBodyDelitos {
+	width: 100%;
+	height: 320px;
+	vertical-align: middle;
+}
+
+.popupBodyDelitos {
+	height: 240px;
+	width: 100%;
+}
+
+
+.corePopupMovimientos {
+	width: 850px !important;
+	height: 500px !important;
+}
+
+
+/** Los estilos para el popup que presenta el popup de cambio de password. */
+.corePopupChangePass {
+	width: 420px;
+	height: 250px;
+}
+
+/** Los estilos para el popup que presenta el popup de cambio de password. */
+.corePopupTramite {
+	position: absolute; /*** REVISAR */
+	z-index: 1001;
+	width: 600px;
+	top: 60%;
+	left: 40%;
+}
+
+/** Los estilos para el popup que presenta el popup de cambio de password. */
+.corePopupOficio {
+	width: 547px;
+	height: 335px;
+}
+
+.popupBodyChangePass {
+	width: 100%;
+	height: 220px;
+	vertical-align: middle;
+}
+
+.popupBodyEnviarArchivo {
+	vertical-align: middle;
+	width: 100% !important; 
+	height: 215px !important;
+}
+
+.corePopupChangeUbicacion {
+	width: 580px;
+	height: 450px;
+}
+
+.popupBodyChangeUbicacionEvidencia {
+	width: 100%;
+	height: 420px;
+	vertical-align: middle;
+}
+
+.popupTableChangePass {
+	height: 160px;
+	width: 100%;
+}
+.corePopupAsociarPersona{
+	width: 840px;
+	height: 260px;
+}
+.corePopupCasosRelacionados{
+	width: 840px;
+	height: 350px;
+}
+
+.corePopupCriterioOportunidad{
+	width: 360px;
+	height: 260px;	
+}
+
+
+/** Los estilos para el popup de primeras diligencias. */
+.corePrimerasDiligenciasPopup {
+	position: absolute;
+	z-index: 1001;
+	width: 1015px;
+	height: 600px;
+	margin-left:-508px; /* Esto para centrar el popup en el browser */
+	top: 60px;
+	left: 50%;	
+}
+
+.popupPrimerasDiligenciasBody {
+	margin-top: 0px;
+	width: 1000px;
+	height: 580px;		
+}
+
+.corePopupFechaRecepcionFisica {
+	width: 200px;
+	height: 150px;
+}
+
+.popupBodyFechaRecepcionFisica {
+	width: 100%;
+	height: 320px;
+	vertical-align: middle;
+}
+
+.popupBodyFechaRecepcionFisica {
+	height: 125px;
+	width: 100%;
+}
+
+.popupAddUserRol {
+	height: 370px;
+	width: 700px;
+}
+
+.popupAddAgencia {
+	height: 230px;
+	width: 500px;
+}
+
+.popupAssingCaso {
+	height: 425px;
+	width: 900px;
+}
+
+
+.corePopupAlbumFotografico {
+	width: 975px;
+	height: 620px;
+}
+.corePopupFotografiaDPI {
+    position: absolute;
+	z-index: 1001;
+	width: 225px;
+	height: 290px;
+	top: 60%;
+	left: 40%;}
+.corePopupAlbumFotograficoPanel {
+	width: 960px;
+	height: 615px;
+
+}
+
+.corePopupMensaje{
+	position: absolute;
+	top: 250px;
+	left: 180px;
+	width: 800px;
+	height: 350px;
+	background: #DFE8FF;
+}
+.corePopupJustificacionAK{
+	width: 392px;
+	height: 190px;
+}
+
+.corePopupGruposDICRI {
+	position: absolute;
+	z-index: 1001;
+	width: 400px;
+	height: 160px;
+	top: 68px;
+	left: 12px;
+}
+
+.corePopupMonitoreoTramite {
+	position: absolute;
+	z-index: 1001;
+	width: 650px;
+	height: 160px;
+	top: 68px;
+	left: 12px;
+}
+
+.corePopupEnviarExpediente{
+	position: absolute;
+	top: 250px;
+	left: 696px; 
+	width: 495px !important; 
+	height: 285px !important;
+}

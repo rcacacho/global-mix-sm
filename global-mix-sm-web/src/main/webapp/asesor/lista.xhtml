@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"                
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"    
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:shiro="http://shiro.apache.org/tags"
+    template="/templates/template.xhtml">
+
+    <f:metadata> 
+    </f:metadata>
+
+    <ui:define name="pageTitle">        
+        <h:outputLabel value="Buzón de registro de asesores" style="float: left;"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="frm_asesor">
+            <h:panelGrid columns="1" styleClass="panelLateralDerechoFormularioDinamico">                    
+                <p:commandButton id="btnAgregar" value="" title="Registro" onstart="start();" oncomplete="stop();" 
+                                 actionListener="#{listadoAsesorMB.verRegistro()}" immediate="true" ajax="false"
+                                 update=":frm_registro" class="boton boton-img-32 b-gris4 icon-agregar-archivo" process="@this"
+                                 style="background-position: 5px 3px !important; background-size: 32px 32px !important;">
+                </p:commandButton>
+                <p:commandButton  title="Generar Reporte" value="" process="@this"
+                                  onstart="start();" oncomplete="stop();" immediate="true"
+                                  ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+                                  style="background-position: 5px 3px !important; background-size: 32px 32px !important;"
+                                  class="boton boton-img-32 b-gris4 icon-imprimir">
+                    <p:fileDownload value="#{listaClientesMB.generReporte()}" />
+                </p:commandButton>
+            </h:panelGrid>         
+
+            <p:outputPanel class="content_centrado">  
+                <p:panelGrid styleClass="no-border" style="margin-left:2%; margin-right: 5%; margin-top: 10px; width: 95%">
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Nombres" style="font-weight: bold;" />
+                        </p:column>
+                    </p:row>
+                    <p:row> 
+                        <p:column>
+                            <p:inputText id="txtNombres" value="#{listadoAsesorMB.nombres}" style="width: 95%;"  placeholder="(nombres)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>
+                    </p:row>
+
+                    <p:row> 
+                        <p:column>
+                        </p:column>
+                        <p:column>
+
+                        </p:column>
+                        <p:column >
+                            <p:commandButton value="Buscar" title="Buscar" onstart="inicio();" oncomplete="fin();"
+                                             actionListener="#{listadoAsesorMB.buscarFiltro()}" update=":frm_asesor"
+                                             class="boton boton-imgtxt-16 b-gris4 icon-buscar-expediente" process="@this"
+                                             style="margin-top: 4px;background-size: 20px 20px !important;
+                                             background-position: 4px 1px !important;"/>  
+
+                            <p:commandButton  value="Limpiar" title="Limpiar" 
+                                              action="#{listadoAsesorMB.limpiarCampos()}" class="boton boton-imgtxt-16 b-gris4 icon-limpiar"
+                                              onstart="inicio();" oncomplete="fin();"
+                                              style="margin-top: 4px; background-size: 20px 20px !important; background-position: 4px 1px !important;" update=":frm_asesor"  >
+                            </p:commandButton> 
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                <br />
+                <p:tabView id="tab_table">
+                    <p:tab title="Asesores (#{listadoAsesorMB.listAsesor.size()})">
+                        <div align="center" style="margin-top: 5px; font-size: 13px;">
+                        </div>
+
+                        <p:dataTable id="dt_asesor" emptyMessage="No hay registros" styleClass="tabla-mp"
+                                     var="asesor" value="#{listadoAsesorMB.listAsesor}"
+                                     rows="20" paginator="#{listadoAsesorMB.listAsesor.size()>20}" paginatorPosition="bottom"
+                                     rowIndexVar="rowId" style="width: 100%;" editable="true"
+                                     widgetVar="wv_asesor" filteredValue="#{listadoAsesorMB.listAsesorFiltrado}">
+
+                            <p:ajax event="rowEdit" listener="#{listadoAsesorMB.onRowEditAsesor}" update=":frm_asesor:tab_table:dt_asesor" />
+                            <p:column headerText="No." style="width: 5%; text-align: center;">
+                                #{rowId+1}
+                            </p:column>
+
+                            <p:column headerText="Nombres" width="20%" filterMatchMode="contains" style="text-align: center;">                                
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <p:outputLabel value="#{asesor.nombres} #{asesor.apellidos}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText  value="#{asesor.nombres}" style="width: 160px;"/>
+                                        <p:inputText  value="#{asesor.apellidos}" style="width: 160px;"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+
+                            <p:column headerText="Fecha ingreso" width="7%">
+                                <p:outputLabel value="#{asesor.fechacreacion}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </p:outputLabel>
+                            </p:column>
+
+                            <p:column width="12%" exportable="false" >
+                                <p:rowEditor style="background-position: 7px 7px !important; background-size: 18px 18px !important; float: right;"/>
+                                <p:commandButton action="#{listadoAsesorMB.eliminarAsesor(asesor)}" title="Eliminar"
+                                                 onstart="start();" onsuccess="stop();" process="@this" value=""
+                                                 immediate="true" update="frm_asesor" class="boton boton-img-24 b-gris4 icon-trash" 
+                                                 style="background-position: 5px 5px !important; background-size: 18px 18px !important; float: right;"/>
+
+                                <p:commandButton value="" action="#{listadoAsesorMB.verDetalle(asesor.idasesor)}" 
+                                                 title="Ver detalle" class="boton boton-img-24 b-gris4 icon-buscar-expediente" onstart="start();" onsuccess="stop();"
+                                                 style="background-position: 5px 5px !important; background-size: 18px 18px !important; float: right;"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:tab>
+                </p:tabView>
+            </p:outputPanel>
+        </h:form>
+
+        <h:form id="frm_registro">
+            <p:dialog widgetVar="dlgRegistro" id="dlgRegistro" showEffect="clip" hideEffect="clip" header="Registro de asesores"
+                      resizable="false" draggable="false" closable="true" modal="true" width="550px" position="top">
+
+                <p:panelGrid id="pginfo" columns="2" styleClass="no-border" style="width: 100%; margin-top: 10px;">
+                    <p:outputLabel value="Nombres:" style="font-weight: bold;" />              
+                    <p:outputLabel value="Apellidos:" style="font-weight: bold;"/>
+
+                    <p:inputText value="#{listadoAsesorMB.asesor.nombres}" style="width: 220px;"  
+                                 placeholder="(ingrese el nombre)">
+                    </p:inputText>    
+                    <p:inputText value="#{listadoAsesorMB.asesor.apellidos}" style="width: 220px;"  
+                                 placeholder="(ingrese el apellido)">
+                    </p:inputText> 
+                    <p:outputLabel value="" style="font-weight: bold;" />
+                    <p:outputLabel value="" style="font-weight: bold;" />
+                </p:panelGrid> 
+
+                <p:commandButton value="Cancelar" process="@this" 
+                                 style="float: right; margin-right: 10px; margin-bottom: 10px; margin-top: 10px"
+                                 class="boton boton-imgtxt-16 b-gris4 icon-cancelar-cerrar"
+                                 onclick="PF('dlgRegistro').hide();"/>
+
+                <p:commandButton value="Guardar" 
+                                 class="boton boton-imgtxt-16 b-gris4 icon-guardar"
+                                 style="float: right; margin-right: 10px; margin-bottom: 10px; margin-top: 10px"       
+                                 action="#{listadoAsesorMB.registroAsesor()}" onstart="start();" oncomplete="stop();"
+                                 update="frm_asesor"/>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

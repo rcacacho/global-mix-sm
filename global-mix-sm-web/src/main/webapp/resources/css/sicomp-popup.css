@@ -1,0 +1,32 @@
+.newPopUp{
+/* 	width:60% !important; */
+}
+
+.popUpPPenal{
+	width:75% !important;
+	height:auto !important;
+	
+}
+
+.ui-dialog .ui-dialog-titlebar-close{	
+	background: url(#{resource['images/cerrar.png']}) no-repeat;
+	background-size:40px 40px;
+	overflow:visible; 
+	width:40px;
+	height:40px;
+}
+.ui-dialog .ui-dialog-titlebar-close:hover{
+	border:none !important; 
+	box-shadow:none !important;
+}
+
+.ui-dialog .ui-dialog-titlebar-close span{
+	background:none !important;
+	
+}
+
+.ui-dialog .ui-dialog-title{
+	font-family:futuraCondensed;
+	font-size:32px;
+	font-weight:100;
+}

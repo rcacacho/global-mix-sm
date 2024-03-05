@@ -1,0 +1,872 @@
+/*IMAGENES*/
+
+/*value = "Reasignar" */
+.icon-reasignar{
+    background: url(#{resource['css/images/Reasignar64.png']}) no-repeat !important; 
+        }
+
+        /*value = "Ordenamiento" */
+        .icon-ordenamiento{        
+        background: url(#{resource['css/images/Ordenamiento64.png']}) no-repeat !important; 
+        }
+        /*value = "Inicio" */
+        .icon-inicio{        
+        background: url(#{resource['images/Inicio64.png']}) no-repeat !important; 
+        }
+        /*value = "Abrir" */ 
+        .icon-abrir{        
+        background: url(#{resource['css/images/Abrir64.png']}) no-repeat !important; 
+        }
+
+        .icon-password{        
+        background: url(#{resource['css/images/LogIn2_64.png']}) no-repeat !important; 
+        }
+
+        .icon-balancer{        
+        background: url(#{resource['css/images/balanceador.png']}) no-repeat !important; 
+        }
+
+        /*value = "Aceptar" */
+        .icon-aceptar{
+        background: url(#{resource['images/Aceptar64.png']}) no-repeat  !important;
+        }
+        
+        /*value = "Comision" */
+        .icon-comision{
+        background: url(#{resource['images/comision.png']}) no-repeat  !important;
+        }
+
+        /*value = "Actualizar" */
+        .icon-actualizar{
+        background: url(#{resource['css/images/Actualizar64.png']}) no-repeat  !important;
+        }
+
+        /*value = "Expediente TRabajo" */
+        .icon-expediente-trabajo{
+        background: url(#{resource['css/images/ExpedienteaTrabajar64.png']}) no-repeat  !important;
+        }
+
+        /*value = "Actualizar Expediente" */
+        .icon-actualizar-expediente{
+        background: url(#{resource['css/images/ActualizarExpediente64.png']}) no-repeat  !important;
+        }
+
+        /*value = "Adjuntar Archivo" */
+        .icon-adjuntar-archivo{
+        background: url(#{resource['css/images/AdjuntarArchivo64.png']}) no-repeat  !important;
+        }
+
+        /*value = "Agregar" */
+        .icon-agregar-archivo{
+        background-image: url(#{resource['images/AgregarArchivo64.png']}) no-repeat !important;
+        }
+
+        .icon-reiniciar-password{
+        background-image: url(#{resource['images/restablecer-la-contrasena.png']}) no-repeat !important;
+        }
+
+        /*value = "Agregar 2" */
+        .icon-agregar-pesonalizado{
+        background-image: url(#{resource['images/agregar-personalizado.png']}) no-repeat !important;
+        }
+
+        /*value = "Actualizar" */
+        .icon-actualizar-existencia{
+        background-image: url(#{resource['images/agregar.png']}) no-repeat !important;
+        }
+
+        /*value = "Agregar Formulario" */
+        .icon-agregar{
+        background: url(#{resource['css/images/AgregarFormulario64.png']}) no-repeat  !important;
+        }
+
+        /*value = "Agregar Formulario 2" */
+        .icon-agregar2{
+        background: url(#{resource['css/images/AgregarFormulario264.png']}) no-repeat  !important;
+        }
+
+        /*value = "Agregar Formulario 3" */
+        .icon-agregar3{
+        background: url(#{resource['css/images/AgregarFormulario364.png']}) no-repeat  !important;
+        }
+
+        /*value = "Agregar Proyecto" */
+        .icon-agregar-proyecto{
+        background: url(#{resource['css/images/AgregarProyecto64.png']}) no-repeat  !important;
+        }
+
+        /*value = "Aplicacion Movil" */
+        .icon-aplicacion-movil{
+        background: url(#{resource['css/images/AplicacionMovil64.png']}) no-repeat  !important;
+        }
+
+        /*value = "Archivar" */
+        .icon-archivar{
+        background: url(#{resource['css/images/Archivar6.png']}) no-repeat  !important;
+        }
+
+        /*value = "Asignar Tecnico" */
+        .icon-asignar-tecnico{
+        background: url(#{resource['css/images/AsignarTecnico64.png']}) no-repeat  !important;
+        }
+
+        /*value = "Audio" */
+        .icon-audio{
+        background: url(#{resource['css/images/Audio64.png']}) no-repeat  !important;
+        }
+
+        /*value = "Mensaje Entrante" */
+        .icon-mensaje-entrante{
+        background: url(#{resource['css/images/BandejaDeEntradaMensaje64.png']}) no-repeat  !important;
+        }
+
+        /*value = "Base de Datos" */
+        .icon-base-datos{
+        background: url(#{resource['css/images/BaseDeDatos64.png']}) no-repeat  !important;
+        }
+
+        /*value = "Bloquear" */
+        .icon-bloqueado{
+        background: url(#{resource['css/images/Bloqueado64.png']}) no-repeat !important;
+        }
+
+        /*value = "Buscar" */
+        .icon-buscar{
+        background: url(#{resource['css/images/Buscar64.png']}) no-repeat !important;
+        }
+
+        /*value = "Buscar Documento" */
+        .icon-buscar-documento{
+        background: url(#{resource['css/images/BuscarDocumento64.png']}) no-repeat !important;
+        }
+
+        /*value = "Buscar Expediente" */
+        .icon-buscar-expediente{
+        background: url(#{resource['images/BuscarExpediente64.png']}) no-repeat !important;
+        }
+
+        /*value = "Calendarizar" */
+        .icon-calendario{
+        background: url(#{resource['css/images/Calendario64.png']}) no-repeat !important;
+        }
+
+        /*value = "Calendarizar" */
+        .icon-calendarizacion{
+        background: url(#{resource['css/images/Calendarizacion64.png']}) no-repeat !important;
+        }
+
+        /*value = "Cancelar" value = "Cerrar */
+        .icon-cancelar-cerrar{
+        background-image: url(#{resource['images/Cancelar_Cerrar64.png']}) !important;
+        }
+
+        /*value = "pedido personalizado" value = "PedidodPersonalizado */
+        .icon-pedido-personalizado{
+        background-image: url(#{resource['images/pedido-en-linea.png']}) !important;
+        }
+
+        /*value = "pedido normal" value = "Pedidod normal */
+        .icon-pedido-normal{
+        background-image: url(#{resource['images/entrega-de-pedidos.png']}) !important;
+        }
+
+
+        /*value = "Cerrar Sesión"*/
+        .icon-cerrar-sesion{
+        background: url(#{resource['images/CerrarSesion2.png']}) no-repeat !important;
+        }
+
+        /*value = "Contactar"  value = "Chat"*/
+        .icon-chat{
+        background: url(#{resource['css/images/Chat64.png']}) no-repeat !important;
+        }
+
+        /*value = "Configurar"*/
+        .icon-configuracion{
+        background: url(#{resource['css/images/Configuraciones64.png']}) no-repeat !important;
+        }
+
+        /*value = "Contrato" */
+        .icon-contrato{
+        background: url(#{resource['css/images/Contrato64.png']}) no-repeat !important;
+        }
+
+        /*value = "Cortar" */
+        .icon-cortar{
+        background: url(#{resource['css/images/Cortar64.png']}) no-repeat !important;
+        }
+
+        /*value = "Presentacion" */
+        .icon-dashboard{
+        background: url(#{resource['css/images/Dashboard64.png']}) no-repeat !important;
+        }
+
+        /*value = "Desbloquear" */
+        .icon-desbloquear{
+        background: url(#{resource['css/images/Desbloquear64.png']}) no-repeat !important;
+        }
+
+        /*value = "Decargar" */
+        .icon-descargar{
+        background: url(#{resource['css/images/Descargar64.png']}) no-repeat !important;
+        }
+
+        /*value = "Decargar2" */
+        .icon-descargar2{
+        background: url(#{resource['css/images/Descargar264.png']}) no-repeat !important;
+        }
+
+        /*value = "Decargar2" */
+        .icon-descargar2{
+        background: url(#{resource['css/images/Descargar264.png']}) no-repeat !important;
+        }
+
+        /*value = "DecargarCertificacion" */
+        .icon-descargar-certi{
+        background: url(#{resource['css/images/DescargarCertificacion64.png']}) no-repeat !important;
+        }
+
+        /*value = "editar" */
+        .icon-editar{
+        background: url(#{resource['images/lapiz.png']}) no-repeat !important;
+        }
+
+        /*value = "icon-enviar-firma" */
+        .icon-enviar-firma{
+        background: url(#{resource['css/images/firmar_doc.jpg']}) no-repeat !important;
+        }
+
+        /*value = "icon-enviar-firma" */
+        .icon-verificar-firma{
+        background: url(#{resource['css/images/verificar_firma.jpg']}) no-repeat !important;
+        }
+
+        /*value = "Editar Calendarizacion" */
+        .icon-editar-calendarizacion{
+        background: url(#{resource['css/images/EditarCalendarizacion64.png']}) no-repeat !important;
+        }
+
+        /*value = "Editar Documento" */
+        .icon-editar-documento{
+        background: url(#{resource['css/images/EditarDocumento64.png']}) no-repeat !important;
+        }
+
+        /*value = "Editar Mensaje" */
+        .icon-editar-mensaje{
+        background: url(#{resource['css/images/EditarMensaje64.png']}) no-repeat !important;
+        }
+
+        /*value = "Editar Proyecto" */
+        .icon-editar-proyecto{
+        background: url(#{resource['css/images/EditarProyecto64.png']}) no-repeat !important;
+        }
+
+        /*value = "Eliminar Documento" */
+        .icon-eliminar-documento{
+        background: url(#{resource['css/images/EliminarDocumento64.png']}) no-repeat !important;
+        }
+
+        /*value = "Eliminar Formulario" */
+        .icon-eliminar-formulario{
+        background: url(#{resource['css/images/EliminarFormulario64.png']}) no-repeat !important;
+        }
+
+        /*value = "Eliminar Mensaje" */
+        .icon-eliminar-mensaje{
+        background: url(#{resource['css/images/EliminarMensaje64.png']}) no-repeat !important;
+        }
+
+        /*value = "Eliminar Proyecto" */
+        .icon-eliminar-proyecto{
+        background: url(#{resource['css/images/EliminarProyecto64.png']}) no-repeat !important;
+        }
+
+        /*value = "Enviar Mensaje" */
+        .icon-enviar-mensaje{
+        background: url(#{resource['css/images/EnviarMensaje64.png']}) no-repeat !important;
+        }
+
+        /*value = "Escanear Documento" */
+        .icon-escaner{
+        background: url(#{resource['css/images/Escanner64.png']}) no-repeat !important;
+        }
+
+        /*value = "Estard�sticas" */
+        .icon-estadistica{
+        background: url(#{resource['css/images/Estadisticas64.png']}) no-repeat !important;
+        }
+
+        /*value = "Evidencia" */
+        .icon-evidencia{
+        background: url(#{resource['css/images/Evidencia64.png']}) no-repeat !important;
+        }
+
+        /*value = "Excel" */
+        .icon-excel{
+        background: url(#{resource['css/images/Excel64.png']}) no-repeat !important;
+        }
+
+        /*value = "Expediente" */
+        .icon-expediente{
+        background: url(#{resource['css/images/Expediente64.png']}) no-repeat !important;
+        }
+
+        /*value = "Flujo de Expediente" */
+        .icon-expediente-flujo{
+        background: url(#{resource['css/images/ExpedienteFlujo64.png']}) no-repeat !important;
+        }
+
+        /*value = "Trabajar expediente" */
+        .icon-expediente-trabajar{
+        background: url(#{resource['css/images/ExpedienteTrabajar64.png']}) no-repeat !important;
+        }
+
+        /*value = "Exportar" */
+        .icon-exportar{
+        background-image: url(#{resource['css/images/Exportar64.png']}) !important;
+        }
+
+        /*value = "Exportar2" */
+        .icon-exportar2{
+        background-image: url(#{resource['css/images/Exportar264.png']}) !important;
+        }
+
+        /*value = "Exportar3" */
+        .icon-exportar3{
+        background-image: url(#{resource['css/images/Exportar364.png']}) !important;
+        }
+
+        .icon-informacion{
+        background-image: url(#{resource['css/images/menuIcons/Informacion.png']}) !important;
+        }
+
+        /*value = "Descargar" */
+        .icon-flecha-abajo{
+        background: url(#{resource['css/images/FlechaAbajo64.png']}) no-repeat !important;
+        }
+
+        .icon-flecha-arriba{
+        background: url(#{resource['css/images/FlechaArriba64.png']}) no-repeat !important;
+        }
+
+        /*value = "Adelante" */
+        .icon-flecha-adelante{
+        background: url(#{resource['css/images/FlechaAdelante64.png']}) no-repeat !important;
+        }
+
+        /*value = "Adelante" */
+        .icon-flecha-anterior{
+        background: url(#{resource['images/FlechaAnterior64.png']}) no-repeat !important;
+        }
+
+        /*value = "Adelante" */
+        .icon-flecha-adelante2{
+        background: url(#{resource['css/images/flecha-derecha.png']}) no-repeat !important;
+        }
+
+        /*value = "Adelante" */
+        .icon-flecha-anterior2{
+        background: url(#{resource['css/images/flecha-izquierda.png']}) no-repeat !important;
+        }
+
+
+        /*value = "Atras" */
+        .icon-flecha-atras{
+        background: url(#{resource['css/images/FlechaAtras64.png']}) no-repeat !important;
+        }
+
+        /*value = "Entrar" */
+        .icon-flecha-entrar{
+        background: url(#{resource['css/images/FlechaEntrar64.png']}) no-repeat !important;
+        }
+
+        /*value = "Nuevo Gafete" */
+        .icon-nuevo-gafete{
+        background: url(#{resource['css/images/GafeteNuevol6.png']}) no-repeat !important;
+        }
+
+        /*value = "Gafete" */
+        .icon-gafete{
+        background: url(#{resource['css/images/Gafetes64.png']}) no-repeat !important;
+        }
+
+        /*value = "Usuarios" */
+        .icon-grupo{
+        background: url(#{resource['css/images/Grupo64.png']}) no-repeat !important;
+        }
+
+        /*value = "Guardar" */
+        .icon-guardar{
+        background-image: url(#{resource['images/Guardar64.png']}) !important;
+        }
+
+        /*value = "Hoja de Merito" */
+        .icon-hoja-merito{
+        background: url(#{resource['css/images/HojaDeMerito64.png']}) no-repeat !important;
+        }
+
+        /*value = "Reenviar documento" */
+        .icon-reenviar-documento{
+        background: url(#{resource['css/images/RenviarDocumento64.png']}) no-repeat !important;
+        }
+
+        .icon-asignar-grupo{
+        background: url(#{resource['css/images/UsuariosGrupos64.png']}) no-repeat !important;
+        }
+
+        /*value = "Imagenes" */
+        .icon-imagenes{
+        background: url(#{resource['css/images/Imagenes64.png']}) no-repeat !important;
+        }
+
+        /*value = "Imprimir" */
+        .icon-imprimir{
+        background: url(#{resource['images/Imprimir64.png']}) no-repeat !important;
+        }
+
+        /*value = "Imprimir" */
+        .icon-imprimir-evaluacion{
+        background: url(#{resource['css/images/ImprimirEvaluacion64.png']}) no-repeat !important;
+        }
+
+        /*value = "Justicia" */
+        .icon-justicia{
+        background: url(#{resource['css/images/Justicia64.png']}) no-repeat !important;
+        }
+
+        /*value = "Limpiar" */
+        .icon-limpiar{
+        background: url(#{resource['images/Limpiar64.png']}) no-repeat !important;
+        }
+
+        /*value = "Login" */
+        .icon-login{
+        background: url(#{resource['css/images/LogIn64.png']}) no-repeat !important;
+        }
+
+        /*value = "Login" */
+        .icon-llave{
+        background: url(#{resource['css/images/Login2.png']}) no-repeat !important;
+        }
+
+        /*value = "Acceso Restringido" */
+        .icon-acceso-retringido{
+        background: url(#{resource['css/images/MensajeAccesoRestringido64.png']}) no-repeat !important;
+        }
+
+        /*value = "Advertencia" */
+        .icon-advertencia{
+        background: url(#{resource['css/images/MensajeAdvertencia64.png']}) no-repeat !important;
+        }
+
+        /*value = "Informacion" */
+        .icon-informacion1{
+        background: url(#{resource['css/images/MensajeDeInformacion64.png']}) no-repeat !important;
+        }
+
+        /*value = "Nuevo" */
+        .icon-nuevo-documento{
+        background: url(#{resource['css/images/NuevoDocumento64.png']}) no-repeat !important;
+        }
+
+        /*value = "Nuevo" */
+        .icon-nuevo-catalogo{
+        background: url(#{resource['css/images/NuevoCatalogo64.png']}) no-repeat !important;
+        }
+
+        /*value = "Nuevo Gafete" */
+        .icon-nuevo-gafete{         
+        background: url(#{resource['css/images/NuevoGafete64.png']}) no-repeat !important;     
+        }
+
+        /*value = "Nuevo Mensaje" */
+        .icon-nuevo-mensaje{
+        background: url(#{resource['css/images/NuevoMensaje64.png']}) no-repeat !important;
+        }
+
+        /*value = "Oferta de Servicio" */
+        .icon-oferta-servicio{
+        background: url(#{resource['css/images/OfertaDeServicio64.png']}) no-repeat !important;
+        }
+
+        /*value = "Organigrama" */
+        .icon-organigrama{
+        background-image: url(#{resource['css/images/Organigrama64.png']}) !important;
+        }
+
+        /*value = "Papelera" */
+        .icon-papelera{
+        background-image: url(#{resource['css/images/Papelera64.png']}) !important;
+        }
+
+        /*value = "Pasante" */
+        .icon-pasante{
+        background-image: url(#{resource['css/images/Pasante.png']}) !important;
+        }
+
+        /*value = "Documento PDF" */
+        .icon-pdf{
+        background: url(#{resource['css/images/Pdf64.png']}) no-repeat !important;
+        }
+
+        /*value = "Pegar" */
+        .icon-pegar{
+        background: url(#{resource['css/images/Pegar64.png']}) no-repeat !important;
+        }
+
+        /*value = "Proyecto" */
+        .icon-proyecto{
+        background: url(#{resource['css/images/Proyecto64.png']}) no-repeat !important;
+        }
+
+        /*value = "Puesto" */
+        .icon-puesto{
+        background: url(#{resource['css/images/Puestos64.png']}) no-repeat !important;
+        }
+
+        /*value = "Reenviar Mensaje" */
+        .icon-reenviar-mensaje{
+        background: url(#{resource['css/images/ReenviarMensaje64.png']}) no-repeat !important;
+        }
+
+        /*value = "Registrar LLamada" */
+        .icon-registrar-llamada{
+        background: url(#{resource['css/images/RegistroLlamada64.png']}) no-repeat !important;
+        }
+
+        /*value = "Tiempo" */
+        .icon-tiempo{
+        background: url(#{resource['css/images/Reloj64.png']}) no-repeat !important;
+        }
+
+        /*value = "Tiempo" */
+        .icon-tiempo2{
+        background: url(#{resource['css/images/Reloj264.png']}) no-repeat !important;
+        }
+
+        /*value = "Reporte Estad�stico" */
+        .icon-reporte-estadistico{
+        background: url(#{resource['css/images/ReporteEstadistico64.png']}) no-repeat !important;
+        }
+
+        /*value = "Reporte" */
+        .icon-reporte{
+        background: url(#{resource['css/images/Reportes64.png']}) no-repeat !important;
+        }
+
+        /*value = "Reproceso" */
+        .icon-reproceso{
+        background: url(#{resource['css/images/Reproceso64.png']}) no-repeat !important;
+        }
+
+        /*value = "Salir" */
+        .icon-salir{
+        background: url(#{resource['css/images/Salir_Regresar64.png']}) no-repeat !important;
+        }
+
+        /*value = "Siguiente Etapa" */
+        .icon-siguiente-etapa{
+        background: url(#{resource['css/images/SiguienteEtapa64.png']}) no-repeat !important;
+        }
+
+        /*value = "Ubicacion" */
+        .icon-ubicacion{
+        background: url(#{resource['css/images/Ubicacion64.png']}) no-repeat !important;
+        }
+
+        /*value = "Home" */
+        .icon-home{
+        background: url(#{resource['css/images/Unidades64.png']}) no-repeat !important;
+        }
+
+        /*value = "Activar Usuario" */
+        .icon-activar-usuario{
+        background: url(#{resource['css/images/UsuarioActivar64.png']}) no-repeat !important;
+        }
+
+        .icon-excel_reporte{
+        background: url(#{resource['css/images/Exel64.png']}) no-repeat !important;
+        }
+
+        /*value = "Actualizar Usuario" */
+        .icon-actualizar-usuario{
+        background-image: url(#{resource['css/images/UsuarioActualizar64.png']}) !important;
+        }
+
+        /*value = "Agregar Usuario" */
+        .icon-agregar-usuario{
+        background-image: url(#{resource['css/images/UsuarioAgregar64.png']}) !important;
+        }
+
+        /*value = "Buscar Usuario" */
+        .icon-buscar-usuario{
+        background: url(#{resource['css/images/UsuarioBuscar64.png']}) no-repeat !important;
+        }
+
+        /*value = "Editar Usuario" */
+        .icon-editar-usuario{
+        background: url(#{resource['css/images/UsuarioEditar64.png']}) no-repeat !important;
+        }
+
+        /*value = "Eliminar Usuario" */
+        .icon-eliminar-usuario{
+        background: url(#{resource['css/images/UsuarioEliminar64.png']}) no-repeat !important;
+        }
+
+        /*value = "Inactivar Usuario" */
+        .icon-inactivar-usuario{
+        background: url(#{resource['css/images/UsuarioInactivar64.png']}) no-repeat !important;
+        }
+
+        /*value = "Video" */
+        .icon-video{
+        background: url(#{resource['css/images/Video64.png']}) no-repeat !important;
+        }
+
+        /*value = "Documento Word" */
+        .icon-word{
+        background: url(#{resource['css/images/Word64.png']}) no-repeat !important;
+        }
+
+        /*value = "Expediente Empleado" */
+        .icon-expediente-empleado{        
+        background: url(#{resource['css/images/ExpedientedeEmpleado64.png']}) no-repeat !important;  
+        }
+
+        .icon-asociar-persona{
+        background-image: url(#{resource['css/images/menuIcons/AsociarPersona.png']}) !important;
+        }
+
+        .icon-agregar-archivo{
+        background: url(#{resource['images/AgregarArchivo64.png']}) no-repeat !important;
+        }
+
+        .icon-reiniciar-password{
+        background: url(#{resource['images/restablecer-la-contrasena.png']}) no-repeat !important;
+        }
+
+        .icon-agregar-personalizado{
+        background: url(#{resource['images/agregar-personalizado.png']}) no-repeat !important;
+        }
+
+        .icon-actualizar-existencia{
+        background: url(#{resource['images/agregar.png']}) no-repeat !important;
+        }
+
+        .icon-avanzar-grupo{
+        background: url(#{resource['css/images/AvanzarGrupo.png']}) no-repeat !important;
+        }
+
+        .icon-gitdesa-wiki{
+        background: url(#{resource['css/images/wiki-png2.png']}) no-repeat !important;
+        }
+
+        .icon-gitdesa-issues{
+        background: url(#{resource['css/images/bug-png2.png']}) no-repeat !important;
+        }
+
+        .icon-gitdesa{
+        background: url(#{resource['css/images/gitlab.png']}) no-repeat !important;
+        }
+
+        .icon-gitdesa-detalle{
+        background: url(#{resource['css/images/gitdesa-detalle.png']}) no-repeat !important;
+        }
+
+        .icon-instancias{
+        background: url(#{resource['css/images/instancias.png']}) no-repeat !important;
+        }
+
+        .icon-trash{
+        background: url(#{resource['images/trash.png']}) no-repeat !important;
+        }
+
+        .icon-edit2{
+        background: url(#{resource['css/images/editar.png']}) no-repeat !important;
+        }
+
+        .icon-add2{
+        background: url(#{resource['css/images/add.png']}) no-repeat !important;
+        }
+        .icon-add-sprint{
+        background: url(#{resource['css/images/sprint.png']}) no-repeat !important;
+        }
+        .icon-erase{
+        background: url(#{resource['css/images/erase.png']}) no-repeat !important;
+        }
+        .icon-script-sql{
+        background: url(#{resource['css/images/icon-script.png']}) no-repeat !important;
+        }
+        .icon-terminal{
+        background: url(#{resource['css/images/terminal.png']}) no-repeat !important;
+        }
+
+        .icon-add-field{
+        background: url(#{resource['css/images/addField.png']}) no-repeat !important;
+        }
+
+        .icon-delete-field{
+        background: url(#{resource['css/images/deleteField.png']}) no-repeat !important;
+        }
+
+        .icon-consulta-sicomp{
+        background: url(#{resource['css/images/ConsultasSicompWeb.png']}) no-repeat !important;
+        }
+
+        .icon-revertir-documento {
+        background: url(#{resource['css/images/revertirDocumento.png']}) no-repeat !important;
+        }
+
+        .icon-acta-borrador {
+        background: url(#{resource['css/images/acuerdoDescargar.png']}) no-repeat !important;
+        }
+
+        .icon-acta-definitiva {
+        background: url(#{resource['css/images/acta-definitiva.png']}) no-repeat !important;
+        }
+
+        .icon-acta-firmada {
+        background: url(#{resource['css/images/acta-firmada.png']}) no-repeat !important;
+        }
+
+        .icon-documento-firmado {
+        background: url(#{resource['css/images/acta-firmada.png']}) no-repeat !important;
+        }
+
+        .icon-acuerdo-borrador {
+        background: url(#{resource['css/images/acuerdoBorrador.png']}) no-repeat !important;
+        }
+
+        .icon-acuerdo-definitivo {
+        background: url(#{resource['css/images/acuerdoDefinitivo.png']}) no-repeat !important;
+        }
+
+        .icon-acuerdo-descargar {
+        background: url(#{resource['css/images/acuerdoDescargar.png']}) no-repeat !important;
+        }
+
+        .icon-contrato-borrador {
+        background: url(#{resource['css/images/contratoBorrador.png']}) no-repeat !important;
+        }
+
+        .icon-contrato-definitivo {
+        background: url(#{resource['css/images/contratoDefinitivo.png']}) no-repeat !important;
+        }
+
+        .icon-contrato-descargar {
+        background: url(#{resource['css/images/contratoDescargar.png']}) no-repeat !important;
+        }
+
+        .icon-dictamen-descargar {
+        background: url(#{resource['css/images/dictamenDescargar.png']}) no-repeat !important;
+        }
+
+        .icon-dictamen-definitivo {
+        background: url(#{resource['css/images/dictamenDefinitivo.png']}) no-repeat !important;
+        }
+
+        .icon-contratos-borrador {
+        background: url(#{resource['css/images/contratosBorrador.png']}) no-repeat !important;
+        }
+
+        .icon-contratos-definitivo {
+        background: url(#{resource['css/images/contratosDefinitivo.png']}) no-repeat !important;
+        }
+
+        .icon-contratos-descargar {
+        background: url(#{resource['css/images/contratosDescargar.png']}) no-repeat !important;
+        }
+
+
+        .icon-validado-azul{
+        background: url(#{resource['css/images/ValidadoAzul.png']}) no-repeat !important;
+        }
+
+        .icon-validado-gris{
+        background: url(#{resource['css/images/ValidadoGris.png']}) no-repeat !important;
+        }
+
+        .icon-proceso-azul{
+        background: url(#{resource['css/images/ProcesoAzul.png']}) no-repeat !important;
+        }
+
+        .icon-proceso-gris{
+        background: url(#{resource['css/images/ProcesoGris.png']}) no-repeat !important;
+        }
+
+        .icon-finzalizado-azul{
+        background: url(#{resource['css/images/FinalizadoAzul.png']}) no-repeat !important;
+        }
+
+        .icon-proceso-azul{
+        background: url(#{resource['css/images/FinalizadoGris.png']}) no-repeat !important;
+        }
+
+        .icon-agregar-comentario{
+        background: url(#{resource['css/images/AgregarComentario64.png']}) no-repeat !important;
+        }
+
+        .icon-usuario-grupo-check{
+        background: url(#{resource['css/images/UsuariosGrupoCheck24.png']}) no-repeat !important;
+        }
+
+        .icon-usuario-grupo-busqueda{
+        background: url(#{resource['css/images/UsuariosGrupoSearch24.png']}) no-repeat !important;
+        }
+
+        .icon-persona-graduada{
+        background: url(#{resource['css/images/Graduado64.png']}) no-repeat !important;
+        }
+
+        span.ui-button-icon-left.ui-icon.ui-c.ui-icon-plusthick{
+        background-image: url(#{resource['css/images/clip-icon-24.png']}) !important;
+        background-position: 0px 0px !important;
+        width: 35px !important;
+        height: 35px !important;
+        top: 0px !important;
+        margin-top: 4px !important;
+        position: absolute !important;
+        margin-left: -3px !important;
+        }
+
+        span.ui-fileupload-icon-only.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-fileupload-choose{
+        width: 40px !important;
+        height: 40px !important;
+        }
+
+        .icon-generar-docs{
+        background: url(#{resource['css/images/generarDocs.png']}) no-repeat !important;
+        }
+
+        .icon-show-modal{
+        background: url(#{resource['css/images/icon_show_modal.png']}) no-repeat !important;
+        }
+
+        .icon-show-modal2{
+        background: url(#{resource['css/images/icon_show_modal2.png']}) no-repeat !important;
+        }
+
+        .icon-zip {
+        background: url(#{resource['css/images/zip_icon.png']}) no-repeat !important;
+        }
+
+        .icon-zip2 {
+        background: url(#{resource['css/images/zip_icon2.png']}) no-repeat !important;
+        }
+
+        .devolver-grupo{
+        background: url(#{resource['css/images/DevolverGrupo32.png']}) no-repeat !important;
+        }
+
+        /*value = "editar" */
+        .icon-editar{
+        background: url(#{resource['images/lapiz.png']}) no-repeat !important;
+        }
+
+        .icon-eliminar-acta{
+        background: url(#{resource['css/images/eliminar_acta.png']}) no-repeat !important;
+        }
+
+        .icon-previsualizar-doc{
+        background-image: url(#{resource['css/images/preview-doc-64.png']}) !important;
+        }

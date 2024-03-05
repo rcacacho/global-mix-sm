@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"                
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"    
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:shiro="http://shiro.apache.org/tags"
+    template="/templates/template.xhtml">
+
+    <f:metadata> 
+    </f:metadata>
+
+    <ui:define name="pageTitle">        
+        <h:outputLabel value="Resumen diario" style="float: left;"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="frm_pedido">
+            <h:panelGrid columns="1" styleClass="panelLateralDerechoFormularioDinamico">                    
+                <p:commandButton  title="Generar Reporte" value="" process="@this" update="dlgReporte"
+                                  onstart="start();" oncomplete="stop();" 
+                                  action="#{resumenDiarioMB.dialogReporte()}" 
+                                  style="background-position: 5px 3px !important; background-size: 32px 32px !important;"
+                                  class="boton boton-img-32 b-gris4 icon-imprimir"/>
+            </h:panelGrid>         
+
+            <p:outputPanel class="content_centrado">  
+                <p:panelGrid styleClass="no-border" style="margin-left:2%; margin-right: 5%; margin-top: 10px; width: 95%">
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Fecha inicio" style="font-weight: bold;" />
+                        </p:column>
+
+                        <p:column>
+                            <p:outputLabel value="Fecha fin" style="font-weight: bold;" />
+                        </p:column>
+                    </p:row>
+                    <p:row> 
+                        <p:column>
+                            <p:calendar id="cal_fechaInicio" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
+                                        value="#{resumenDiarioMB.fechaInicio}" navigator="true">  
+                                <p:ajax event="dateSelect" process="@this" />
+                            </p:calendar>
+                        </p:column>
+                        <p:column>
+                            <p:calendar id="cal_fechaFin" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
+                                        value="#{resumenDiarioMB.fechaFin}" navigator="true">  
+                                <p:ajax event="dateSelect" process="@this" />
+                            </p:calendar>
+                        </p:column>
+                        <p:column >
+                            <p:commandButton value="Buscar" title="Buscar" onstart="inicio();" oncomplete="fin();"
+                                             actionListener="#{resumenDiarioMB.buscarFiltro()}" update=":frm_pedido"
+                                             class="boton boton-imgtxt-16 b-gris4 icon-buscar-expediente" process="@this"
+                                             style="margin-top: 4px;background-size: 20px 20px !important;
+                                             background-position: 4px 1px !important;"/>  
+
+                            <p:commandButton  value="Limpiar" title="Limpiar" 
+                                              action="#{resumenDiarioMB.limpiarCampos()}" class="boton boton-imgtxt-16 b-gris4 icon-limpiar"
+                                              onstart="inicio();" oncomplete="fin();"
+                                              style="margin-top: 4px; background-size: 20px 20px !important; background-position: 4px 1px !important;" update=":frm_pedido"  >
+                            </p:commandButton> 
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+                <br />
+                <p:tabView id="tab_table">
+                    <p:tab title="Resumen (#{resumenDiarioMB.listDespachos.size()})">
+                        <div align="center" style="margin-top: 5px; font-size: 13px;">
+                        </div>
+
+                        <p:dataTable id="dt_resumen" emptyMessage="No hay registros" styleClass="tabla-mp"
+                                     var="resumen" value="#{resumenDiarioMB.listDespachos}"
+                                     rows="20" paginator="#{resumenDiarioMB.listDespachos.size()>20}" paginatorPosition="bottom"
+                                     rowIndexVar="rowId" style="width: 100%;" 
+                                     widgetVar="wv_resumen" filteredValue="#{resumenDiarioMB.listDespachosFilter}">
+
+                            <p:column headerText="No." style="width: 5%; text-align: center;">
+                                #{rowId+1}
+                            </p:column>
+
+                            <p:column headerText="Materia prima" width="10%" style="text-align: left;">
+                                <p:outputLabel value="#{resumen.totalmateriaprima}"/>
+                            </p:column>
+
+                            <p:column headerText="Diésel" width="8%" filterMatchMode="contains" style="text-align: center;">
+                                <p:outputLabel value="#{resumen.costototaldieseldinero}"/>
+                            </p:column>
+
+                            <p:column headerText="Bombeo" width="9%" style="text-align: left;">
+                                <p:outputLabel value="#{resumen.costototalbombeo}"/>
+                            </p:column>
+
+                            <p:column headerText="Colocado" width="7%" style="text-align: left;">
+                                <p:outputLabel value="#{resumen.costototalcolocado}"/>
+                            </p:column>
+
+                            <p:column headerText="Comisión" width="7%" style="text-align: left;">
+                                <p:outputLabel value="#{resumen.comision}"/>
+                            </p:column>
+
+                            <p:column headerText="Total de costos" width="5%" style="text-align: left;">
+                                <p:outputLabel value="Pendiente"/>
+                            </p:column>
+
+                            <p:column headerText="Ingreso neto" width="6%" style="text-align: left;">
+                                <p:outputLabel value="Pendiente"/>
+                            </p:column>
+
+                            <p:column headerText="Utilidad bruta" width="5%" style="text-align: left;">
+                                <p:outputLabel value="Pendiente"/>
+                            </p:column>
+
+                            <p:column width="8%" exportable="false" >
+                                <p:commandButton value="" action="#{resumenDiarioMB.verDetalle(pedido.idpedido)}" 
+                                                 title="Ver detalle" class="boton boton-img-24 b-gris4 icon-buscar-expediente" onstart="start();" onsuccess="stop();"
+                                                 style="background-position: 5px 5px !important; background-size: 18px 18px !important; float: right;"/>                             
+                            </p:column>
+                        </p:dataTable>
+                    </p:tab>
+                </p:tabView>
+            </p:outputPanel>
+
+            <p:dialog id="dlgReporte" widgetVar="dlgReporte" header="Generar reporte pedidos" 
+                      closable="true" width="400" height="100" modal="true" resizable="false" 
+                      position="top">
+                <p:panelGrid columns="2" id="pgEmpleado" styleClass="no-border" style="width: 90%;">
+                    <p:outputLabel for="fInicial" value="Año:" style="font-weight: bold;" />
+                    <p:outputLabel for="fFinal" value="Renglón:" style="font-weight: bold;" />
+
+                    <p:calendar id="fInicial" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
+                                value="#{resumenDiarioMB.fechaInicioReporte}" navigator="true">  
+                        <p:ajax event="dateSelect" process="@this" />
+                    </p:calendar>
+                    <p:calendar id="fFinal" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
+                                value="#{resumenDiarioMB.fechaFinReporte}" navigator="true">  
+                        <p:ajax event="dateSelect" process="@this" />
+                    </p:calendar>
+                </p:panelGrid>
+
+                <p:commandButton id="btnDes" value="Generar reporte" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+                                 process="@this" immediate="true"  oncomplete="PF('dlgGenerar').hide();" 
+                                 class="boton boton-imgtxt-16 b-gris4 icon-imprimir"
+                                 style="background-size: 20px 20px !important; float: right;
+                                 background-position: 3px 1px !important; margin-top: 5px;">
+                    <p:fileDownload value="#{resumenDiarioMB.generReporte()}" />
+                </p:commandButton> 
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

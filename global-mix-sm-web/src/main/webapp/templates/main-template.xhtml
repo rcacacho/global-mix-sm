@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"                
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"      
+      xmlns:p="http://primefaces.org/ui">
+    <f:view locale="es_GT">
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        </h:head>
+
+        <h:body id="allThePage">
+            <h:outputStylesheet library="css" name="siamp.css" />
+            <h:outputStylesheet name="css/bootstrap.css"/>
+            <h:outputStylesheet name="css/main.css"/>
+            <h:outputStylesheet name="css/custom-prime.css"/>
+            <h:outputStylesheet name="css/custom-components.css"/>
+            <h:outputStylesheet name="css/sicomp-bootstrap-customs.css"/>
+            <h:outputStylesheet name="css/sicomp-message-popup.css"/>
+            <h:outputStylesheet name="css/sicomp-popup.css"/>
+            <h:outputStylesheet name="css/sit-button-16.css"/>
+            <h:outputStylesheet name="css/sit-button-24.css"/>
+            <h:outputStylesheet name="css/sit-button-32.css"/>
+            <h:outputStylesheet name="css/sit-button-48.css"/>
+            <h:outputStylesheet name="css/sit-button-varios.css"/>
+            <h:outputStylesheet name="css/sit-button-colors.css"/>
+            <h:outputStylesheet name="css/sit-button-images.css"/>
+            <h:outputStylesheet name="css/sit-button-main.css"/>
+            <h:outputStylesheet name="css/wizarConvocatorias.css"/>
+            <h:outputStylesheet name="css/sicomp-alarma-layout.css"/>
+            <ui:include src="session-timeout.xhtml" />
+            <div id="container">
+                <!-- ui:include src="session-timeout.xhtml" /-->
+                <p:growl id="messages" autoUpdate="true"  />
+
+                <div id="top">
+                    <h:graphicImage library="images" name="logo.jpeg" style="left: 0px; top: 0px; float: left !important; height: 80px;"/>                                
+                    <h1 class="headerTitle">Global Mix</h1>
+                </div>
+
+                <div id="botonesIni">
+                    <p:commandButton value="CERRAR SESIÓN" action="#{loginMB.logout()}" styleClass="boton boton-imgtxt-32 b-rojo icon-cerrar-sesion"
+                                     style="float: right;
+                                     margin-right: 5px;
+                                     color: #FFFFFF;
+                                     border-color: #D9534F !important;
+                                     margin-top: 15px !important;
+                                     background-position: 13px 9px !important;
+                                     background-size: 20px 20px !important;
+                                     background-color: #D9534F !important;"/>
+
+                    <p:commandButton  value="MENÚ" action="#{loginMB.verificacionLogin()}" styleClass="boton boton-imgtxt-32 b-azul-marino icon-inicio" 
+                                      style="float: right;
+                                      margin-right: 5px;
+                                      color: #FFFFFF;
+                                      border-color: #0071BD !important;
+                                      margin-top: 15px !important;
+                                      background-position: 13px 9px !important;
+                                      background-size: 20px 20px !important;
+                                      background-color: #0071BD !important;" />
+                </div>               
+
+                <div id="mainProcesos">
+                    <ui:insert name="main-procesos"></ui:insert>
+                </div>
+
+                <center>
+                    <div id="pageTitle">
+                        <ui:insert name="pageTitle"></ui:insert>
+                    </div>   
+                </center>
+
+                <div id="contentInfo">
+                    <ui:insert name="contentInfo"></ui:insert>
+                </div>                  
+
+                <div id="content">
+                    <ui:insert name="content"></ui:insert>  
+                    <ui:include src="confirmation-dialog.xhtml" />
+                    <h:outputScript library="js" name="utils.js" />
+                    <h:outputScript library="js"  name="calendarLabels_es_GT.js" />  
+                    <h:outputScript library="js"  name="flipclock.min.js" />  
+                    <h:outputScript library="js"  name="spanishLocale.js" /> 
+                    <h:outputScript library="js"  name="editor.js" /> 
+                    <h:outputScript library="js"  name="format.js" />                          
+                </div>
+
+                <div id="footer">
+                    <ui:insert name="footer">
+                        <ui:include src="footer.xhtml" />
+                    </ui:insert>
+                </div>
+            </div>
+        </h:body>
+    </f:view>
+</html>
