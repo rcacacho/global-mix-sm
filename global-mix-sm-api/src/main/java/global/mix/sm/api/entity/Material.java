@@ -52,62 +52,59 @@ public class Material implements Serializable {
     @Basic(optional = false)
     @Column(name = "idmaterial", nullable = false)
     private Integer idmaterial;
-    
+
     @Basic(optional = false)
     @Column(name = "material", nullable = false, length = 1000)
     private String material;
-    
+
     @Column(name = "existenciainicial", precision = 22)
     private Double existenciainicial;
-    
+
     @Basic(optional = false)
     @Column(name = "valor", nullable = false)
     private Double valor;
-    
+
     @Basic(optional = false)
     @Column(name = "valorneto", nullable = false)
     private Double valorneto;
-    
+
     @Column(name = "costo", precision = 22)
     private Double costo;
-    
+
     @Basic(optional = false)
     @Column(name = "fechacreacion", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-    
+
     @Basic(optional = false)
     @Column(name = "usuariocreacion", nullable = false, length = 50)
     private String usuariocreacion;
-    
+
     @Column(name = "fechamodificacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechamodificacion;
-    
+
     @Column(name = "usuariomodificacion", length = 50)
     private String usuariomodificacion;
-    
+
     @Column(name = "fechaeliminacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaeliminacion;
-    
+
     @Column(name = "usuarioeliminacion", length = 50)
     private String usuarioeliminacion;
-    
+
     @Basic(optional = false)
     @Column(name = "activo", nullable = false)
     private boolean activo;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmaterial", fetch = FetchType.LAZY)
     private List<Detallematerial> detallematerialList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcamion1", fetch = FetchType.LAZY)
-    private List<Detallepedidonormal> detallepedidonormalList;
-    
+
     @JoinColumn(name = "idunidadmedida", referencedColumnName = "idunidadmedida", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Unidadmedida idunidadmedida;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idmaterial", fetch = FetchType.LAZY)
     private List<Detallepedido> detallepedidoList;
 
@@ -241,15 +238,6 @@ public class Material implements Serializable {
         this.detallematerialList = detallematerialList;
     }
 
-    @XmlTransient
-    public List<Detallepedidonormal> getDetallepedidonormalList() {
-        return detallepedidonormalList;
-    }
-
-    public void setDetallepedidonormalList(List<Detallepedidonormal> detallepedidonormalList) {
-        this.detallepedidonormalList = detallepedidonormalList;
-    }
-
     public Unidadmedida getIdunidadmedida() {
         return idunidadmedida;
     }
@@ -291,5 +279,5 @@ public class Material implements Serializable {
     public String toString() {
         return "global.mix.sm.api.entity.Material[ idmaterial=" + idmaterial + " ]";
     }
-    
+
 }

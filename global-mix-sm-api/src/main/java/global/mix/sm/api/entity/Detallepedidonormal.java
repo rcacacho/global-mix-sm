@@ -131,10 +131,6 @@ public class Detallepedidonormal implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Camion idcamion;
     
-    @JoinColumn(name = "idcamion", referencedColumnName = "idmaterial", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Material idcamion1;
-    
     @JoinColumn(name = "idpedido", referencedColumnName = "idpedido", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pedidos idpedido;
@@ -333,14 +329,6 @@ public class Detallepedidonormal implements Serializable {
 
     public void setIdcamion(Camion idcamion) {
         this.idcamion = idcamion;
-    }
-
-    public Material getIdcamion1() {
-        return idcamion1;
-    }
-
-    public void setIdcamion1(Material idcamion1) {
-        this.idcamion1 = idcamion1;
     }
 
     public Pedidos getIdpedido() {

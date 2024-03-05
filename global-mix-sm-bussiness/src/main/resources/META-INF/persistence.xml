@@ -2,26 +2,26 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="GlobalMixSmPU" transaction-type="JTA">
         <jta-data-source>jdbc/globalmixsm</jta-data-source>
-        <class>globa.mix.api.entity.Asesor</class>
-        <class>globa.mix.api.entity.Camion</class>
-        <class>globa.mix.api.entity.Cliente</class>
-        <class>globa.mix.api.entity.Confirmacionpago</class>
-        <class>globa.mix.api.entity.Detallematerial</class>
-        <class>globa.mix.api.entity.Detallepedido</class>
-        <class>globa.mix.api.entity.Detallepedidonormal</class>
-        <class>globa.mix.api.entity.Diesel</class>
-        <class>globa.mix.api.entity.Despachos</class>
-        <class>globa.mix.api.entity.Estadopedido</class>
-        <class>globa.mix.api.entity.Estadodespacho</class>
-        <class>globa.mix.api.entity.Gastos</class>
-        <class>globa.mix.api.entity.Kilogramo</class>
-        <class>globa.mix.api.entity.Material</class>
-        <class>globa.mix.api.entity.Pedidos</class>
-        <class>globa.mix.api.entity.Secuenciapedido</class>
-        <class>globa.mix.api.entity.Tipopago</class>
-        <class>globa.mix.api.entity.Tipousuario</class>
-        <class>globa.mix.api.entity.Unidadmedida</class>
-        <class>globa.mix.api.entity.Usuario</class>        
+        <class>global.mix.sm.api.entity.Asesor</class>
+        <class>global.mix.sm.api.entity.Camion</class>
+        <class>global.mix.sm.api.entity.Cliente</class>
+        <class>global.mix.sm.api.entity.Confirmacionpago</class>
+        <class>global.mix.sm.api.entity.Detallematerial</class>
+        <class>global.mix.sm.api.entity.Detallepedido</class>
+        <class>global.mix.sm.api.entity.Detallepedidonormal</class>
+        <class>global.mix.sm.api.entity.Diesel</class>
+        <class>global.mix.sm.api.entity.Despachos</class>
+        <class>global.mix.sm.api.entity.Estadopedido</class>
+        <class>global.mix.sm.api.entity.Estadodespacho</class>
+        <class>global.mix.sm.api.entity.Gastos</class>
+        <class>global.mix.sm.api.entity.Kilogramo</class>
+        <class>global.mix.sm.api.entity.Material</class>
+        <class>global.mix.sm.api.entity.Pedidos</class>
+        <class>global.mix.sm.api.entity.Secuenciapedido</class>
+        <class>global.mix.sm.api.entity.Tipopago</class>
+        <class>global.mix.sm.api.entity.Tipousuario</class>
+        <class>global.mix.sm.api.entity.Unidadmedida</class>
+        <class>global.mix.sm.api.entity.Usuario</class>        
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <shared-cache-mode>NONE</shared-cache-mode>
         <properties>
