@@ -20,6 +20,7 @@
         <class>global.mix.sm.api.entity.Secuenciapedido</class>
         <class>global.mix.sm.api.entity.Tipopago</class>
         <class>global.mix.sm.api.entity.Tipousuario</class>
+        <class>global.mix.sm.api.entity.Tipocemento</class>
         <class>global.mix.sm.api.entity.Unidadmedida</class>
         <class>global.mix.sm.api.entity.Usuario</class>        
         <exclude-unlisted-classes>true</exclude-unlisted-classes>

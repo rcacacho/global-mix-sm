@@ -47,5 +47,7 @@ public interface CatalogosBeanLocal {
     List<Material> listMaterial();
 
     Estadodespacho findEstadoDespacho(Integer idestadodespacho);
+    
+    Material findMaterialExistenciaMayorCeroById(Integer idmaterial);
 
 }

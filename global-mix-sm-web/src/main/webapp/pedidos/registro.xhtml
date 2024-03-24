@@ -94,7 +94,7 @@
                     </p:row>
                     <p:row>
                         <p:column>
-                            <p:outputLabel value="Concreto #{registroPedidoMB.pedido.kgcm3} PSI de #{registroPedidoMB.pedido.agregado} REV de #{registroPedidoMB.pedido.revpulg}"/>
+                            <p:outputLabel value="#{registroPedidoMB.pedido.idtipocemento.descripcion} #{registroPedidoMB.pedido.kgcm3}"/>
                         </p:column>
                         <p:column>
                             <p:outputLabel value="#{registroPedidoMB.pedido.elemento}"/>
@@ -274,7 +274,7 @@
                             </table>
                         </div>
                     </p:tab>
-                    <p:tab title="Registro personalizado">
+                    <p:tab id="tabRegPer" title="Registro personalizado">
                         <p:panelGrid id="pgMaterialPer" styleClass="no-border" style="width: 96%; margin-left: 30px;">
                             <p:row>       
                                 <p:column>
@@ -356,7 +356,22 @@
                                         <p:ajax event="blur" process="@this"  />
                                     </p:inputText>
                                 </p:column>
-                            </p:row>       
+                            </p:row>    
+                            <p:row>
+                                <p:column >
+                                    <p:outputLabel value="M|3 despachados" style="font-weight: bold;"/>
+                                </p:column>    
+                            </p:row>
+                            <p:row>
+                                <p:column >
+                                    <p:inputText id="txtDespachadaPer" value="#{registroPedidoMB.cantidadDespachadaPer}" style="width: 95%;"  placeholder="(Cantidad)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>                                    
+                                </p:column>            
+                            </p:row>
+                        </p:panelGrid>     
+
+                        <p:panelGrid id="pgOtro" styleClass="no-border" style="width: 48%; margin-left: 30px;">
                             <p:row>
                                 <p:column >
                                     <p:outputLabel value="Otros materiales" style="font-weight: bold;"/>
@@ -364,9 +379,7 @@
                                 <p:column >
                                     <p:outputLabel value="Cantidad otros materiales" style="font-weight: bold;"/>
                                 </p:column>
-                                <p:column >
-                                    <p:outputLabel value="M|3 despachados" style="font-weight: bold;"/>
-                                </p:column>    
+
                             </p:row>
                             <p:row>
                                 <p:column>
@@ -383,18 +396,13 @@
                                     </p:inputText>                                   
                                     <p:commandButton id="btnAgregar" value="" title="Registro" onstart="start();" oncomplete="stop();" 
                                                      actionListener="#{registroPedidoMB.registrarOtroMaterial()}" immediate="true"
-                                                     update=":form:tab_table:tabOtro"  style="background-position: 5px 3px !important; 
+                                                     update="pgOtro :form:tab_table:tabOtro"  style="background-position: 5px 3px !important; 
                                                      background-size: 18px 18px !important; margin-left: 5px;"
                                                      class="boton boton-img-24 b-gris4 icon-agregar-archivo" process="@this">
                                     </p:commandButton>
-                                </p:column>
-                                <p:column >
-                                    <p:inputText id="txtDespachadaPer" value="#{registroPedidoMB.cantidadDespachadaPer}" style="width: 95%;"  placeholder="(Cantidad)">
-                                        <p:ajax event="blur" process="@this"  />
-                                    </p:inputText>                                    
-                                </p:column>               
-                            </p:row> 
-                        </p:panelGrid>              
+                                </p:column>                                 
+                            </p:row>     
+                        </p:panelGrid>
                         <div align="right" style="width: 100%; margin-bottom: 15px; margin-top: 15px; width: 98%" >
                             <table >
                                 <tr>                                       
@@ -600,12 +608,6 @@
                                         <p:inputText  value="#{det.cantidad}" style="width: 100px;"/>
                                     </f:facet>
                                 </p:cellEditor>
-                            </p:column>
-
-                            <p:column headerText="Fecha registro" width="7%">
-                                <p:outputLabel value="#{det.fechacreacion}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                </p:outputLabel>
                             </p:column>
 
                             <p:column headerText="" width="6%" style="text-align: left;">

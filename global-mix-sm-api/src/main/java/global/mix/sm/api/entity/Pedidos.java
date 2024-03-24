@@ -67,121 +67,125 @@ public class Pedidos implements Serializable {
     @Basic(optional = false)
     @Column(name = "idpedido", nullable = false)
     private Integer idpedido;
-    
+
     @Column(name = "tipopedido")
     private Integer tipopedido;
-    
+
     @Basic(optional = false)
     @Column(name = "obra", nullable = false, length = 500)
     private String obra;
-    
+
     @Basic(optional = false)
     @Column(name = "elemento", nullable = false, length = 100)
     private String elemento;
-    
+
     @Basic(optional = false)
     @Column(name = "volumen", nullable = false)
     private double volumen;
-    
+
     @Column(name = "fraguado")
     private Integer fraguado;
-  
+
     @Column(name = "cantidadpagada", precision = 22)
     private Double cantidadpagada;
-    
+
     @Column(name = "kgcm3")
     private Integer kgcm3;
-    
+
     @Column(name = "agregado", length = 100)
     private String agregado;
-    
+
     @Column(name = "revpulg")
     private Integer revpulg;
-    
+
     @Column(name = "frec")
     private Integer frec;
-    
+
     @Basic(optional = false)
     @Column(name = "bombeo", nullable = false, length = 25)
     private String bombeo;
-    
+
     @Column(name = "dirbom", length = 50)
     private String dirbom;
-    
+
     @Column(name = "colocado", length = 25)
     private String colocado;
-    
+
     @Column(name = "tipocolocado", length = 75)
     private String tipocolocado;
-    
+
     @Column(name = "cantidadcobradacolocado", precision = 22)
     private Double cantidadcobradacolocado;
-    
+
     @Column(name = "colocador", length = 50)
     private String colocador;
-    
+
     @Column(name = "tuberia")
     private Integer tuberia;
-    
+
     @Column(name = "laboratorio", length = 50)
     private String laboratorio;
-    
+
     @Column(name = "confirmado")
     private Boolean confirmado;
-    
+
     @Column(name = "fechapedido")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechapedido;
-    
+
     @Basic(optional = false)
     @Column(name = "usuariocreacion", nullable = false, length = 50)
     private String usuariocreacion;
-    
+
     @Basic(optional = false)
     @Column(name = "fechacreacion", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-    
+
     @Column(name = "usuariomodificacion", length = 50)
     private String usuariomodificacion;
-    
+
     @Column(name = "fechamodificacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechamodificacion;
-    
+
     @Column(name = "usuarioeliminacion", length = 50)
     private String usuarioeliminacion;
-    
+
     @Column(name = "fechaeliminacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaeliminacion;
-    
+
     @Basic(optional = false)
     @Column(name = "activo", nullable = false)
     private boolean activo;
-    
+
     @JoinColumn(name = "idasesor", referencedColumnName = "idasesor", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Asesor idasesor;
-    
+
     @JoinColumn(name = "idcliente", referencedColumnName = "idcliente", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Cliente idcliente;
-    
+
     @JoinColumn(name = "idestadopedido", referencedColumnName = "idestadopedido", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Estadopedido idestadopedido;
-    
+
     @JoinColumn(name = "idtipopago", referencedColumnName = "idtipopago", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Tipopago idtipopago;
-    
+
+    @JoinColumn(name = "idtipocemento", referencedColumnName = "idtipocemento", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Tipocemento idtipocemento;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idpedido", fetch = FetchType.LAZY)
     private List<Despachos> despachosList;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idpedido", fetch = FetchType.LAZY)
     private List<Detallepedidonormal> detallepedidonormalList;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idpedido", fetch = FetchType.LAZY)
     private List<Confirmacionpago> confirmacionpagoList;
 
@@ -510,5 +514,13 @@ public class Pedidos implements Serializable {
     public String toString() {
         return "global.mix.sm.api.entity.Pedidos[ idpedido=" + idpedido + " ]";
     }
-    
+
+    public Tipocemento getIdtipocemento() {
+        return idtipocemento;
+    }
+
+    public void setIdtipocemento(Tipocemento idtipocemento) {
+        this.idtipocemento = idtipocemento;
+    }
+
 }

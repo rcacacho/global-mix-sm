@@ -177,7 +177,7 @@ public class CatalogosBean implements CatalogosBeanLocal {
 
     @Override
     public Material findMaterialById(Integer idmaterial) {
-        List<Material> lst = em.createQuery("SELECT cl FROM Material cl WHERE cl.idmaterial =:idmaterial ", Material.class)
+        List<Material> lst = em.createQuery("SELECT cl FROM Material cl WHERE cl.idmaterial =:idmaterial order by cl.fechacreacion asc", Material.class)
                 .setParameter("idmaterial", idmaterial)
                 .getResultList();
 
@@ -217,6 +217,19 @@ public class CatalogosBean implements CatalogosBeanLocal {
     public Estadodespacho findEstadoDespacho(Integer idestadodespacho) {
         List<Estadodespacho> lst = em.createQuery("SELECT qj FROM Estadodespacho qj where qj.activo = true and qj.idestadodespacho =:idestadodespacho ", Estadodespacho.class)
                 .setParameter("idestadodespacho", idestadodespacho)
+                .getResultList();
+
+        if (lst == null || lst.isEmpty()) {
+            return null;
+        }
+
+        return lst.get(0);
+    }
+
+    @Override
+    public Material findMaterialExistenciaMayorCeroById(Integer idmaterial) {
+        List<Material> lst = em.createQuery("SELECT cl FROM Material cl WHERE cl.idmaterial =:idmaterial and cl.existenciainicial > 0.0 order by cl.fechacreacion asc", Material.class)
+                .setParameter("idmaterial", idmaterial)
                 .getResultList();
 
         if (lst == null || lst.isEmpty()) {

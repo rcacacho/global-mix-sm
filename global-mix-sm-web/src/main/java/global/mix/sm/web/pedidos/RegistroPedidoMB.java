@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -421,15 +422,32 @@ public class RegistroPedidoMB implements Serializable {
             if (det.getCantidadaditivo() != null) {
                 Material matAditvio = catalogoBean.findMaterialById(det.getIdaditivo());
                 matAditvio.setExistenciainicial(matAditvio.getExistenciainicial() - det.getCantidadaditivo());
+                if (matAditvio.getExistenciainicial() <= 0) {
+                    Double resto = det.getCantidadaditivo() - matAditvio.getExistenciainicial();
+                    matAditvio.setExistenciainicial(0.0);
+                    Material responseUpdate = materialBean.updateMaterial(matAditvio, SesionUsuarioMB.getUserName());
 
-                Material responseUpdate = materialBean.updateMaterial(matAditvio, SesionUsuarioMB.getUserName());
+                    Detallematerial detalle = new Detallematerial();
+                    detalle.setExistenciaActual(matAditvio.getExistenciainicial());
+                    detalle.setIdmaterial(matAditvio);
+                    detalle.setEgreso(det.getCantidadaditivo());
+                    detalle.setTotal(matAditvio.getExistenciainicial() * matAditvio.getValorneto());
+                    Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
 
-                Detallematerial detalle = new Detallematerial();
-                detalle.setExistenciaActual(matAditvio.getExistenciainicial());
-                detalle.setIdmaterial(matAditvio);
-                detalle.setEgreso(det.getCantidadaditivo());
-                detalle.setTotal(matAditvio.getExistenciainicial() * matAditvio.getValorneto());
-                Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+                    Material matAditvioOtro = catalogoBean.findMaterialExistenciaMayorCeroById(det.getIdaditivo());
+                    matAditvioOtro.setExistenciainicial(resto);
+                    Material responseUpdateOtro = materialBean.updateMaterial(matAditvioOtro, SesionUsuarioMB.getUserName());
+
+                } else {
+                    Material responseUpdate = materialBean.updateMaterial(matAditvio, SesionUsuarioMB.getUserName());
+
+                    Detallematerial detalle = new Detallematerial();
+                    detalle.setExistenciaActual(matAditvio.getExistenciainicial());
+                    detalle.setIdmaterial(matAditvio);
+                    detalle.setEgreso(det.getCantidadaditivo());
+                    detalle.setTotal(matAditvio.getExistenciainicial() * matAditvio.getValorneto());
+                    Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+                }
             }
 
             if (det.getCantidadagua() != null) {
@@ -606,6 +624,7 @@ public class RegistroPedidoMB implements Serializable {
             parametros.put("tipoObra", pedido.getElemento());
             parametros.put("estadoPago", pedido.getIdestadopedido().getEstado());
             parametros.put("asesor", pedido.getIdasesor().getNombres() + " " + pedido.getIdasesor().getApellidos());
+
             if (pedido.getBombeo().equals("Si")) {
                 parametros.put("bombeo", "Con bombeo");
             } else {
@@ -675,7 +694,37 @@ public class RegistroPedidoMB implements Serializable {
             parametros.put("IMAGE", "logo.jpeg");
             parametros.put("DIRECTORIO", realPath + File.separator + "resources" + File.separator + "images" + File.separator);
             parametros.put("secuencia", secuencia);
-            parametros.put("iddetallepedidonormal", detalle.getIddetallepedidonormal());
+            parametros.put("cliente", detalle.getIdpedido().getIdcliente().getNombres() + " " + detalle.getIdpedido().getIdcliente().getApellidos());
+            parametros.put("obra", detalle.getIdpedido().getObra());
+            parametros.put("faltan", detalle.getIdpedido().getVolumen() - detalle.getCantidaddespachada());
+            parametros.put("uso", detalle.getIdpedido().getElemento());
+            parametros.put("cantidaDespachada", detalle.getCantidaddespachada());
+            parametros.put("camion", detalle.getIdcamion().getNumero());
+            parametros.put("asesor", detalle.getIdpedido().getIdasesor().getNombres() + " " + detalle.getIdpedido().getIdasesor().getApellidos());
+            parametros.put("piloto", detalle.getIdcamion().getEncargado());
+            parametros.put("fraguado", detalle.getIdpedido().getFraguado());
+            parametros.put("despacho", detalle.getCantidaddespachada());
+            
+            if (detalle.getIdpedido().getIdtipocemento() != null){
+                parametros.put("cemento", detalle.getIdpedido().getIdtipocemento().getDescripcion()  + " " + detalle.getIdpedido().getKgcm3());
+            }
+
+            if (detalle.getIdpedido().getBombeo().equals("Si")) {
+                parametros.put("bombeo", "Con bombeo");
+            } else {
+                parametros.put("bombeo", "Sin bombeo");
+            }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaComoCadena = sdf.format(detalle.getIdpedido().getFechapedido());
+            System.out.println(fechaComoCadena);
+
+            SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
+            String hora = sdf2.format(detalle.getIdpedido().getFechapedido());
+            System.out.println(hora);
+
+            parametros.put("horaPedido", hora);
+            parametros.put("fechaPedido", fechaComoCadena);
 
             ReporteJasper reporteJasper = JasperUtil.jasperReportPDF(nombreReporte, nombreArchivo + secuencia, parametros, dataSource);
             StreamedContent streamedContent;
@@ -701,6 +750,8 @@ public class RegistroPedidoMB implements Serializable {
         }
 
         listDetalleOtro.add(detalleOtro);
+        detalleOtro = null;
+        detalleOtro = new Detallepedido();
     }
 
     /*Metodos getters y setters*/

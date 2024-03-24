@@ -6,104 +6,94 @@
 	<parameter name="DIRECTORIO" class="java.lang.String"/>
 	<parameter name="IMAGE" class="java.lang.String"/>
 	<parameter name="secuencia" class="java.lang.String"/>
-	<parameter name="iddetallepedidonormal" class="java.lang.Integer"/>
+	<parameter name="cliente" class="java.lang.String"/>
+	<parameter name="obra" class="java.lang.String"/>
+	<parameter name="faltan" class="java.lang.Double"/>
+	<parameter name="uso" class="java.lang.String"/>
+	<parameter name="cantidaDespachada" class="java.lang.Double"/>
+	<parameter name="camion" class="java.lang.Integer"/>
+	<parameter name="piloto" class="java.lang.String"/>
+	<parameter name="asesor" class="java.lang.String"/>
+	<parameter name="horaPedido" class="java.lang.String"/>
+	<parameter name="fechaPedido" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select concat (c.nombres, ' ', c.apellidos) cliente, p.obra,
-concat('PSI', ' ', p.agregado) resistencia,  p.agregado, p.revpulg, p.fraguado, p.bombeo, P.kgcm3 cocreto, 
-p.volumen, (p.volumen - det.cantidaddespachada) faltan, p.elemento uso, det.cantidaddespachada,
-ca.numero, concat(ase.nombres, ' ', ase.apellidos) asesor, ca.encargado, DATE_FORMAT(p.fechapedido, '%d/%m/%Y') fechapedido,
-DATE_FORMAT(p.fechapedido, '%H:%i:%s') horapedido
-from detallepedidonormal det
-join pedidos p on det.idpedido = p.idpedido and p.activo = 1
-join cliente c on p.idcliente = c.idcliente and c.activo = 1 
-join asesor ase on p.idasesor = ase.idasesor and ase.activo = 1
-join camion ca on det.idcamion = ca.idcamion and ca.activo = 1 
-where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
+		<![CDATA[select * from cliente where idcliente = 1]]>
 	</queryString>
-	<field name="cliente" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="cliente"/>
-		<property name="com.jaspersoft.studio.field.label" value="cliente"/>
+	<field name="idcliente" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="idcliente"/>
+		<property name="com.jaspersoft.studio.field.label" value="idcliente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
-	<field name="obra" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="obra"/>
-		<property name="com.jaspersoft.studio.field.label" value="obra"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
+	<field name="nombres" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombres"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombres"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
-	<field name="resistencia" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="resistencia"/>
-		<property name="com.jaspersoft.studio.field.label" value="resistencia"/>
+	<field name="apellidos" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellidos"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellidos"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
-	<field name="agregado" class="java.lang.Float">
-		<property name="com.jaspersoft.studio.field.name" value="agregado"/>
-		<property name="com.jaspersoft.studio.field.label" value="agregado"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
+	<field name="nit" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nit"/>
+		<property name="com.jaspersoft.studio.field.label" value="nit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
-	<field name="revpulg" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="revpulg"/>
-		<property name="com.jaspersoft.studio.field.label" value="revpulg"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
+	<field name="direccion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="direccion"/>
+		<property name="com.jaspersoft.studio.field.label" value="direccion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
-	<field name="fraguado" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="fraguado"/>
-		<property name="com.jaspersoft.studio.field.label" value="fraguado"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
+	<field name="correoelectronico" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="correoelectronico"/>
+		<property name="com.jaspersoft.studio.field.label" value="correoelectronico"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
-	<field name="bombeo" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="bombeo"/>
-		<property name="com.jaspersoft.studio.field.label" value="bombeo"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
+	<field name="telefono" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="telefono"/>
+		<property name="com.jaspersoft.studio.field.label" value="telefono"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
-	<field name="cocreto" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="kgcm3"/>
-		<property name="com.jaspersoft.studio.field.label" value="cocreto"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
+	<field name="usuariocreacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="usuariocreacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="usuariocreacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
-	<field name="volumen" class="java.lang.Float">
-		<property name="com.jaspersoft.studio.field.name" value="volumen"/>
-		<property name="com.jaspersoft.studio.field.label" value="volumen"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
+	<field name="fechacreacion" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="fechacreacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechacreacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
-	<field name="faltan" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.name" value="faltan"/>
-		<property name="com.jaspersoft.studio.field.label" value="faltan"/>
+	<field name="usuariomodificacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="usuariomodificacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="usuariomodificacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
-	<field name="uso" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="elemento"/>
-		<property name="com.jaspersoft.studio.field.label" value="uso"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
+	<field name="fechamodificacion" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="fechamodificacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechamodificacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
-	<field name="cantidaddespachada" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.name" value="cantidaddespachada"/>
-		<property name="com.jaspersoft.studio.field.label" value="cantidaddespachada"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="detallepedidonormal"/>
+	<field name="usuarioeliminacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="usuarioeliminacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="usuarioeliminacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
-	<field name="numero" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="numero"/>
-		<property name="com.jaspersoft.studio.field.label" value="numero"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="camion"/>
+	<field name="fechaeliminacion" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="fechaeliminacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechaeliminacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
-	<field name="asesor" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="asesor"/>
-		<property name="com.jaspersoft.studio.field.label" value="asesor"/>
-	</field>
-	<field name="encargado" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="encargado"/>
-		<property name="com.jaspersoft.studio.field.label" value="encargado"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="camion"/>
-	</field>
-	<field name="fechapedido" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="fechapedido"/>
-		<property name="com.jaspersoft.studio.field.label" value="fechapedido"/>
-	</field>
-	<field name="horapedido" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="horapedido"/>
-		<property name="com.jaspersoft.studio.field.label" value="horapedido"/>
+	<field name="activo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="activo"/>
+		<property name="com.jaspersoft.studio.field.label" value="activo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="84" splitType="Stretch">
+		<band height="110" splitType="Stretch">
 			<staticText>
 				<reportElement x="80" y="32" width="378" height="17" uuid="0a79b38b-a5e8-4080-acd4-5e739eb65705">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -176,6 +166,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
+				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$P{secuencia}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -186,12 +177,13 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{fechapedido}]]></textFieldExpression>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{fechaPedido}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
 	<detail>
-		<band height="192" splitType="Stretch">
+		<band height="204" splitType="Stretch">
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="285" height="15" forecolor="#FFFFFF" backcolor="#345AC2" uuid="bdbd89a4-d195-4142-8c15-fe6c7d4f10a5">
 					<property name="local_mesure_unitwidth" value="pixel"/>
@@ -237,7 +229,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{cliente}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="34" width="125" height="15" forecolor="#FFFFFF" backcolor="#345AC2" uuid="32b86cef-b746-498a-8c48-8fe47c8977c1">
@@ -318,7 +310,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{obra}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{obra}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="380" y="34" width="92" height="15" forecolor="#FFFFFF" backcolor="#345AC2" uuid="af25a93c-5690-4a33-9997-dec32251d571">
@@ -365,7 +357,6 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{resistencia}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="125" y="49" width="80" height="17" uuid="4510b6d3-5505-4a04-974f-a27bdb1e675f">
@@ -377,10 +368,9 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{agregado}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="183" width="570" height="1" uuid="a6ffcf53-3b9e-472d-a102-6f96f5de82de"/>
+				<reportElement x="0" y="193" width="570" height="1" uuid="a6ffcf53-3b9e-472d-a102-6f96f5de82de"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
@@ -395,7 +385,6 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{revpulg}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="68" width="285" height="15" forecolor="#FFFFFF" backcolor="#345AC2" uuid="ae543275-cf41-4e0d-953b-de4f36fa3038">
@@ -443,7 +432,6 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{fraguado}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="380" y="49" width="92" height="17" uuid="9643558f-58be-4368-8482-7099b63db438">
@@ -455,7 +443,6 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{bombeo}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="472" y="49" width="98" height="17" uuid="8b37b07e-8609-4681-b921-a395bae1d1ee">
@@ -467,7 +454,6 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{cocreto}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="285" y="68" width="285" height="15" forecolor="#FFFFFF" backcolor="#345AC2" uuid="7530bc78-d5bd-4d4f-b029-801aa2f30cf6">
@@ -623,7 +609,6 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{volumen}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="285" y="117" width="155" height="15" forecolor="#FFFFFF" backcolor="#345AC2" uuid="c423380b-99f9-4e2a-8574-c6b5db29dbcc">
@@ -707,7 +692,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{faltan}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{faltan}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="94" y="98" width="28" height="17" uuid="c10f7894-bb1e-4e1c-a136-b9ecfeeba850">
@@ -719,7 +704,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{uso}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{uso}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="122" y="98" width="96" height="17" uuid="bd358baa-485f-4d2b-8f8e-cf7725f3a938">
@@ -731,7 +716,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{volumen}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{cantidaDespachada}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="218" y="98" width="67" height="17" uuid="4f720616-a5a8-41bb-8c21-7a921abaa99a">
@@ -743,7 +728,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{camion}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="285" y="98" width="155" height="17" uuid="451bc0f7-be39-4d32-8414-3e5ce12f05b7">
@@ -755,7 +740,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{asesor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{asesor}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="440" y="98" width="130" height="17" uuid="ab00191f-e6aa-44a4-b998-3ade87fa20ec">
@@ -767,7 +752,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{encargado}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{piloto}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="138" y="132" width="72" height="15" forecolor="#FFFFFF" backcolor="#345AC2" uuid="bcf091f6-3f4e-44a6-a238-09ad081ace58">
@@ -815,7 +800,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{horapedido}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{horaPedido}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="138" y="147" width="72" height="33" uuid="1691dea3-5bcf-4c45-88aa-52f989304389">
@@ -907,7 +892,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nombres]]></text>
+				<text><![CDATA[Obra a despachar]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
 				<reportElement x="0" y="15" width="285" height="17" uuid="3a515d04-6291-4849-8d44-5f74463c8da0">
@@ -919,7 +904,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{cliente}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="34" width="125" height="15" forecolor="#FFFFFF" backcolor="#345AC2" uuid="e6164ec9-247b-4693-a96d-b5e0b7a0cafe">
@@ -1000,7 +985,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{obra}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{obra}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="380" y="34" width="92" height="15" forecolor="#FFFFFF" backcolor="#345AC2" uuid="b08aab73-9927-44ea-8f93-5554956ec257">
@@ -1047,7 +1032,6 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{resistencia}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="125" y="49" width="80" height="17" uuid="17d4fb1e-80b3-45f0-bf0a-21d3787b8889">
@@ -1059,7 +1043,6 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{agregado}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="205" y="49" width="80" height="17" uuid="4c43e394-bfbc-46b1-aac3-8d514db2371b">
@@ -1071,7 +1054,6 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{revpulg}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="68" width="285" height="15" forecolor="#FFFFFF" backcolor="#345AC2" uuid="bd0b728f-65fc-45f0-8817-9ea0cc8d8114">
@@ -1119,7 +1101,6 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{fraguado}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="380" y="49" width="92" height="17" uuid="100fecf0-b7ce-4501-8983-07dad1116eeb">
@@ -1131,7 +1112,6 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{bombeo}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="472" y="49" width="98" height="17" uuid="87d0f81e-4e5e-47c7-a926-8b95dc96651a">
@@ -1143,7 +1123,6 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{cocreto}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="285" y="68" width="285" height="15" forecolor="#FFFFFF" backcolor="#345AC2" uuid="a7f6a8d1-c574-48e6-851d-08d4bd15f524">
@@ -1299,7 +1278,6 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{volumen}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="285" y="117" width="155" height="15" forecolor="#FFFFFF" backcolor="#345AC2" uuid="fbc658c0-941d-4461-82f3-edbc880c5e92">
@@ -1383,7 +1361,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{faltan}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{faltan}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="94" y="98" width="28" height="17" uuid="a44b0e68-fa5f-4def-a9e0-f35a39471c54">
@@ -1395,7 +1373,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{uso}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{uso}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="122" y="98" width="96" height="17" uuid="6237ebae-a80c-43c3-b6b3-d4604dcd62c1">
@@ -1407,7 +1385,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{cantidaddespachada}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{cantidaDespachada}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="218" y="98" width="67" height="17" uuid="52131921-a4ff-4ccc-8d03-10523618cbd5">
@@ -1419,7 +1397,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{camion}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="285" y="98" width="155" height="17" uuid="6ad1c3ab-1236-416d-a2f9-32064490078c">
@@ -1431,7 +1409,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{asesor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{asesor}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="440" y="98" width="130" height="17" uuid="dc45cfb7-e587-47b0-8267-d15cae92baa9">
@@ -1443,7 +1421,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{encargado}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{piloto}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="138" y="132" width="72" height="15" forecolor="#FFFFFF" backcolor="#345AC2" uuid="e18122b5-2556-4a4c-b18b-eae93f08a7c1">
@@ -1491,7 +1469,7 @@ where det.iddetallepedidonormal = $P{iddetallepedidonormal}]]>
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{horapedido}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{horaPedido}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="138" y="148" width="72" height="32" uuid="6456b1b3-904f-49a4-8af8-fe4fc2769a1a">
