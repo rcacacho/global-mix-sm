@@ -177,7 +177,7 @@ public class MaterialBean implements MaterialBeanLocal {
 
     @Override
     public Material findMaterialByNombre(String material) {
-        List<Material> lst = em.createQuery("SELECT mat FROM Material mat WHERE mat.material =:material ", Material.class)
+        List<Material> lst = em.createQuery("SELECT mat FROM Material mat WHERE mat.material =:material and mat.activo = true ", Material.class)
                 .setParameter("material", material)
                 .getResultList();
 

@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,7 +32,9 @@ import javax.sql.DataSource;
 import org.apache.log4j.Logger;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.ScheduleModel;
 import org.primefaces.model.StreamedContent;
 
 /**
@@ -65,6 +68,12 @@ public class ListaPedidosMB implements Serializable {
     private List<Estadopedido> listEstado;
     private Date fechaInicioReporte;
     private Date fechaFinReporte;
+    private ScheduleModel eventModel;
+    private String serverTimeZone = ZoneId.systemDefault().toString();
+
+    public ListaPedidosMB() {
+        eventModel = new DefaultScheduleModel();
+    }
 
     @PostConstruct
     void cargarDatos() {
@@ -95,6 +104,10 @@ public class ListaPedidosMB implements Serializable {
         } else {
             listEstado = new ArrayList<>();
         }
+
+        fechaInicio = new Date();
+        fechaFin = new Date();
+        buscarFiltro();
     }
 
     public void verDetalle(Integer idPedido) {
@@ -106,6 +119,8 @@ public class ListaPedidosMB implements Serializable {
         idestadopedido = null;
         idestadopedido = null;
         obra = null;
+        fechaFin = null;
+        fechaInicio = null;
 
         cargarDatos();
     }
@@ -113,6 +128,24 @@ public class ListaPedidosMB implements Serializable {
     public void buscarFiltro() {
         try {
             if (idcliente != null || idestadopedido != null || idsesor != null || obra != null || fechaInicio != null || fechaFin != null) {
+                if (fechaInicio != null) {
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(fechaInicio);
+                    c.set(Calendar.HOUR_OF_DAY, 0);
+                    c.set(Calendar.MINUTE, 0);
+                    c.set(Calendar.SECOND, 0);
+                    fechaInicio = c.getTime();
+                }
+
+                if (fechaFin != null) {
+                    Calendar c1 = Calendar.getInstance();
+                    c1.setTime(fechaFin);
+                    c1.set(Calendar.HOUR_OF_DAY, 23);
+                    c1.set(Calendar.MINUTE, 59);
+                    c1.set(Calendar.SECOND, 59);
+                    fechaFin = c1.getTime();
+                }
+
                 List<Pedidos> response = pedidoBean.listPedidoBuzon(idsesor, idcliente, idestadopedido, obra, fechaInicio, fechaFin);
                 if (response != null) {
                     listPedidos = response;
@@ -217,12 +250,12 @@ public class ListaPedidosMB implements Serializable {
         confir.setNombreconfirmo(SesionUsuarioMB.getUserName());
 
         Confirmacionpago response = pedidoBean.saveConfirmarPedido(confir, SesionUsuarioMB.getRolUsuario());
-        if (response != null){
+        if (response != null) {
             idPedido.setConfirmado(Boolean.TRUE);
             Pedidos responsePedido = pedidoBean.updatePedido(idPedido, SesionUsuarioMB.getRolUsuario());
-            
+
             JsfUtil.addSuccessMessage("Se registro la confirmación exisitosamente");
-        } 
+        }
     }
 
     /*Metodos getters y setters*/
@@ -330,4 +363,21 @@ public class ListaPedidosMB implements Serializable {
         this.fechaFinReporte = fechaFinReporte;
     }
 
+    public ScheduleModel getEventModel() {
+        return eventModel;
+    }
+
+    public void setEventModel(ScheduleModel eventModel) {
+        this.eventModel = eventModel;
+    }
+
+    public String getServerTimeZone() {
+        return serverTimeZone;
+    }
+
+    public void setServerTimeZone(String serverTimeZone) {
+        this.serverTimeZone = serverTimeZone;
+    }
+
 }
+

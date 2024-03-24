@@ -19,6 +19,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.apache.log4j.Logger;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -129,35 +130,37 @@ public class ListaMaterialMB implements Serializable {
             return;
         }
 
-        if (mat.getMaterial().equals("CEMENTO") || mat.getMaterial().equals("Cemento") || mat.getMaterial().equals("cemento")) {
-            mat.setValor(mat.getValor() + 172.77);
-        }
+        mat.setValorneto((mat.getValor() * mat.getExistenciainicial()) / 1.12);
 
-        mat.setValorneto(mat.getValor() / 1.12);
+        if (mat.getMaterial().equals("CEMENTO") || mat.getMaterial().equals("Cemento") || mat.getMaterial().equals("cemento")) {
+            mat.setValorneto(mat.getValorneto() + 172.77);
+        }
 
         if (unidadMedida != null) {
             mat.setIdunidadmedida(unidadMedida);
         }
 
         if (mat.getIdunidadmedida().getIdkilogramo() != null) {
-            mat.setCosto(mat.getValorneto() / mat.getIdunidadmedida().getIdkilogramo().getValor());
-        }
-
-        Material responseSave = materialBean.saveMaterial(mat, SesionUsuarioMB.getUserName());
-        if (responseSave != null) {
-            Detallematerial detalle = new Detallematerial();
-            detalle.setExistenciaActual(mat.getExistenciainicial());
-            detalle.setIdmaterial(mat);
-            detalle.setIngreso(mat.getExistenciainicial());
-            detalle.setTotal(mat.getExistenciainicial() * mat.getValorneto());
-            Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
-
-            JsfUtil.addSuccessMessage("Material creado exitosamente");
-            cargarDatos();
-            RequestContext.getCurrentInstance().execute("PF('dlgRegistro').hide()");
+            mat.setCosto(mat.getValorneto() / (mat.getIdunidadmedida().getIdkilogramo().getValor() * mat.getExistenciainicial()));
         } else {
-            JsfUtil.addErrorMessage("Ocurrio un error verificar datos");
+            mat.setCosto(mat.getValorneto() / mat.getExistenciainicial());
         }
+
+//        Material responseSave = materialBean.saveMaterial(mat, SesionUsuarioMB.getUserName());
+//        if (responseSave != null) {
+//            Detallematerial detalle = new Detallematerial();
+//            detalle.setExistenciaActual(mat.getExistenciainicial());
+//            detalle.setIdmaterial(mat);
+//            detalle.setIngreso(mat.getExistenciainicial());
+//            detalle.setTotal(mat.getExistenciainicial() * mat.getValorneto());
+//            Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+//
+//            JsfUtil.addSuccessMessage("Material creado exitosamente");
+//            cargarDatos();
+//            RequestContext.getCurrentInstance().execute("PF('dlgRegistro').hide()");
+//        } else {
+//            JsfUtil.addErrorMessage("Ocurrio un error verificar datos");
+//        }
     }
 
     public void eliminarMaterial(Material id) throws IOException {
@@ -222,6 +225,16 @@ public class ListaMaterialMB implements Serializable {
         Material materi = catalogoBean.findMaterialById(materialAgregar.getIdmaterial());
         if (materi != null) {
             mat = materi;
+        }
+    }
+
+    public void onRowEditMaterial(RowEditEvent event) throws IOException {
+        Material objeto = ((Material) event.getObject());
+        Material response = materialBean.updateMaterial(objeto, SesionUsuarioMB.getUserName());
+        if (response == null) {
+            JsfUtil.addErrorMessage("Ocurrio un error al actualizar");
+        } else {
+            JsfUtil.addSuccessMessage("Material actualizado correctamente");
         }
     }
 

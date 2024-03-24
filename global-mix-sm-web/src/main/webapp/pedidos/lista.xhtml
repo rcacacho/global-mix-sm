@@ -31,157 +31,187 @@
             </h:panelGrid>         
 
             <p:outputPanel class="content_centrado">  
-                <p:panelGrid styleClass="no-border" style="margin-left:2%; margin-right: 5%; margin-top: 10px; width: 95%">
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel value="Asesor" style="font-weight: bold;" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel value="Cliente" style="font-weight: bold;" />
-                        </p:column>
-                    </p:row>
-                    <p:row> 
-                        <p:column>
-                            <p:selectOneMenu  value="#{listaPedidosMB.idsesor}" style="width: 220px;" converter="entityConverter">    
-                                <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
-                                <f:selectItems value="#{listaPedidosMB.listAsesor}" var="asesor" itemLabel="#{asesor.nombres} #{asesor.apellidos}" itemValue="#{asesor.idasesor}" />
-                            </p:selectOneMenu>
-                        </p:column>
-                        <p:column>
-                            <p:selectOneMenu  value="#{listaPedidosMB.idcliente}" style="width: 220px;" converter="entityConverter">    
-                                <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
-                                <f:selectItems value="#{listaPedidosMB.listCliente}" var="cliente" itemLabel="#{cliente.nombres} #{cliente.apellidos}" itemValue="#{cliente.idcliente}" />
-                            </p:selectOneMenu>
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel value="Estado" style="font-weight: bold;" />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel value="Obra" style="font-weight: bold;" />
-                        </p:column>
-                    </p:row>
-                    <p:row> 
-                        <p:column>
-                            <p:selectOneMenu  value="#{listaPedidosMB.idestadopedido}" style="width: 220px;" converter="entityConverter">    
-                                <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
-                                <f:selectItems value="#{listaPedidosMB.listEstado}" var="estado" itemLabel="#{estado.estado}" itemValue="#{estado.idestadopedido}" />
-                            </p:selectOneMenu>
-                        </p:column>
-                        <p:column>
-                            <p:inputText id="txtObra" value="#{listaPedidosMB.obra}" style="width: 95%;"  placeholder="(Obra)">
-                                <p:ajax event="blur" process="@this"  />
-                            </p:inputText>
-                        </p:column>
-                    </p:row>  
-
-                    <p:row> 
-                        <p:column>
-                        </p:column>
-                        <p:column>
-                        </p:column>
-                        <p:column >
-                            <p:commandButton value="Buscar" title="Buscar" onstart="inicio();" oncomplete="fin();"
-                                             actionListener="#{listaPedidosMB.buscarFiltro()}" update=":frm_pedido"
-                                             class="boton boton-imgtxt-16 b-gris4 icon-buscar-expediente" process="@this"
-                                             style="margin-top: 4px;background-size: 20px 20px !important;
-                                             background-position: 4px 1px !important;"/>  
-
-                            <p:commandButton  value="Limpiar" title="Limpiar" 
-                                              action="#{listaPedidosMB.limpiarCampos()}" class="boton boton-imgtxt-16 b-gris4 icon-limpiar"
-                                              onstart="inicio();" oncomplete="fin();"
-                                              style="margin-top: 4px; background-size: 20px 20px !important; background-position: 4px 1px !important;" update=":frm_pedido"  >
-                            </p:commandButton> 
-                        </p:column>
-                    </p:row>
-                </p:panelGrid>
-                <br />
                 <p:tabView id="tab_table">
-                    <p:tab title="Pedidos (#{listaPedidosMB.listPedidos.size()})">
-                        <div align="center" style="margin-top: 5px; font-size: 13px;">
-                        </div>
+                    <p:tab title="Buzón">
+                        <p:panelGrid styleClass="no-border" style="margin-left:2%; margin-right: 5%; margin-top: 10px; width: 95%">
+                            <p:row>
+                                <p:column>
+                                    <p:outputLabel value="Asesor" style="font-weight: bold;" />
+                                </p:column>
+                                <p:column>
+                                    <p:outputLabel value="Cliente" style="font-weight: bold;" />
+                                </p:column>
+                            </p:row>
+                            <p:row> 
+                                <p:column>
+                                    <p:selectOneMenu  value="#{listaPedidosMB.idsesor}" style="width: 220px;" converter="entityConverter">    
+                                        <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                        <f:selectItems value="#{listaPedidosMB.listAsesor}" var="asesor" itemLabel="#{asesor.nombres} #{asesor.apellidos}" itemValue="#{asesor.idasesor}" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu  value="#{listaPedidosMB.idcliente}" style="width: 220px;" converter="entityConverter">    
+                                        <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                        <f:selectItems value="#{listaPedidosMB.listCliente}" var="cliente" itemLabel="#{cliente.nombres} #{cliente.apellidos}" itemValue="#{cliente.idcliente}" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column>
+                                    <p:outputLabel value="Estado" style="font-weight: bold;" />
+                                </p:column>
+                                <p:column>
+                                    <p:outputLabel value="Obra" style="font-weight: bold;" />
+                                </p:column>
+                            </p:row>
+                            <p:row> 
+                                <p:column>
+                                    <p:selectOneMenu  value="#{listaPedidosMB.idestadopedido}" style="width: 220px;" converter="entityConverter">    
+                                        <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                        <f:selectItems value="#{listaPedidosMB.listEstado}" var="estado" itemLabel="#{estado.estado}" itemValue="#{estado.idestadopedido}" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                                <p:column>
+                                    <p:inputText id="txtObra" value="#{listaPedidosMB.obra}" style="width: 95%;"  placeholder="(Obra)">
+                                        <p:ajax event="blur" process="@this"  />
+                                    </p:inputText>
+                                </p:column>
+                            </p:row>  
 
-                        <p:dataTable id="dt_pedido" emptyMessage="No hay registros" styleClass="tabla-mp"
-                                     var="pedido" value="#{listaPedidosMB.listPedidos}"
-                                     rows="20" paginator="#{listaPedidosMB.listPedidos.size()>20}" paginatorPosition="bottom"
-                                     rowIndexVar="rowId" style="width: 100%;" 
-                                     widgetVar="wv_pedido" filteredValue="#{listaPedidosMB.listPedidoFiltrado}">
+                            <p:row>
+                                <p:column>
+                                    <p:outputLabel value="Fecha inicio" style="font-weight: bold;" />
+                                </p:column>
+                                <p:column>
+                                    <p:outputLabel value="Fecha fin" style="font-weight: bold;" />
+                                </p:column>
+                            </p:row>
+                            <p:row> 
+                                <p:column>
+                                    <p:calendar id="cal_fechaInicio" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
+                                                value="#{listaPedidosMB.fechaInicio}" navigator="true">  
+                                        <p:ajax event="dateSelect" process="@this" />
+                                    </p:calendar>
+                                </p:column>
+                                <p:column>
+                                    <p:calendar id="cal_fechaFin" placeholder="(elige una fecha)" locale="es" timeZone="America/Guatemala" pattern="dd/MM/yyyy" mask ="true"                          
+                                                value="#{listaPedidosMB.fechaFin}" navigator="true">  
+                                        <p:ajax event="dateSelect" process="@this" />
+                                    </p:calendar>
+                                </p:column>
+                            </p:row>  
 
-                            <p:column headerText="No." style="width: 5%; text-align: center;">
-                                #{rowId+1}
-                            </p:column>
+                            <p:row> 
+                                <p:column>
+                                </p:column>
+                                <p:column>
+                                </p:column>
+                                <p:column >
+                                    <p:commandButton value="Buscar" title="Buscar" onstart="inicio();" oncomplete="fin();"
+                                                     actionListener="#{listaPedidosMB.buscarFiltro()}" update=":frm_pedido"
+                                                     class="boton boton-imgtxt-16 b-gris4 icon-buscar-expediente" process="@this"
+                                                     style="margin-top: 4px;background-size: 20px 20px !important;
+                                                     background-position: 4px 1px !important;"/>  
 
-                            <p:column headerText="Asesor" width="8%" style="text-align: left;">
-                                <p:outputLabel value="#{pedido.idasesor.nombres} #{pedido.idasesor.apellidos}"/>
-                            </p:column>
+                                    <p:commandButton  value="Limpiar" title="Limpiar" 
+                                                      action="#{listaPedidosMB.limpiarCampos()}" class="boton boton-imgtxt-16 b-gris4 icon-limpiar"
+                                                      onstart="inicio();" oncomplete="fin();"
+                                                      style="margin-top: 4px; background-size: 20px 20px !important; background-position: 4px 1px !important;" update=":frm_pedido"  >
+                                    </p:commandButton> 
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                        <br />
+                        <p:tabView id="tab_table">
+                            <p:tab title="Pedidos (#{listaPedidosMB.listPedidos.size()})">
+                                <div align="center" style="margin-top: 5px; font-size: 13px;">
+                                </div>
 
-                            <p:column headerText="Cliente" width="8%" filterMatchMode="contains" style="text-align: center;">
-                                <p:outputLabel value="#{pedido.idcliente.nombres} #{pedido.idcliente.apellidos}"/>
-                            </p:column>
+                                <p:dataTable id="dt_pedido" emptyMessage="No hay registros" styleClass="tabla-mp"
+                                             var="pedido" value="#{listaPedidosMB.listPedidos}"
+                                             rows="20" paginator="#{listaPedidosMB.listPedidos.size()>20}" paginatorPosition="bottom"
+                                             rowIndexVar="rowId" style="width: 100%;" 
+                                             widgetVar="wv_pedido" filteredValue="#{listaPedidosMB.listPedidoFiltrado}">
 
-                            <p:column headerText="Obra" width="12%" style="text-align: left;">
-                                <p:outputLabel value="#{pedido.obra}"/>
-                            </p:column>
+                                    <p:column headerText="No." style="width: 5%; text-align: center;">
+                                        #{rowId+1}
+                                    </p:column>
 
-                            <p:column headerText="Pago" width="5%" style="text-align: left;">
-                                <p:outputLabel value="#{pedido.cantidadpagada}"/>
-                            </p:column>
+                                    <p:column headerText="Asesor" width="8%" style="text-align: left;">
+                                        <p:outputLabel value="#{pedido.idasesor.nombres} #{pedido.idasesor.apellidos}"/>
+                                    </p:column>
 
-                            <p:column headerText="kg/cm3" width="5%" style="text-align: left;">
-                                <p:outputLabel value="#{pedido.kgcm3}"/>
-                            </p:column>
+                                    <p:column headerText="Cliente" width="8%" filterMatchMode="contains" style="text-align: center;">
+                                        <p:outputLabel value="#{pedido.idcliente.nombres} #{pedido.idcliente.apellidos}"/>
+                                    </p:column>
 
-                            <p:column headerText="rev./pulg." width="5%" style="text-align: left;">
-                                <p:outputLabel value="#{pedido.revpulg}"/>
-                            </p:column>
+                                    <p:column headerText="Obra" width="12%" style="text-align: left;">
+                                        <p:outputLabel value="#{pedido.obra}"/>
+                                    </p:column>
 
-                            <p:column headerText="Agregado" width="6%" style="text-align: left;">
-                                <p:outputLabel value="#{pedido.agregado}"/>
-                            </p:column>
+                                    <p:column headerText="Pago" width="5%" style="text-align: left;">
+                                        <p:outputLabel value="#{pedido.cantidadpagada}"/>
+                                    </p:column>
 
-                            <p:column headerText="Tipo pago" width="5%" style="text-align: left;">
-                                <p:outputLabel value="#{pedido.idtipopago.tipopago}"/>
-                            </p:column>
+                                    <p:column headerText="kg/cm3" width="5%" style="text-align: left;">
+                                        <p:outputLabel value="#{pedido.kgcm3}"/>
+                                    </p:column>
 
-                            <p:column headerText="Autorizado" width="6%" style="text-align: left;">
-                                <p:outputLabel value="#{pedido.confirmado == true ? 'Si' : 'No'}" rendered="#{pedido.idtipopago.idtipopago eq 2 || pedido.idtipopago.idtipopago eq 3}"/>
-                            </p:column>
+                                    <p:column headerText="rev./pulg." width="5%" style="text-align: left;">
+                                        <p:outputLabel value="#{pedido.revpulg}"/>
+                                    </p:column>
 
-                            <p:column headerText="Estado" width="5%" style="text-align: left;">
-                                <p:outputLabel value="#{pedido.idestadopedido.estado}"/>
-                            </p:column>
+                                    <p:column headerText="Agregado" width="6%" style="text-align: left;">
+                                        <p:outputLabel value="#{pedido.agregado}"/>
+                                    </p:column>
 
-                            <p:column headerText="Fecha ingreso" width="5%">
-                                <p:outputLabel value="#{pedido.fechacreacion}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                </p:outputLabel>
-                            </p:column>
+                                    <p:column headerText="Tipo pago" width="5%" style="text-align: left;">
+                                        <p:outputLabel value="#{pedido.idtipopago.tipopago}"/>
+                                    </p:column>
 
-                            <p:column width="11%" exportable="false" >
-                                <p:commandButton action="#{listaPedidosMB.eliminarPedido(pedido)}" title="Eliminar"
-                                                 onstart="start();" onsuccess="stop();" process="@this" value="" rendered="#{pedido.idestadopedido.idestadopedido eq 1}"
-                                                 immediate="true" update="frm_pedido" class="boton boton-img-24 b-gris4 icon-trash" 
-                                                 style="background-position: 5px 5px !important; background-size: 18px 18px !important; float: right;"/>
+                                    <p:column headerText="Autorizado" width="6%" style="text-align: left;">
+                                        <p:outputLabel value="#{pedido.confirmado == true ? 'Si' : 'No'}" rendered="#{pedido.idtipopago.idtipopago eq 2 || pedido.idtipopago.idtipopago eq 3}"/>
+                                    </p:column>
 
-                                <p:commandButton value="" action="#{listaPedidosMB.verDetalle(pedido.idpedido)}" 
-                                                 title="Ver detalle" class="boton boton-img-24 b-gris4 icon-buscar-expediente" onstart="start();" onsuccess="stop();"
-                                                 style="background-position: 5px 5px !important; background-size: 18px 18px !important; float: right;"/>
+                                    <p:column headerText="Estado" width="5%" style="text-align: left;">
+                                        <p:outputLabel value="#{pedido.idestadopedido.estado}"/>
+                                    </p:column>
 
-                                <p:button value="" href="#{listaPedidosMB.abrirRegistro(pedido.idpedido)}" target="_blank" rendered="#{pedido.idestadopedido.idestadopedido eq 1}"
-                                          title="Registrar orden" class="boton boton-img-24 b-gris4 icon-agregar-personalizado"                                                  
-                                          style="background-position: 5px 5px !important; background-size: 18px 18px !important; float: right;"/>
+                                    <p:column headerText="Fecha ingreso" width="5%">
+                                        <p:outputLabel value="#{pedido.fechacreacion}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                        </p:outputLabel>
+                                    </p:column>
 
-                                <p:commandButton value="" action="#{listaPedidosMB.verEditar(pedido.idpedido)}"  rendered="#{pedido.idestadopedido.idestadopedido eq 1}"
-                                                 title="Editar" class="boton boton-img-24 b-gris4 icon-editar" onstart="start();" onsuccess="stop();"
-                                                 style="background-position: 5px 5px !important; background-size: 18px 18px !important; float: right;"/>
+                                    <p:column width="11%" exportable="false" >
+                                        <p:commandButton action="#{listaPedidosMB.eliminarPedido(pedido)}" title="Eliminar"
+                                                         onstart="start();" onsuccess="stop();" process="@this" value="" rendered="#{pedido.idestadopedido.idestadopedido eq 1}"
+                                                         immediate="true" update="frm_pedido" class="boton boton-img-24 b-gris4 icon-trash" 
+                                                         style="background-position: 5px 5px !important; background-size: 18px 18px !important; float: right;"/>
 
-                                <p:commandButton value="" action="#{listaPedidosMB.confirmarPedido(pedido)}" update="@form" 
-                                                 rendered="#{pedido.idtipopago.idtipopago eq 2 || pedido.idtipopago.idtipopago eq 3}" disabled="#{pedido.confirmado eq true}"
-                                                 title="Confirmar Pedido" class="boton boton-img-24 b-gris4 icon-aceptar" onstart="start();" onsuccess="stop();"
-                                                 style="background-position: 5px 5px !important; background-size: 18px 18px !important; float: right;"/>
-                            </p:column>
-                        </p:dataTable>
+                                        <p:commandButton value="" action="#{listaPedidosMB.verDetalle(pedido.idpedido)}" 
+                                                         title="Ver detalle" class="boton boton-img-24 b-gris4 icon-buscar-expediente" onstart="start();" onsuccess="stop();"
+                                                         style="background-position: 5px 5px !important; background-size: 18px 18px !important; float: right;"/>
+
+                                        <p:button value="" href="#{listaPedidosMB.abrirRegistro(pedido.idpedido)}" target="_blank" rendered="#{pedido.idestadopedido.idestadopedido eq 1}"
+                                                  title="Registrar orden" class="boton boton-img-24 b-gris4 icon-agregar-personalizado"                                                  
+                                                  style="background-position: 5px 5px !important; background-size: 18px 18px !important; float: right;"/>
+
+                                        <p:commandButton value="" action="#{listaPedidosMB.verEditar(pedido.idpedido)}"  rendered="#{pedido.idestadopedido.idestadopedido eq 1}"
+                                                         title="Editar" class="boton boton-img-24 b-gris4 icon-editar" onstart="start();" onsuccess="stop();"
+                                                         style="background-position: 5px 5px !important; background-size: 18px 18px !important; float: right;"/>
+
+                                        <p:commandButton value="" action="#{listaPedidosMB.confirmarPedido(pedido)}" update="@form" 
+                                                         rendered="#{pedido.idtipopago.idtipopago eq 2 || pedido.idtipopago.idtipopago eq 3}" disabled="#{pedido.confirmado eq true}"
+                                                         title="Confirmar Pedido" class="boton boton-img-24 b-gris4 icon-aceptar" onstart="start();" onsuccess="stop();"
+                                                         style="background-position: 5px 5px !important; background-size: 18px 18px !important; float: right;"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </p:tab>
+                        </p:tabView>
+                    </p:tab>
+                    <p:tab title="Calendario">
+ 
                     </p:tab>
                 </p:tabView>
             </p:outputPanel>
