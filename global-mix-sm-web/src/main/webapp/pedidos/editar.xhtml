@@ -106,7 +106,7 @@
                             <p:outputLabel value="Fraguado" style="font-weight: bold;"/>
                         </p:column>
                         <p:column >
-                            <p:outputLabel value="Kg/cm3" style="font-weight: bold;"/>
+                            <p:outputLabel value="Tipo Cemento" style="font-weight: bold;"/>
                         </p:column>
                     </p:row>
                     <p:row>
@@ -121,37 +121,35 @@
                             </p:inputText>
                         </p:column>
                         <p:column>
+                            <p:selectOneMenu id="somTipoCem" value="#{editarPedidoMB.pedido.idtipocemento}" style="width: 250px;" converter="entityConverter"
+                                             filter="true" filterMatchMode="contains">    
+                                <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                <f:selectItems value="#{programacionPedidoMB.listTipoCemento}" var="tipo" itemLabel="#{tipo.descripcion}" itemValue="#{tipo}" />
+                            </p:selectOneMenu>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Extra" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
                             <p:inputText id="txtCm" value="#{editarPedidoMB.pedido.kgcm3}" style="width: 95%;"  placeholder="(kg/cm3)">
                                 <p:ajax event="blur" process="@this"  />
                             </p:inputText>
                         </p:column>
-                    </p:row>
-                    <p:row>
                         <p:column>
-                            <p:outputLabel value="Agregado" style="font-weight: bold;"/>
-                        </p:column>
-                        <p:column >
-                            <p:outputLabel value="Rev./pulg" style="font-weight: bold;"/>
-                        </p:column>
-                        <p:column >
-                            <p:outputLabel value="Frec" style="font-weight: bold;"/>
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:inputText id="txtAgregado" value="#{editarPedidoMB.pedido.agregado}" style="width: 95%;"  placeholder="(Agregado)">
-                                <p:ajax event="blur" process="@this"  />
-                            </p:inputText>
+                            <p:outputLabel value="" style="font-weight: bold;"/>
                         </p:column>
                         <p:column>
-                            <p:inputText id="txtRev" value="#{editarPedidoMB.pedido.revpulg}" style="width: 95%;"  placeholder="(Rev./pulg)">
-                                <p:ajax event="blur" process="@this"  />
-                            </p:inputText>
-                        </p:column>
-                        <p:column>
-                            <p:inputText id="txtFrec" value="#{editarPedidoMB.pedido.frec}" style="width: 95%;"  placeholder="(Frec)">
-                                <p:ajax event="blur" process="@this"  />
-                            </p:inputText>
+                            <p:outputLabel value="" style="font-weight: bold;"/>
                         </p:column>
                     </p:row>
                     <p:row>

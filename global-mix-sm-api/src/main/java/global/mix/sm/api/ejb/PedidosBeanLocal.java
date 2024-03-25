@@ -5,6 +5,7 @@ import global.mix.sm.api.entity.Detallepedido;
 import global.mix.sm.api.entity.Detallepedidonormal;
 import global.mix.sm.api.entity.Pedidos;
 import global.mix.sm.api.entity.Secuenciapedido;
+import global.mix.sm.api.entity.Tipocemento;
 import java.util.Date;
 import java.util.List;
 
@@ -30,8 +31,6 @@ public interface PedidosBeanLocal {
 
     Detallepedido updateDetallePedido(Detallepedido detallePedido, String usuarioModificacion);
 
-    List<Detallepedido> listDetallePedidoByIdPedido(Integer idpedido);
-
     Detallepedidonormal saveDetallePedidoNormal(Detallepedidonormal detallePedidonormal, String usuarioCreacion);
 
     List<Detallepedidonormal> listDetallePedidoNormalByIdPedido(Integer idpedido);
@@ -49,10 +48,24 @@ public interface PedidosBeanLocal {
     Confirmacionpago saveConfirmarPedido(Confirmacionpago confirmar, String usuarioCreacion);
 
     Secuenciapedido findUltimaSecuencia();
-    
+
     Secuenciapedido saveSecuenciaPedido(Secuenciapedido secuencia, String usuarioCreacion);
 
     Secuenciapedido findSecuenciaPedidoByIdDetalle(Integer iddetallepedidonormal);
-    
+
     Detallepedidonormal updateDetallePedidoNormal(Detallepedidonormal detallePedidonormal, String usuarioModificacion);
+
+    List<Tipocemento> listTipoCemento();
+
+    Tipocemento findTipoCemento(Integer idTipocemento);
+
+    Tipocemento saveTipoCemento(Tipocemento tipo, String usuarioCreacion);
+
+    Tipocemento updateTipoCemento(Tipocemento tipo, String usuarioModificacion);
+
+    Tipocemento deleteTipoCemento(Tipocemento tipo, String usuarioEliminacion);
+
+    List<Pedidos> listPedidoByMesAnio(Integer mes, Integer anio);
+
+    List<Pedidos> listPedidoByFechaInicio(Date fechaInicio, Date fechaFin);
 }

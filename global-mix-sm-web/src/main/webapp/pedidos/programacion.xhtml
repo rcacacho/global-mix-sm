@@ -48,14 +48,16 @@
                     <p:row>
                         <p:column>
                             <p:selectOneMenu  value="#{programacionPedidoMB.pedido.idasesor}" style="width: 250px;" converter="entityConverter"
-                                              filter="true" filterMatchMode="contains">    
+                                              filter="true" filterMatchMode="contains">   
+                                <p:ajax event="itemSelect"/>
                                 <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
                                 <f:selectItems value="#{programacionPedidoMB.listAsesor}" var="asesor" itemLabel="#{asesor.nombres} #{asesor.apellidos}" itemValue="#{asesor}" />
                             </p:selectOneMenu>
                         </p:column>
                         <p:column >
                             <p:selectOneMenu  value="#{programacionPedidoMB.pedido.idcliente}" style="width: 250px;" converter="entityConverter"
-                                              filter="true" filterMatchMode="contains">    
+                                              filter="true" filterMatchMode="contains">
+                                <p:ajax event="itemSelect"/>
                                 <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
                                 <f:selectItems value="#{programacionPedidoMB.listClientes}" var="cliente" itemLabel="#{cliente.nombres} #{cliente.apellidos}" itemValue="#{cliente}" />
                             </p:selectOneMenu>
@@ -81,6 +83,7 @@
                         <p:column>
                             <p:selectOneMenu  value="#{programacionPedidoMB.pedido.idtipopago}" style="width: 250px;" converter="entityConverter"
                                               filter="true" filterMatchMode="contains">    
+                                <p:ajax event="itemSelect"/>
                                 <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
                                 <f:selectItems value="#{programacionPedidoMB.listTipoPago}" var="tipo" itemLabel="#{tipo.tipopago}" itemValue="#{tipo}" />
                             </p:selectOneMenu>
@@ -104,7 +107,7 @@
                             <p:outputLabel value="Fraguado" style="font-weight: bold;"/>
                         </p:column>
                         <p:column >
-                            <p:outputLabel value="Kg/cm3" style="font-weight: bold;"/>
+                            <p:outputLabel value="Frec" style="font-weight: bold;"/>
                         </p:column>
                     </p:row>
                     <p:row>
@@ -115,34 +118,6 @@
                         </p:column>
                         <p:column>
                             <p:inputText id="txtFraguado" value="#{programacionPedidoMB.pedido.fraguado}" style="width: 95%;"  placeholder="(Fraguado)">
-                                <p:ajax event="blur" process="@this"  />
-                            </p:inputText>
-                        </p:column>
-                        <p:column>
-                            <p:inputText id="txtCm" value="#{programacionPedidoMB.pedido.kgcm3}" style="width: 95%;"  placeholder="(kg/cm3)">
-                                <p:ajax event="blur" process="@this"  />
-                            </p:inputText>
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel value="Agregado" style="font-weight: bold;"/>
-                        </p:column>
-                        <p:column >
-                            <p:outputLabel value="Rev./pulg" style="font-weight: bold;"/>
-                        </p:column>
-                        <p:column >
-                            <p:outputLabel value="Frec" style="font-weight: bold;"/>
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:inputText id="txtAgregado" value="#{programacionPedidoMB.pedido.agregado}" style="width: 95%;"  placeholder="(Agregado)">
-                                <p:ajax event="blur" process="@this"  />
-                            </p:inputText>
-                        </p:column>
-                        <p:column>
-                            <p:inputText id="txtRev" value="#{programacionPedidoMB.pedido.revpulg}" style="width: 95%;"  placeholder="(Rev./pulg)">
                                 <p:ajax event="blur" process="@this"  />
                             </p:inputText>
                         </p:column>
@@ -167,6 +142,7 @@
                         <p:column>
                             <p:selectOneMenu  value="#{programacionPedidoMB.pedido.bombeo}" style="width:250px;" 
                                               filter="true" filterMatchMode="contains">
+                                <p:ajax event="itemSelect"/>
                                 <f:selectItem itemLabel="(Seleccione)" itemValue="" noSelectionOption="true" />
                                 <f:selectItem itemLabel="Si" itemValue="Si" />
                                 <f:selectItem itemLabel="No" itemValue="No" />
@@ -184,6 +160,46 @@
                         </p:column>                  
                     </p:row>
                 </p:panelGrid>
+
+                <p:panelGrid id="pgConcreto" styleClass="no-border" style="width: 84%; margin-left: 30px;">
+                    <p:row>
+                        <p:column>
+                            <p:outputLabel value="Concreto" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="Extras" style="font-weight: bold;"/>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>
+                            <p:selectOneMenu id="somTipoCem" value="#{programacionPedidoMB.pedido.idtipocemento}" style="width: 250px;" converter="entityConverter"
+                                             filter="true" filterMatchMode="contains">   
+                                <p:ajax event="itemSelect"/>
+                                <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
+                                <f:selectItems value="#{programacionPedidoMB.listTipoCemento}" var="tipo" itemLabel="#{tipo.descripcion}" itemValue="#{tipo}" />
+                            </p:selectOneMenu>
+
+                            <p:commandButton id="btnAgregar" value="" title="Registro" onstart="start();" oncomplete="stop();" 
+                                             actionListener="#{programacionPedidoMB.abrirTipoCemento()}" immediate="true"
+                                             update="somTipo"  style="background-position: 5px 3px !important; 
+                                             background-size: 18px 18px !important; margin-left: 5px;"
+                                             class="boton boton-img-24 b-gris4 icon-agregar-archivo" process="@this">
+                            </p:commandButton>
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="txtExtra" value="#{programacionPedidoMB.pedido.kgcm3}" style="width: 368px;"  placeholder="(Extra)">
+                                <p:ajax event="blur" process="@this"  />
+                            </p:inputText>
+                        </p:column>
+                        <p:column >
+                            <p:outputLabel value="" style="font-weight: bold;"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
                 <p:panelGrid id="pgColocado" styleClass="no-border" style="width: 96%; margin-left: 30px;">
                     <p:row>
                         <p:column >
@@ -203,6 +219,7 @@
                         <p:column>
                             <p:selectOneMenu  value="#{programacionPedidoMB.pedido.colocado}" style="width:250px;" 
                                               filter="true" filterMatchMode="contains">
+                                <p:ajax event="itemSelect"/>
                                 <p:ajax listener="#{programacionPedidoMB.cargarColocado()}" update=":form:pgColocado"/>
                                 <f:selectItem itemLabel="(Seleccione)" itemValue="" noSelectionOption="true" />
                                 <f:selectItem itemLabel="Si" itemValue="Si"  />
@@ -212,6 +229,7 @@
                         <p:column >
                             <p:selectOneMenu id="somTipo" value="#{programacionPedidoMB.pedido.tipocolocado}" style="width:250px;" 
                                              filter="true" filterMatchMode="contains" rendered="#{programacionPedidoMB.mostrarColocado}">
+                                <p:ajax event="itemSelect"/>
                                 <f:selectItem itemLabel="(Seleccione)" itemValue="" noSelectionOption="true" />
                                 <f:selectItem itemLabel="M|2" itemValue="M|2" />
                                 <f:selectItem itemLabel="M|3" itemValue="M|3" />
@@ -253,13 +271,12 @@
                     </p:row>
                 </p:panelGrid>        
 
-
                 <div align="right" style="width: 100%; margin-bottom: 15px; margin-top: 15px; width: 98%" >
                     <table >
                         <tr>                                       
                             <td>
                                 <p:commandButton value="Guardar" 
-                                                 class="boton boton-imgtxt-16 b-gris4 icon-guardar"
+                                                 class="boton boton-imgtxt-16 b-gris4 icon-guardar" process="@this"
                                                  style="float: right; margin-right: 10px; margin-bottom: 10px; margin-top: 10px"       
                                                  action="#{programacionPedidoMB.registroPedido()}" onstart="start();" oncomplete="stop();"
                                                  update="@form"/>
@@ -274,6 +291,30 @@
                         </tr>
                     </table>
                 </div>
+
+                <p:dialog widgetVar="dlgRegistro" id="dlgRegistro" showEffect="clip" hideEffect="clip" header="Registro de concreto"
+                          resizable="false" draggable="false" closable="true" modal="true" width="550px" position="top">
+
+                    <p:panelGrid id="pginfo" columns="1" styleClass="no-border" style="width: 100%; margin-top: 10px;">
+                        <p:outputLabel value="Descripción:" style="font-weight: bold;" />              
+
+                        <p:inputText value="#{programacionPedidoMB.tipoCemento.descripcion}" style="width: 520px;"  
+                                     placeholder="(ingrese una descripción)">
+                            <p:ajax event="blur" process="@this"  />
+                        </p:inputText>                            
+                    </p:panelGrid> 
+
+                    <p:commandButton value="Cancelar" process="@this" 
+                                     style="float: right; margin-right: 10px; margin-bottom: 10px; margin-top: 10px"
+                                     class="boton boton-imgtxt-16 b-gris4 icon-cancelar-cerrar"
+                                     onclick="PF('dlgRegistro').hide();"/>
+
+                    <p:commandButton value="Guardar" process="@this" immediate="true"
+                                     class="boton boton-imgtxt-16 b-gris4 icon-guardar"
+                                     style="float: right; margin-right: 10px; margin-bottom: 10px; margin-top: 10px"       
+                                     action="#{programacionPedidoMB.registrarTipoCemento()}" onstart="start();" oncomplete="stop();"
+                                     update=":form:pgConcreto"/>
+                </p:dialog>
             </h:form>
         </p:outputPanel>
     </ui:define>

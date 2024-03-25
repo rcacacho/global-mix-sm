@@ -17,7 +17,7 @@
     </ui:define>
 
     <ui:define name="content">
-        <h:form id="frm_pedido">
+        <h:form id="frm_pedido">     
             <h:panelGrid columns="1" styleClass="panelLateralDerechoFormularioDinamico">                    
                 <p:button id="btnAgregar" value="" title="Registro" outcome="programacion.xhtml"
                           class="boton boton-img-32 b-gris4 icon-agregar-archivo"
@@ -211,7 +211,38 @@
                         </p:tabView>
                     </p:tab>
                     <p:tab title="Calendario">
- 
+                        <script type="text/javascript">
+                            $('.fc-prev-button, .fc-next-button, .fc-today-button').on('click.schedule', function () {
+                                PF('schedule').callBehavior('viewChange');
+                            });
+                        </script>
+
+                        <p:schedule id="schedule" value="#{listaPedidosMB.schedule}"  widgetVar="myschedule" timeZone="America/Guatemala" 
+                                    locale="es" minTime="7:00" maxTime="18:00" draggable="false" resizable="false">  
+                            <p:ajax event="eventSelect" listener="#{listaPedidosMB.onEventSelect}" update="@form" oncomplete="PF('dialogPedido').show();"   />
+                            <p:ajax event="eventResize" listener="#{listaPedidosMB.loadCalendario}" update="@form"/>
+                            <p:ajax event="viewChange" listener="#{listaPedidosMB.onViewChange}"  update="@form"  />
+                        </p:schedule>
+
+
+                        <div align="center" style="margin-top: 15px;">
+                            <p:panelGrid columns="3" style="text-align: center !important;" styleClass="no-border" >
+                                <p:outputPanel style="width: 180px;">
+                                    <div align="center">
+                                        <div id="rectangle" class="rowColorAmarillo" style="border: 1px solid black;"/>
+                                    </div>
+                                    En proceso
+                                </p:outputPanel>
+
+                                <p:outputPanel style="width: 150px;">
+                                    <div align="center">
+                                        <div id="rectangle" class="rowColorCeleste" style="border: 1px solid black;"/>
+                                    </div>
+                                    Finalizado
+                                </p:outputPanel>
+
+                            </p:panelGrid>
+                        </div>
                     </p:tab>
                 </p:tabView>
             </p:outputPanel>
@@ -258,6 +289,33 @@
                     <p:fileDownload value="#{listaPedidosMB.generReporte()}" />
                 </p:commandButton> 
             </p:dialog>
+
+            <p:dialog widgetVar="dialogPedido" id="dialogPedido" header="Detalle pedido" position="center" width="500px"  
+                      closable="true" modal="true" showEffect="clip" draggable="false" hideEffect="clip" resizable="true" >
+                <h:form id="frm_dialogo">
+                    <p:panelGrid id="eventDetails" styleClass="no-border"  columns="2" columnClasses="alignTop,alignTop"  style="font-size: 13px !important; vertical-align: top !important;">
+
+                        <p:outputLabel value="Cemento: " style="font-weight: bold"/>
+                        <p:outputLabel value="#{listaPedidosMB.pedidoSelected.idtipocemento.descripcion}" style="width: 200px" />
+
+                        <p:outputLabel value="Obra: " style="font-weight: bold"/>
+                        <p:outputLabel value="#{listaPedidosMB.pedidoSelected.obra}" style="width: 200px" />
+
+                        <p:outputLabel value="Fecha programada: " style="font-weight: bold"/>
+                        <p:outputLabel value="#{listaPedidosMB.pedidoSelected.fechapedido}" style="width: 200px" >
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Guatemala"  />
+                        </p:outputLabel>
+
+                        <p:outputLabel value="Estado: "  style="font-weight: bold"/>
+                        <p:outputLabel value="#{listaPedidosMB.pedidoSelected.idestadopedido.estado}" style="width: 200px" />                        
+                    </p:panelGrid>
+
+                    <br/>
+                    <div align="center">
+                        <p:commandButton id="addButton" value="Aceptar" style="font-size: 13px !important;" oncomplete="PF('dialogPedido').hide();" />
+                    </div>
+                </h:form>
+            </p:dialog> 
         </h:form>
     </ui:define>
 </ui:composition>

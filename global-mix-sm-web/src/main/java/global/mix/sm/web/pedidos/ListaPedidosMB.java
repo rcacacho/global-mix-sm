@@ -7,6 +7,7 @@ import global.mix.sm.api.entity.Cliente;
 import global.mix.sm.api.entity.Confirmacionpago;
 import global.mix.sm.api.entity.Estadopedido;
 import global.mix.sm.api.entity.Pedidos;
+import global.mix.sm.api.enums.EstadoPedido;
 import global.mix.sm.web.utils.JasperUtil;
 import global.mix.sm.web.utils.JsfUtil;
 import global.mix.sm.web.utils.ReporteJasper;
@@ -27,13 +28,18 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 import org.apache.log4j.Logger;
+import org.primefaces.component.schedule.Schedule;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 import org.primefaces.model.StreamedContent;
 
@@ -45,7 +51,7 @@ import org.primefaces.model.StreamedContent;
 @ViewScoped
 public class ListaPedidosMB implements Serializable {
 
-    private static final Logger log = Logger.getLogger(ListaPedidosMB.class);
+     private static final Logger log = Logger.getLogger(ListaPedidosMB.class);
 
     @EJB
     private PedidosBeanLocal pedidoBean;
@@ -68,11 +74,14 @@ public class ListaPedidosMB implements Serializable {
     private List<Estadopedido> listEstado;
     private Date fechaInicioReporte;
     private Date fechaFinReporte;
-    private ScheduleModel eventModel;
-    private String serverTimeZone = ZoneId.systemDefault().toString();
+    private ScheduleModel schedule;
+    private ScheduleModel lazyEventModel;
+    private ScheduleEvent pedidoCalendario = new DefaultScheduleEvent();
+    private Pedidos pedidoSelected;
+    private ScheduleModel lazyModel;
 
     public ListaPedidosMB() {
-        eventModel = new DefaultScheduleModel();
+        schedule = new DefaultScheduleModel();
     }
 
     @PostConstruct
@@ -108,6 +117,11 @@ public class ListaPedidosMB implements Serializable {
         fechaInicio = new Date();
         fechaFin = new Date();
         buscarFiltro();
+        loadCalendario();
+    }
+
+    public void loadData() {
+
     }
 
     public void verDetalle(Integer idPedido) {
@@ -258,6 +272,64 @@ public class ListaPedidosMB implements Serializable {
         }
     }
 
+    private DefaultScheduleEvent buildEvent(Pedidos pedido) {
+        DefaultScheduleEvent e = new DefaultScheduleEvent();
+        e.setDescription(pedido.getIdtipocemento().getDescripcion());
+        e.setEndDate(pedido.getFechapedido());
+        e.setStartDate(pedido.getFechapedido());
+        e.setTitle(pedido.getObra());
+        e.setData(pedido);
+        if (pedido.getIdestadopedido().getIdestadopedido().equals(EstadoPedido.EN_PROCESO.getValue())) {
+            e.setStyleClass("rowColorAmarillo");
+        }
+        if (pedido.getIdestadopedido().getIdestadopedido().equals(EstadoPedido.FINALIZADO.getValue())) {
+            e.setStyleClass("rowColorCeleste");
+        }
+        //e.setStyleClass(dto.getStyleClass());
+        return e;
+    }
+
+    public void loadCalendario() {
+        Calendar fecha = Calendar.getInstance();
+        int anio = fecha.get(Calendar.YEAR);
+        int mes = fecha.get(Calendar.MONTH) + 1;
+
+        schedule = new DefaultScheduleModel();
+        List<Pedidos> response = pedidoBean.listPedidoByMesAnio(mes, anio);
+        if (response != null) {
+            for (Pedidos ped : response) {
+                schedule.addEvent(buildEvent(ped));
+            }
+        }
+    }
+
+    public void onEventSelect(SelectEvent selectEvent) {
+        pedidoCalendario = (ScheduleEvent) selectEvent.getObject();
+        pedidoCalendario.getDescription();
+        pedidoSelected = (Pedidos) pedidoCalendario.getData();
+        log.debug("Evento seleccionado: " + pedidoSelected.toString());
+        Pedidos response = pedidoBean.findPedidoById(pedidoSelected.getIdpedido());
+        if (response != null) {
+            pedidoSelected = response;
+        }
+    }
+
+    public void onViewChange(SelectEvent selectEvent) {
+        String view = selectEvent.getObject().toString();
+
+        Schedule schedule = (Schedule) FacesContext.getCurrentInstance().getViewRoot().findComponent(":form:schedule");
+        if (schedule == null) {
+            System.out.println("------> es null es schedule..........");
+        }
+
+        AjaxBehaviorEvent behaviorEvent = (AjaxBehaviorEvent) selectEvent;
+
+        //ZoneId zoneId = CalendarUtils.calculateZoneId(schedule.getTimeZone());
+        //System.out.println("zoneId " + zoneId.toString());
+
+    }
+
+
     /*Metodos getters y setters*/
     public List<Pedidos> getListPedidos() {
         return listPedidos;
@@ -363,20 +435,36 @@ public class ListaPedidosMB implements Serializable {
         this.fechaFinReporte = fechaFinReporte;
     }
 
-    public ScheduleModel getEventModel() {
-        return eventModel;
+    public PedidosBeanLocal getPedidoBean() {
+        return pedidoBean;
     }
 
-    public void setEventModel(ScheduleModel eventModel) {
-        this.eventModel = eventModel;
+    public void setPedidoBean(PedidosBeanLocal pedidoBean) {
+        this.pedidoBean = pedidoBean;
     }
 
-    public String getServerTimeZone() {
-        return serverTimeZone;
+    public ScheduleModel getSchedule() {
+        return schedule;
     }
 
-    public void setServerTimeZone(String serverTimeZone) {
-        this.serverTimeZone = serverTimeZone;
+    public void setSchedule(ScheduleModel schedule) {
+        this.schedule = schedule;
+    }
+
+    public ScheduleModel getLazyEventModel() {
+        return lazyEventModel;
+    }
+
+    public void setLazyEventModel(ScheduleModel lazyEventModel) {
+        this.lazyEventModel = lazyEventModel;
+    }
+
+    public Pedidos getPedidoSelected() {
+        return pedidoSelected;
+    }
+
+    public void setPedidoSelected(Pedidos pedidoSelected) {
+        this.pedidoSelected = pedidoSelected;
     }
 
 }

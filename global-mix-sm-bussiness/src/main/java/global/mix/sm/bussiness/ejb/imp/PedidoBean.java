@@ -9,7 +9,9 @@ import global.mix.sm.api.entity.Detallepedidonormal;
 import global.mix.sm.api.entity.Estadopedido;
 import global.mix.sm.api.entity.Pedidos;
 import global.mix.sm.api.entity.Secuenciapedido;
+import global.mix.sm.api.entity.Tipocemento;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
@@ -55,6 +57,29 @@ public class PedidoBean implements PedidosBeanLocal {
                     c.getMessage(), c.getInvalidValue()));
         }
         return sb.toString();
+    }
+
+    private Date getDate(Integer dia, Integer mes, Integer anio) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.DAY_OF_MONTH, dia);
+        calendar.set(Calendar.MONTH, mes);
+        calendar.set(Calendar.YEAR, anio);
+        return calendar.getTime();
+    }
+
+    private Date obtenerFechaInicioDeMesYAnio(Integer mes, Integer anio) {
+        return getDate(1, mes - 1, anio);
+    }
+
+    private Date obtenerFechaFinDeMesYAnio(Integer mes, Integer anio) {
+        if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
+            return getDate(31, mes - 1, anio);
+        } else if (mes == 2) {
+            return getDate((anio % 4) == 0 ? 29 : 28, mes - 1, anio);
+        } else {
+            return getDate(30, mes - 1, anio);
+        }
     }
 
     @Override
@@ -243,19 +268,6 @@ public class PedidoBean implements PedidosBeanLocal {
             context.setRollbackOnly();
             return null;
         }
-    }
-
-    @Override
-    public List<Detallepedido> listDetallePedidoByIdPedido(Integer idpedido) {
-        List<Detallepedido> lst = em.createQuery("SELECT cl FROM Detallepedido cl WHERE cl.idpedido.idpedido =:idpedido ", Detallepedido.class)
-                .setParameter("idpedido", idpedido)
-                .getResultList();
-
-        if (lst == null || lst.isEmpty()) {
-            return null;
-        }
-
-        return lst;
     }
 
     @Override
@@ -467,6 +479,135 @@ public class PedidoBean implements PedidosBeanLocal {
             context.setRollbackOnly();
             return null;
         }
+    }
+
+    @Override
+    public List<Tipocemento> listTipoCemento() {
+        List<Tipocemento> lst = em.createQuery("SELECT qj FROM Tipocemento qj where qj.activo = true ", Tipocemento.class)
+                .getResultList();
+
+        if (lst == null || lst.isEmpty()) {
+            return null;
+        }
+
+        return lst;
+    }
+
+    @Override
+    public Tipocemento findTipoCemento(Integer idTipocemento) {
+        List<Tipocemento> lst = em.createQuery("SELECT cl FROM Tipocemento cl WHERE cl.idtipocemento =:idTipocemento ", Tipocemento.class)
+                .setParameter("idTipocemento", idTipocemento)
+                .getResultList();
+
+        if (lst == null || lst.isEmpty()) {
+            return null;
+        }
+
+        return lst.get(0);
+    }
+
+    @Override
+    public Tipocemento saveTipoCemento(Tipocemento tipo, String usuarioCreacion) {
+        try {
+            tipo.setActivo(true);
+            tipo.setFechacreacion(new Date());
+            tipo.setUsuariocreacion(usuarioCreacion);
+            em.persist(tipo);
+            em.flush();
+            return (tipo);
+        } catch (ConstraintViolationException ex) {
+            String validationError = getConstraintViolationExceptionAsString(ex);
+            log.error(validationError);
+            context.setRollbackOnly();
+            return null;
+        } catch (Exception ex) {
+            processException(ex);
+            context.setRollbackOnly();
+            return null;
+        }
+    }
+
+    @Override
+    public Tipocemento updateTipoCemento(Tipocemento tipo, String usuarioModificacion) {
+        try {
+            tipo.setFechamodificacion(new Date());
+            tipo.setUsuariomodificacion(usuarioModificacion);
+            em.merge(tipo);
+            em.flush();
+            return (tipo);
+        } catch (ConstraintViolationException ex) {
+            String validationError = getConstraintViolationExceptionAsString(ex);
+            log.error(validationError);
+            context.setRollbackOnly();
+            return null;
+        } catch (Exception ex) {
+            processException(ex);
+            context.setRollbackOnly();
+            return null;
+        }
+    }
+
+    @Override
+    public Tipocemento deleteTipoCemento(Tipocemento tipo, String usuarioEliminacion) {
+        try {
+            tipo.setFechaeliminacion(new Date());
+            tipo.setUsuarioeliminacion(usuarioEliminacion);
+            tipo.setActivo(false);
+            em.merge(tipo);
+            em.flush();
+            return (tipo);
+        } catch (ConstraintViolationException ex) {
+            String validationError = getConstraintViolationExceptionAsString(ex);
+            log.error(validationError);
+            context.setRollbackOnly();
+            return null;
+        } catch (Exception ex) {
+            processException(ex);
+            context.setRollbackOnly();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Pedidos> listPedidoByMesAnio(Integer mes, Integer anio) {
+        try {
+            return listPedidoByFechaInicio(obtenerFechaInicioDeMesYAnio(mes, anio), obtenerFechaFinDeMesYAnio(mes, anio));
+        } catch (Exception ex) {
+            processException(ex);
+            return null;
+        }
+    }
+
+    @Override
+    public List<Pedidos> listPedidoByFechaInicio(Date fechaInicio, Date fechaFin) {
+        if (fechaInicio != null) {
+            Calendar c = Calendar.getInstance();
+            c.setTime(fechaInicio);
+            c.set(Calendar.HOUR_OF_DAY, 0);
+            c.set(Calendar.MINUTE, 0);
+            c.set(Calendar.SECOND, 0);
+            fechaInicio = c.getTime();
+        }
+
+        if (fechaFin != null) {
+            Calendar c1 = Calendar.getInstance();
+            c1.setTime(fechaFin);
+            c1.set(Calendar.HOUR_OF_DAY, 23);
+            c1.set(Calendar.MINUTE, 59);
+            c1.set(Calendar.SECOND, 59);
+            fechaFin = c1.getTime();
+        }
+
+        List<Pedidos> lst = em.createQuery("SELECT qj FROM Pedidos qj where qj.activo = true and qj.fechapedido >=:fechaInicio and qj.fechapedido <=:fechaFin ", Pedidos.class)
+                .setParameter("fechaInicio", fechaInicio)
+                .setParameter("fechaFin", fechaFin)
+                .getResultList();
+
+        if (lst == null || lst.isEmpty()) {
+            return null;
+        }
+
+        return lst;
     }
 
 }

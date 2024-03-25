@@ -6,6 +6,7 @@ import global.mix.sm.api.entity.Asesor;
 import global.mix.sm.api.entity.Cliente;
 import global.mix.sm.api.entity.Estadopedido;
 import global.mix.sm.api.entity.Pedidos;
+import global.mix.sm.api.entity.Tipocemento;
 import global.mix.sm.api.entity.Tipopago;
 import global.mix.sm.api.enums.EstadoPedido;
 import global.mix.sm.web.utils.JsfUtil;
@@ -19,6 +20,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import org.apache.log4j.Logger;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -28,7 +30,7 @@ import org.apache.log4j.Logger;
 @ViewScoped
 public class ProgramacionPedidoMB implements Serializable {
 
-    private static final Logger log = Logger.getLogger(ProgramacionPedidoMB.class);
+ private static final Logger log = Logger.getLogger(ProgramacionPedidoMB.class);
 
     @EJB
     private PedidosBeanLocal pedidoBean;
@@ -40,6 +42,8 @@ public class ProgramacionPedidoMB implements Serializable {
     private List<Tipopago> listTipoPago;
     private Pedidos pedido;
     private boolean mostrarColocado;
+    private List<Tipocemento> listTipoCemento;
+    private Tipocemento tipoCemento;
 
     public ProgramacionPedidoMB() {
         pedido = new Pedidos();
@@ -67,6 +71,13 @@ public class ProgramacionPedidoMB implements Serializable {
         } else {
             listTipoPago = new ArrayList<>();
         }
+
+        List<Tipocemento> listCem = pedidoBean.listTipoCemento();
+        if (listCem != null) {
+            listTipoCemento = listCem;
+        } else {
+            listTipoCemento = new ArrayList<>();
+        }
     }
 
     public void registroPedido() throws IOException {
@@ -79,13 +90,13 @@ public class ProgramacionPedidoMB implements Serializable {
             pedido.setConfirmado(Boolean.FALSE);
         }
 
-        if (mostrarColocado){
-            if (pedido.getCantidadcobradacolocado() == null){
+        if (mostrarColocado) {
+            if (pedido.getCantidadcobradacolocado() == null) {
                 JsfUtil.addErrorMessage("Debe registrar una cantidad cobrada en colocado");
                 return;
             }
         }
-               
+
         Pedidos responseSave = pedidoBean.savePedido(pedido, SesionUsuarioMB.getUserName());
         if (responseSave != null) {
             JsfUtil.addSuccessMessage("Programación de pedido registrado exitosamente");
@@ -104,6 +115,26 @@ public class ProgramacionPedidoMB implements Serializable {
             mostrarColocado = Boolean.TRUE;
         } else {
             mostrarColocado = Boolean.FALSE;
+        }
+    }
+
+    public void abrirTipoCemento() {
+        tipoCemento = null;
+        tipoCemento = new Tipocemento();
+        RequestContext.getCurrentInstance().execute("PF('dlgRegistro').show()");
+    }
+
+    public void registrarTipoCemento() throws IOException {
+        if (tipoCemento.getDescripcion() == null) {
+            JsfUtil.addErrorMessage("Debe registrar una descripción");
+            return;
+        }
+
+        Tipocemento response = pedidoBean.saveTipoCemento(tipoCemento, SesionUsuarioMB.getUserName());
+        if (response != null) {
+            JsfUtil.addSuccessMessage("Tipo de cemento creado exitosamente!");
+            cargarDatos();
+            RequestContext.getCurrentInstance().execute("PF('dlgRegistro').hide()");
         }
     }
 
@@ -146,6 +177,22 @@ public class ProgramacionPedidoMB implements Serializable {
 
     public void setMostrarColocado(boolean mostrarColocado) {
         this.mostrarColocado = mostrarColocado;
+    }
+
+    public List<Tipocemento> getListTipoCemento() {
+        return listTipoCemento;
+    }
+
+    public void setListTipoCemento(List<Tipocemento> listTipoCemento) {
+        this.listTipoCemento = listTipoCemento;
+    }
+
+    public Tipocemento getTipoCemento() {
+        return tipoCemento;
+    }
+
+    public void setTipoCemento(Tipocemento tipoCemento) {
+        this.tipoCemento = tipoCemento;
     }
 
 }
