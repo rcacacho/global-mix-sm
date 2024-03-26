@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-03-2024 a las 21:21:32
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 26-03-2024 a las 13:52:35
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -635,15 +635,14 @@ CREATE TABLE `pedidos` (
   `idcliente` int(11) NOT NULL,
   `idtipopago` int(11) NOT NULL,
   `idestadopedido` int(11) NOT NULL,
+  `idtipocemento` int(11) NOT NULL,
   `tipopedido` int(11) DEFAULT NULL,
   `obra` varchar(500) NOT NULL,
   `elemento` varchar(100) NOT NULL,
   `volumen` double NOT NULL,
   `fraguado` int(11) DEFAULT NULL,
   `cantidadpagada` double DEFAULT NULL,
-  `kgcm3` int(11) DEFAULT NULL,
-  `agregado` varchar(100) DEFAULT NULL,
-  `revpulg` int(11) DEFAULT NULL,
+  `extraconcreto` varchar(250) DEFAULT NULL,
   `frec` int(11) DEFAULT NULL,
   `bombeo` varchar(25) NOT NULL,
   `dirbom` varchar(50) DEFAULT NULL,
@@ -668,11 +667,11 @@ CREATE TABLE `pedidos` (
 -- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `pedidos` (`idpedido`, `idasesor`, `idcliente`, `idtipopago`, `idestadopedido`, `tipopedido`, `obra`, `elemento`, `volumen`, `fraguado`, `cantidadpagada`, `kgcm3`, `agregado`, `revpulg`, `frec`, `bombeo`, `dirbom`, `colocado`, `tipocolocado`, `cantidadcobradacolocado`, `colocador`, `tuberia`, `laboratorio`, `confirmado`, `fechapedido`, `usuariocreacion`, `fechacreacion`, `usuariomodificacion`, `fechamodificacion`, `usuarioeliminacion`, `fechaeliminacion`, `activo`) VALUES
-(1, 1, 1, 1, 2, 2, 'San juanes', 'losa', 50, 28, NULL, 4000, '1.5', 6, 15, '', 'no', NULL, NULL, NULL, 'be-02salva', 0, 'no', 1, NULL, 'admin', '2024-01-31 07:00:59', 'admin', '2024-02-27 12:54:31', NULL, NULL, 1),
-(2, 1, 1, 2, 2, 1, 'SAN CRISTOBAL TOTO', 'pavimento', 50, 28, NULL, 3000, '1', 6, 15, '', 'no', 'No', NULL, NULL, 'no', 0, 'no', 1, NULL, 'admin', '2024-01-31 08:36:46', 'admin', '2024-02-15 15:56:10', NULL, NULL, 1),
-(3, 1, 2, 1, 2, 1, 'San Rafel pie de la Cuesta', 'Losa', 53, 28, 56500, 3000, '1', 6, 15, 'No', 'no', 'No', NULL, NULL, NULL, 0, 'No', NULL, NULL, 'admin', '2024-02-16 07:26:09', 'admin', '2024-02-16 08:01:09', NULL, NULL, 1),
-(4, 1, 1, 1, 2, NULL, 'prueba', 'losa', 50, 111, 1000, 11, '11', 11, 11, 'Si', 'a', 'No', NULL, NULL, NULL, 1, 'o', NULL, '2024-02-27 17:00:00', 'admin', '2024-02-28 09:31:45', 'admin', '2024-02-29 06:49:28', NULL, NULL, 1);
+INSERT INTO `pedidos` (`idpedido`, `idasesor`, `idcliente`, `idtipopago`, `idestadopedido`, `idtipocemento`, `tipopedido`, `obra`, `elemento`, `volumen`, `fraguado`, `cantidadpagada`, `extraconcreto`, `frec`, `bombeo`, `dirbom`, `colocado`, `tipocolocado`, `cantidadcobradacolocado`, `colocador`, `tuberia`, `laboratorio`, `confirmado`, `fechapedido`, `usuariocreacion`, `fechacreacion`, `usuariomodificacion`, `fechamodificacion`, `usuarioeliminacion`, `fechaeliminacion`, `activo`) VALUES
+(1, 1, 1, 1, 2, 0, 2, 'San juanes', 'losa', 50, 28, NULL, '4000', 15, '', 'no', NULL, NULL, NULL, 'be-02salva', 0, 'no', 1, NULL, 'admin', '2024-01-31 07:00:59', 'admin', '2024-02-27 12:54:31', NULL, NULL, 1),
+(2, 1, 1, 2, 2, 0, 1, 'SAN CRISTOBAL TOTO', 'pavimento', 50, 28, NULL, '3000', 15, '', 'no', 'No', NULL, NULL, 'no', 0, 'no', 1, NULL, 'admin', '2024-01-31 08:36:46', 'admin', '2024-02-15 15:56:10', NULL, NULL, 1),
+(3, 1, 2, 1, 2, 0, 1, 'San Rafel pie de la Cuesta', 'Losa', 53, 28, 56500, '3000', 15, 'No', 'no', 'No', NULL, NULL, NULL, 0, 'No', NULL, NULL, 'admin', '2024-02-16 07:26:09', 'admin', '2024-02-16 08:01:09', NULL, NULL, 1),
+(4, 1, 1, 1, 2, 0, NULL, 'prueba', 'losa', 50, 111, 1000, '11', 11, 'Si', 'a', 'No', NULL, NULL, NULL, 1, 'o', NULL, '2024-02-27 17:00:00', 'admin', '2024-02-28 09:31:45', 'admin', '2024-02-29 06:49:28', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -754,6 +753,24 @@ CREATE TABLE `secuenciapedido` (
 INSERT INTO `secuenciapedido` (`idsecuenciapedido`, `iddetallepedidonormal`, `secuencia`, `correlativo`, `fechacreacion`, `usuariocreacion`, `fechaeliminacion`, `usuarioeliminacion`, `activo`) VALUES
 (1, 2, 1, '2024-1', '2024-02-22 14:59:25', 'admin', NULL, NULL, 1),
 (2, 8, 2, '2024-2', '2024-02-28 09:40:21', 'admin', NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipocemento`
+--
+
+CREATE TABLE `tipocemento` (
+  `idtipocemento` int(11) NOT NULL,
+  `descripcion` varchar(1000) NOT NULL,
+  `fechacreacion` datetime NOT NULL,
+  `usuariocreacion` varchar(50) NOT NULL,
+  `fechamodificacion` datetime DEFAULT NULL,
+  `usuariomodificacion` varchar(50) DEFAULT NULL,
+  `fechaeliminacion` datetime DEFAULT NULL,
+  `usuarioeliminacion` varchar(50) DEFAULT NULL,
+  `activo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -986,7 +1003,8 @@ ALTER TABLE `pedidos`
   ADD KEY `FK_PedidoAsesor` (`idasesor`),
   ADD KEY `FK_PedidoCliente` (`idcliente`),
   ADD KEY `FK_PedidoTipoPago` (`idtipopago`),
-  ADD KEY `FK_EstadoPedido` (`idestadopedido`);
+  ADD KEY `FK_EstadoPedido` (`idestadopedido`),
+  ADD KEY `FK_TipoCemento` (`idtipocemento`);
 
 --
 -- Indices de la tabla `resumendiario`
@@ -1006,6 +1024,12 @@ ALTER TABLE `resumeobras`
 ALTER TABLE `secuenciapedido`
   ADD PRIMARY KEY (`idsecuenciapedido`),
   ADD KEY `FK_SecuenciaDetallePedido` (`iddetallepedidonormal`);
+
+--
+-- Indices de la tabla `tipocemento`
+--
+ALTER TABLE `tipocemento`
+  ADD PRIMARY KEY (`idtipocemento`);
 
 --
 -- Indices de la tabla `tipopago`
@@ -1150,6 +1174,12 @@ ALTER TABLE `resumeobras`
 --
 ALTER TABLE `secuenciapedido`
   MODIFY `idsecuenciapedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `tipocemento`
+--
+ALTER TABLE `tipocemento`
+  MODIFY `idtipocemento` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tipopago`
