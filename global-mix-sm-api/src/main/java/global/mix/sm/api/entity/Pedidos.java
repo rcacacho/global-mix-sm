@@ -38,9 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pedidos.findByVolumen", query = "SELECT p FROM Pedidos p WHERE p.volumen = :volumen"),
     @NamedQuery(name = "Pedidos.findByFraguado", query = "SELECT p FROM Pedidos p WHERE p.fraguado = :fraguado"),
     @NamedQuery(name = "Pedidos.findByCantidadpagada", query = "SELECT p FROM Pedidos p WHERE p.cantidadpagada = :cantidadpagada"),
-    @NamedQuery(name = "Pedidos.findByKgcm3", query = "SELECT p FROM Pedidos p WHERE p.kgcm3 = :kgcm3"),
-    @NamedQuery(name = "Pedidos.findByAgregado", query = "SELECT p FROM Pedidos p WHERE p.agregado = :agregado"),
-    @NamedQuery(name = "Pedidos.findByRevpulg", query = "SELECT p FROM Pedidos p WHERE p.revpulg = :revpulg"),
     @NamedQuery(name = "Pedidos.findByFrec", query = "SELECT p FROM Pedidos p WHERE p.frec = :frec"),
     @NamedQuery(name = "Pedidos.findByBombeo", query = "SELECT p FROM Pedidos p WHERE p.bombeo = :bombeo"),
     @NamedQuery(name = "Pedidos.findByDirbom", query = "SELECT p FROM Pedidos p WHERE p.dirbom = :dirbom"),
@@ -89,14 +86,8 @@ public class Pedidos implements Serializable {
     @Column(name = "cantidadpagada", precision = 22)
     private Double cantidadpagada;
 
-    @Column(name = "kgcm3")
-    private Integer kgcm3;
-
-    @Column(name = "agregado", length = 100)
-    private String agregado;
-
-    @Column(name = "revpulg")
-    private Integer revpulg;
+    @Column(name = "extraconcreto")
+    private String extraconcreto;
 
     @Column(name = "frec")
     private Integer frec;
@@ -263,28 +254,12 @@ public class Pedidos implements Serializable {
         this.cantidadpagada = cantidadpagada;
     }
 
-    public Integer getKgcm3() {
-        return kgcm3;
+    public String getExtraconcreto() {
+        return extraconcreto;
     }
 
-    public void setKgcm3(Integer kgcm3) {
-        this.kgcm3 = kgcm3;
-    }
-
-    public String getAgregado() {
-        return agregado;
-    }
-
-    public void setAgregado(String agregado) {
-        this.agregado = agregado;
-    }
-
-    public Integer getRevpulg() {
-        return revpulg;
-    }
-
-    public void setRevpulg(Integer revpulg) {
-        this.revpulg = revpulg;
+    public void setExtraconcreto(String extraconcreto) {
+        this.extraconcreto = extraconcreto;
     }
 
     public Integer getFrec() {

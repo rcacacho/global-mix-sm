@@ -153,16 +153,8 @@
                                         <p:outputLabel value="#{pedido.cantidadpagada}"/>
                                     </p:column>
 
-                                    <p:column headerText="kg/cm3" width="5%" style="text-align: left;">
-                                        <p:outputLabel value="#{pedido.kgcm3}"/>
-                                    </p:column>
-
-                                    <p:column headerText="rev./pulg." width="5%" style="text-align: left;">
-                                        <p:outputLabel value="#{pedido.revpulg}"/>
-                                    </p:column>
-
-                                    <p:column headerText="Agregado" width="6%" style="text-align: left;">
-                                        <p:outputLabel value="#{pedido.agregado}"/>
+                                    <p:column headerText="Tipo concreto" width="5%" style="text-align: left;">
+                                        <p:outputLabel value="#{pedido.idtipocemento.descripcion} #{pedido.extraconcreto}"/>
                                     </p:column>
 
                                     <p:column headerText="Tipo pago" width="5%" style="text-align: left;">
@@ -211,12 +203,6 @@
                         </p:tabView>
                     </p:tab>
                     <p:tab title="Calendario">
-                        <script type="text/javascript">
-                            $('.fc-prev-button, .fc-next-button, .fc-today-button').on('click.schedule', function () {
-                                PF('schedule').callBehavior('viewChange');
-                            });
-                        </script>
-
                         <p:schedule id="schedule" value="#{listaPedidosMB.schedule}"  widgetVar="myschedule" timeZone="America/Guatemala" 
                                     locale="es" minTime="7:00" maxTime="18:00" draggable="false" resizable="false">  
                             <p:ajax event="eventSelect" listener="#{listaPedidosMB.onEventSelect}" update="@form" oncomplete="PF('dialogPedido').show();"   />
@@ -309,11 +295,6 @@
                         <p:outputLabel value="Estado: "  style="font-weight: bold"/>
                         <p:outputLabel value="#{listaPedidosMB.pedidoSelected.idestadopedido.estado}" style="width: 200px" />                        
                     </p:panelGrid>
-
-                    <br/>
-                    <div align="center">
-                        <p:commandButton id="addButton" value="Aceptar" style="font-size: 13px !important;" oncomplete="PF('dialogPedido').hide();" />
-                    </div>
                 </h:form>
             </p:dialog> 
         </h:form>

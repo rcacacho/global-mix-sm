@@ -618,7 +618,9 @@ public class RegistroPedidoMB implements Serializable {
 
             parametros.put("metroCubicosEncargado", pedido.getVolumen());
             parametros.put("cliente", pedido.getIdcliente().getNombres() + " " + pedido.getIdcliente().getApellidos());
-            parametros.put("material", "Concreto " + pedido.getKgcm3() + " PSI de " + pedido.getAgregado() + " REV de " + pedido.getRevpulg());
+            if (pedido.getIdtipocemento() != null) {
+                parametros.put("cemento", pedido.getIdtipocemento().getDescripcion() + " " + pedido.getExtraconcreto());
+            }
             parametros.put("metroCubicosVendidos", idPedido);
             parametros.put("ubicacion", pedido.getObra());
             parametros.put("tipoObra", pedido.getElemento());
@@ -704,9 +706,9 @@ public class RegistroPedidoMB implements Serializable {
             parametros.put("piloto", detalle.getIdcamion().getEncargado());
             parametros.put("fraguado", detalle.getIdpedido().getFraguado());
             parametros.put("despacho", detalle.getCantidaddespachada());
-            
-            if (detalle.getIdpedido().getIdtipocemento() != null){
-                parametros.put("cemento", detalle.getIdpedido().getIdtipocemento().getDescripcion()  + " " + detalle.getIdpedido().getKgcm3());
+
+            if (detalle.getIdpedido().getIdtipocemento() != null) {
+                parametros.put("cemento", detalle.getIdpedido().getIdtipocemento().getDescripcion() + " " + detalle.getIdpedido().getExtraconcreto());
             }
 
             if (detalle.getIdpedido().getBombeo().equals("Si")) {
