@@ -51,7 +51,7 @@ import org.primefaces.model.StreamedContent;
 @ViewScoped
 public class ListaPedidosMB implements Serializable {
 
-     private static final Logger log = Logger.getLogger(ListaPedidosMB.class);
+    private static final Logger log = Logger.getLogger(ListaPedidosMB.class);
 
     @EJB
     private PedidosBeanLocal pedidoBean;
@@ -274,7 +274,9 @@ public class ListaPedidosMB implements Serializable {
 
     private DefaultScheduleEvent buildEvent(Pedidos pedido) {
         DefaultScheduleEvent e = new DefaultScheduleEvent();
-        e.setDescription(pedido.getIdtipocemento().getDescripcion());
+        if (pedido.getIdtipocemento() != null) {
+            e.setDescription(pedido.getIdtipocemento().getDescripcion());
+        }
         e.setEndDate(pedido.getFechapedido());
         e.setStartDate(pedido.getFechapedido());
         e.setTitle(pedido.getObra());
@@ -326,7 +328,6 @@ public class ListaPedidosMB implements Serializable {
 
         //ZoneId zoneId = CalendarUtils.calculateZoneId(schedule.getTimeZone());
         //System.out.println("zoneId " + zoneId.toString());
-
     }
 
 
@@ -468,4 +469,3 @@ public class ListaPedidosMB implements Serializable {
     }
 
 }
-
