@@ -141,26 +141,29 @@ public class ListaMaterialMB implements Serializable {
         }
 
         if (mat.getIdunidadmedida().getIdkilogramo() != null) {
-            mat.setCosto(mat.getValorneto() / (mat.getIdunidadmedida().getIdkilogramo().getValor() * mat.getExistenciainicial()));
+            Double totalUnidad = mat.getIdunidadmedida().getIdkilogramo().getValor() * mat.getExistenciainicial();
+            mat.setCosto(mat.getValorneto() / totalUnidad);
         } else {
             mat.setCosto(mat.getValorneto() / mat.getExistenciainicial());
         }
 
-//        Material responseSave = materialBean.saveMaterial(mat, SesionUsuarioMB.getUserName());
-//        if (responseSave != null) {
-//            Detallematerial detalle = new Detallematerial();
-//            detalle.setExistenciaActual(mat.getExistenciainicial());
-//            detalle.setIdmaterial(mat);
-//            detalle.setIngreso(mat.getExistenciainicial());
-//            detalle.setTotal(mat.getExistenciainicial() * mat.getValorneto());
-//            Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
-//
-//            JsfUtil.addSuccessMessage("Material creado exitosamente");
-//            cargarDatos();
-//            RequestContext.getCurrentInstance().execute("PF('dlgRegistro').hide()");
-//        } else {
-//            JsfUtil.addErrorMessage("Ocurrio un error verificar datos");
-//        }
+        mat.setValorneto(mat.getValor() / 1.12);
+
+        Material responseSave = materialBean.saveMaterial(mat, SesionUsuarioMB.getUserName());
+        if (responseSave != null) {
+            Detallematerial detalle = new Detallematerial();
+            detalle.setExistenciaActual(mat.getExistenciainicial());
+            detalle.setIdmaterial(mat);
+            detalle.setIngreso(mat.getExistenciainicial());
+            detalle.setTotal(mat.getExistenciainicial() * mat.getValorneto());
+            Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+
+            JsfUtil.addSuccessMessage("Material creado exitosamente");
+            cargarDatos();
+            RequestContext.getCurrentInstance().execute("PF('dlgRegistro').hide()");
+        } else {
+            JsfUtil.addErrorMessage("Ocurrio un error verificar datos");
+        }
     }
 
     public void eliminarMaterial(Material id) throws IOException {

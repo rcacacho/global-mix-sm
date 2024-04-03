@@ -619,7 +619,7 @@ public class RegistroPedidoMB implements Serializable {
             parametros.put("metroCubicosEncargado", pedido.getVolumen());
             parametros.put("cliente", pedido.getIdcliente().getNombres() + " " + pedido.getIdcliente().getApellidos());
             if (pedido.getIdtipocemento() != null) {
-                parametros.put("cemento", pedido.getIdtipocemento().getDescripcion() + " " + pedido.getExtraconcreto());
+                parametros.put("material", pedido.getIdtipocemento().getDescripcion() + " " + pedido.getExtraconcreto());
             }
             parametros.put("metroCubicosVendidos", idPedido);
             parametros.put("ubicacion", pedido.getObra());

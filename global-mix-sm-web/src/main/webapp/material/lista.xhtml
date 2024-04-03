@@ -180,9 +180,11 @@
 
                     <p:inputText value="#{listaMaterialMB.mat.material}" style="width: 220px;"   
                                  placeholder="(ingrese el nombre)">
+                        <p:ajax event="blur" />
                     </p:inputText>
                     <p:selectOneMenu  value="#{listaMaterialMB.unidadMedida}"  style="width: 220px;" converter="entityConverter"
                                       filter="true" filterMatchMode="contains">    
+                        <p:ajax event="itemSelect"/>
                         <f:selectItem itemLabel="Seleccione" itemValue="#{null}" noSelectionOption="true" /> 
                         <f:selectItems value="#{listaMaterialMB.listUnidadMedida}" var="unidad" itemLabel="#{unidad.unidadmedida} - #{unidad.descripcion}" itemValue="#{unidad}" />
                     </p:selectOneMenu>
@@ -192,10 +194,12 @@
 
                     <p:inputText value="#{listaMaterialMB.mat.existenciainicial}" style="width: 220px;" 
                                  placeholder="(ingrese la cantidad)">
+                        <p:ajax event="blur"  />
                     </p:inputText>
 
                     <p:inputText value="#{listaMaterialMB.mat.valor}" style="width: 220px;"  
                                  placeholder="(ingrese el valor)">
+                        <p:ajax event="blur" />
                     </p:inputText>                  
                 </p:panelGrid> 
 
@@ -204,7 +208,7 @@
                                  class="boton boton-imgtxt-16 b-gris4 icon-cancelar-cerrar"
                                  onclick="PF('dlgRegistro').hide();"/>
 
-                <p:commandButton value="Guardar" 
+                <p:commandButton value="Guardar" process="@this"
                                  class="boton boton-imgtxt-16 b-gris4 icon-guardar"
                                  style="float: right; margin-right: 10px; margin-bottom: 10px; margin-top: 10px"       
                                  action="#{listaMaterialMB.registroMaterial()}" onstart="start();" oncomplete="stop();"
