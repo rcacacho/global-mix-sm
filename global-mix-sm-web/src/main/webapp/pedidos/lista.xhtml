@@ -205,11 +205,10 @@
                     <p:tab title="Calendario">
                         <p:schedule id="schedule" value="#{listaPedidosMB.schedule}"  widgetVar="myschedule" timeZone="America/Guatemala" 
                                     locale="es" minTime="7:00" maxTime="18:00" draggable="false" resizable="false">  
-                            <p:ajax event="eventSelect" listener="#{listaPedidosMB.onEventSelect}" update="@form" oncomplete="PF('dialogPedido').show();"   />
-                            <p:ajax event="eventResize" listener="#{listaPedidosMB.loadCalendario}" update="@form"/>
+                            <p:ajax event="eventSelect" listener="#{listaPedidosMB.onEventSelect}" update=":frm_pedido:dialogPedido" oncomplete="PF('dialogPedido').show();"   />
+                            <p:ajax event="eventResize" listener="#{listaPedidosMB.loadCalendario}" update="schedule"/>
                             <p:ajax event="viewChange" listener="#{listaPedidosMB.onViewChange}"  update="@form"  />
                         </p:schedule>
-
 
                         <div align="center" style="margin-top: 15px;">
                             <p:panelGrid columns="3" style="text-align: center !important;" styleClass="no-border" >
@@ -267,17 +266,25 @@
                     </p:calendar>
                 </p:panelGrid>
 
-                <p:commandButton id="btnDes" value="Generar reporte" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+                <p:commandButton id="btnDes" value="Generar reporte excel" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
                                  process="@this" immediate="true"  oncomplete="PF('dlgGenerar').hide();" 
                                  class="boton boton-imgtxt-16 b-gris4 icon-imprimir"
                                  style="background-size: 20px 20px !important; float: right;
                                  background-position: 3px 1px !important; margin-top: 5px;">
-                    <p:fileDownload value="#{listaPedidosMB.generReporte()}" />
+                    <p:fileDownload value="#{listaPedidosMB.imprimirExcel()}" />
+                </p:commandButton> 
+
+                <p:commandButton id="btnDepdf" value="Generar reporte pdf" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+                                 process="@this" immediate="true"  oncomplete="PF('dlgGenerar').hide();" 
+                                 class="boton boton-imgtxt-16 b-gris4 icon-imprimir"
+                                 style="background-size: 20px 20px !important; float: right;
+                                 background-position: 3px 1px !important; margin-top: 5px;">
+                    <p:fileDownload value="#{listaPedidosMB.imprimirReportePdf()}" />
                 </p:commandButton> 
             </p:dialog>
 
             <p:dialog widgetVar="dialogPedido" id="dialogPedido" header="Detalle pedido" position="top" width="500px"  
-                      closable="true" modal="true" showEffect="clip" draggable="false" hideEffect="clip" resizable="true" >
+                      closable="true" modal="true" showEffect="clip" draggable="false" hideEffect="clip" resizable="true">
                 <h:form id="frm_dialogo">
                     <p:panelGrid id="eventDetails" styleClass="no-border"  columns="2" columnClasses="alignTop,alignTop"  style="font-size: 13px !important; vertical-align: top !important;">
 
@@ -295,6 +302,8 @@
                         <p:outputLabel value="Estado: "  style="font-weight: bold"/>
                         <p:outputLabel value="#{listaPedidosMB.pedidoSelected.idestadopedido.estado}" style="width: 200px" />                        
                     </p:panelGrid>
+
+                    <br/>
                 </h:form>
             </p:dialog> 
         </h:form>

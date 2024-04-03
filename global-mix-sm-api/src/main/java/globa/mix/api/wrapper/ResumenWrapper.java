@@ -1,4 +1,4 @@
-package global.mix.sm.api.wrp;
+package globa.mix.api.wrapper;
 
 import java.io.Serializable;
 import java.util.Date;

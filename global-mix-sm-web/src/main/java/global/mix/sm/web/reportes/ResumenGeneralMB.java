@@ -2,7 +2,7 @@ package global.mix.sm.web.reportes;
 
 import global.mix.sm.api.ejb.DespachosBeanLocal;
 import global.mix.sm.api.entity.Despachos;
-import global.mix.sm.api.wrp.ResumenWrapper;
+import globa.mix.api.wrapper.ResumenWrapper;
 import global.mix.sm.web.utils.JsfUtil;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

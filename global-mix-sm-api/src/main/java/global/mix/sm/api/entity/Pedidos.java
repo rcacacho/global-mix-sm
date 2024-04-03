@@ -78,7 +78,7 @@ public class Pedidos implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "volumen", nullable = false)
-    private double volumen;
+    private Double volumen;
 
     @Column(name = "fraguado")
     private Integer fraguado;
@@ -187,7 +187,7 @@ public class Pedidos implements Serializable {
         this.idpedido = idpedido;
     }
 
-    public Pedidos(Integer idpedido, String obra, String elemento, double volumen, String bombeo, String usuariocreacion, Date fechacreacion, boolean activo) {
+    public Pedidos(Integer idpedido, String obra, String elemento, Double volumen, String bombeo, String usuariocreacion, Date fechacreacion, boolean activo) {
         this.idpedido = idpedido;
         this.obra = obra;
         this.elemento = elemento;
@@ -230,11 +230,11 @@ public class Pedidos implements Serializable {
         this.elemento = elemento;
     }
 
-    public double getVolumen() {
+    public Double getVolumen() {
         return volumen;
     }
 
-    public void setVolumen(double volumen) {
+    public void setVolumen(Double volumen) {
         this.volumen = volumen;
     }
 

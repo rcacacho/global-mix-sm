@@ -1,87 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptPedidos" pageWidth="1370" pageHeight="595" orientation="Landscape" columnWidth="1330" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2217c0e0-b4b1-4c32-b9db-e539dda861b6">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="global"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="DIRECTORIO" class="java.lang.String"/>
 	<parameter name="IMAGE" class="java.lang.String"/>
 	<parameter name="usuario" class="java.lang.String"/>
-	<parameter name="FECHA_INICIO" class="java.sql.Date"/>
-	<parameter name="FECHA_FIN" class="java.util.Date"/>
 	<queryString language="SQL">
-		<![CDATA[select p.idpedido, concat(c.nombres, ' ', c.apellidos) cliente, concat(a.nombres , ' ', a.apellidos) asesor,
-p.obra ubicacion, p.fechacreacion, concat(tc.descripcion,' ', p.extraconcreto) material, p.elemento,
-case when p.bombeo = 'Si' then 'Con bombeo' else 'Sin bombeo' end bombeo, case when p.colocado = 'Si' then 'Con colocado' else 'Sin colocado' end colocado,
-p.volumen, e.estado, t.tipopago, p.fechacreacion fechaCreacion  
-from pedidos p 
-join asesor a ON p.idasesor = a.idasesor and a.activo = 1
-join cliente c on p.idcliente = c.idcliente and c.activo = 1
-join tipopago t on p.idtipopago = t.idtipopago and t.activo = 1
-join estadopedido e on p.idestadopedido = e.idestadopedido and e.activo = 1
-left join tipocemento tc on p.idtipocemento = tc.idtipocemento and tc.activo = 1
-where  p.fechacreacion >= $P{FECHA_INICIO}
-and p.fechacreacion <= $P{FECHA_FIN}]]>
+		<![CDATA[]]>
 	</queryString>
-	<field name="idpedido" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.name" value="idpedido"/>
-		<property name="com.jaspersoft.studio.field.label" value="idpedido"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
-	</field>
 	<field name="cliente" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="cliente"/>
-		<property name="com.jaspersoft.studio.field.label" value="cliente"/>
+		<fieldDescription><![CDATA[cliente]]></fieldDescription>
 	</field>
-	<field name="asesor" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="asesor"/>
-		<property name="com.jaspersoft.studio.field.label" value="asesor"/>
-	</field>
-	<field name="ubicacion" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="obra"/>
-		<property name="com.jaspersoft.studio.field.label" value="ubicacion"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
-	</field>
-	<field name="fechacreacion" class="java.sql.Timestamp">
-		<property name="com.jaspersoft.studio.field.name" value="fechacreacion"/>
-		<property name="com.jaspersoft.studio.field.label" value="fechacreacion"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
-	</field>
-	<field name="material" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="material"/>
-		<property name="com.jaspersoft.studio.field.label" value="material"/>
-	</field>
-	<field name="elemento" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="elemento"/>
-		<property name="com.jaspersoft.studio.field.label" value="elemento"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
-	</field>
-	<field name="bombeo" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="bombeo"/>
-		<property name="com.jaspersoft.studio.field.label" value="bombeo"/>
-	</field>
-	<field name="colocado" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="colocado"/>
-		<property name="com.jaspersoft.studio.field.label" value="colocado"/>
-	</field>
-	<field name="volumen" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.name" value="volumen"/>
-		<property name="com.jaspersoft.studio.field.label" value="volumen"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
+	<field name="fecha" class="java.util.Date">
+		<fieldDescription><![CDATA[fecha]]></fieldDescription>
 	</field>
 	<field name="estado" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="estado"/>
-		<property name="com.jaspersoft.studio.field.label" value="estado"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="estadopedido"/>
+		<fieldDescription><![CDATA[estado]]></fieldDescription>
 	</field>
-	<field name="tipopago" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="tipopago"/>
-		<property name="com.jaspersoft.studio.field.label" value="tipopago"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="tipopago"/>
+	<field name="ubicacion" class="java.lang.String">
+		<fieldDescription><![CDATA[ubicacion]]></fieldDescription>
 	</field>
-	<field name="fechaCreacion" class="java.sql.Timestamp">
-		<property name="com.jaspersoft.studio.field.name" value="fechacreacion"/>
-		<property name="com.jaspersoft.studio.field.label" value="fechaCreacion"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pedidos"/>
+	<field name="elemento" class="java.lang.String">
+		<fieldDescription><![CDATA[elemento]]></fieldDescription>
+	</field>
+	<field name="material" class="java.lang.String">
+		<fieldDescription><![CDATA[material]]></fieldDescription>
+	</field>
+	<field name="volumen" class="java.lang.Double">
+		<fieldDescription><![CDATA[volumen]]></fieldDescription>
+	</field>
+	<field name="bombeo" class="java.lang.String">
+		<fieldDescription><![CDATA[bombeo]]></fieldDescription>
+	</field>
+	<field name="colocado" class="java.lang.String">
+		<fieldDescription><![CDATA[colocado]]></fieldDescription>
+	</field>
+	<field name="asesor" class="java.lang.String">
+		<fieldDescription><![CDATA[asesor]]></fieldDescription>
 	</field>
 	<variable name="NO_FILA" class="java.lang.Integer">
 		<variableExpression><![CDATA[$V{NO_FILA}+1]]></variableExpression>
@@ -414,7 +371,7 @@ and p.fechacreacion <= $P{FECHA_FIN}]]>
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{fechaCreacion})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{fecha})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="830" y="0" width="100" height="16" uuid="d8d0c804-5f64-4c57-a37d-5489481fff81">
