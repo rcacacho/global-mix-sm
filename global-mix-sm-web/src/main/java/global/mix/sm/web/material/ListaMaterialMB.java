@@ -142,9 +142,11 @@ public class ListaMaterialMB implements Serializable {
 
         if (mat.getIdunidadmedida().getIdkilogramo() != null) {
             Double totalUnidad = mat.getIdunidadmedida().getIdkilogramo().getValor() * mat.getExistenciainicial();
-            mat.setCosto(mat.getValorneto() / totalUnidad);
+            Double valorNeto = (mat.getExistenciainicial() * mat.getValor()) / 1.12;
+            mat.setCosto(valorNeto / totalUnidad);
         } else {
-            mat.setCosto(mat.getValorneto() / mat.getExistenciainicial());
+            Double valorNeto = (mat.getExistenciainicial() * mat.getValor()) / 1.12;
+            mat.setCosto(valorNeto / mat.getExistenciainicial());
         }
 
         mat.setValorneto(mat.getValor() / 1.12);
