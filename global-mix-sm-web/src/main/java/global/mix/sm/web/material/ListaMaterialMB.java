@@ -130,7 +130,7 @@ public class ListaMaterialMB implements Serializable {
             return;
         }
 
-        mat.setValorneto((mat.getValor() * mat.getExistenciainicial()) / 1.12);
+        mat.setValorneto(mat.getValor() / 1.12);
 
         if (mat.getMaterial().equals("CEMENTO") || mat.getMaterial().equals("Cemento") || mat.getMaterial().equals("cemento")) {
             mat.setValorneto(mat.getValorneto() + 172.77);
@@ -142,14 +142,10 @@ public class ListaMaterialMB implements Serializable {
 
         if (mat.getIdunidadmedida().getIdkilogramo() != null) {
             Double totalUnidad = mat.getIdunidadmedida().getIdkilogramo().getValor() * mat.getExistenciainicial();
-            Double valorNeto = (mat.getExistenciainicial() * mat.getValor()) / 1.12;
-            mat.setCosto(valorNeto / totalUnidad);
+            mat.setCosto(mat.getValorneto() / totalUnidad);
         } else {
-            Double valorNeto = (mat.getExistenciainicial() * mat.getValor()) / 1.12;
-            mat.setCosto(valorNeto / mat.getExistenciainicial());
+            mat.setCosto(mat.getValorneto() / mat.getExistenciainicial());
         }
-
-        mat.setValorneto(mat.getValor() / 1.12);
 
         Material responseSave = materialBean.saveMaterial(mat, SesionUsuarioMB.getUserName());
         if (responseSave != null) {
@@ -200,13 +196,21 @@ public class ListaMaterialMB implements Serializable {
 
         materialAgregar.setExistenciainicial(existencia + materialAgregar.getExistenciainicial());
         materialAgregar.setValorneto(materialAgregar.getValor() / 1.12);
+
         if (mat.getValor() != materialAgregar.getValor()) {
-            if (mat.getIdunidadmedida().getIdkilogramo() != null) {
-                materialAgregar.setCosto(materialAgregar.getValorneto() / materialAgregar.getIdunidadmedida().getIdkilogramo().getValor());
+            if (materialAgregar.getIdunidadmedida().getIdkilogramo() != null) {
+                //materialAgregar.setCosto(materialAgregar.getValorneto() / materialAgregar.getIdunidadmedida().getIdkilogramo().getValor());
+                Double totalUnidad = materialAgregar.getIdunidadmedida().getIdkilogramo().getValor() * materialAgregar.getExistenciainicial();
+                materialAgregar.setCosto(materialAgregar.getValorneto() / totalUnidad);
+            } else {
+                materialAgregar.setCosto(materialAgregar.getValorneto() / materialAgregar.getExistenciainicial());
             }
-        } else if (materialAgregar.getCosto() == null) {
-            if (mat.getIdunidadmedida().getIdkilogramo() != null) {
-                materialAgregar.setCosto(materialAgregar.getValorneto() / materialAgregar.getIdunidadmedida().getIdkilogramo().getValor());
+        } else {
+            if (materialAgregar.getIdunidadmedida().getIdkilogramo() != null) {
+                Double totalUnidad = materialAgregar.getIdunidadmedida().getIdkilogramo().getValor() * materialAgregar.getExistenciainicial();
+                materialAgregar.setCosto(materialAgregar.getValorneto() / totalUnidad);
+            } else {
+                materialAgregar.setCosto(materialAgregar.getValorneto() / materialAgregar.getExistenciainicial());
             }
         }
 
