@@ -45,40 +45,46 @@ public class Detallematerial implements Serializable {
     @Basic(optional = false)
     @Column(name = "iddetallematerial", nullable = false)
     private Integer iddetallematerial;
-    
+
     @Basic(optional = false)
     @Column(name = "existencia_actual", nullable = false)
     private double existenciaActual;
 
     @Column(name = "ingreso", precision = 22)
     private Double ingreso;
-    
+
     @Column(name = "egreso", precision = 22)
     private Double egreso;
-    
-    @Column(name = "total", precision = 22)
+
+    @Column(name = "egresounidadmedida", precision = 22, scale = 0)
+    private Double egresounidadmedida;
+
+    @Column(name = "total", precision = 22, scale = 0)
     private Double total;
-    
+
+    @Column(name = "totalunidadmedida", precision = 22, scale = 0)
+    private Double totalunidadmedida;
+
     @Basic(optional = false)
     @Column(name = "fechacreacion", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
-    
+
     @Basic(optional = false)
     @Column(name = "usuariocreacion", nullable = false, length = 50)
     private String usuariocreacion;
-    
+
     @Column(name = "fechaeliminacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaeliminacion;
-    
+
     @Column(name = "usuarioeliminacion", length = 50)
     private String usuarioeliminacion;
-    
+
     @Basic(optional = false)
     @Column(name = "activo", nullable = false)
     private boolean activo;
-    
+
     @JoinColumn(name = "idmaterial", referencedColumnName = "idmaterial", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Material idmaterial;
@@ -186,6 +192,22 @@ public class Detallematerial implements Serializable {
         this.idmaterial = idmaterial;
     }
 
+    public Double getEgresounidadmedida() {
+        return egresounidadmedida;
+    }
+
+    public void setEgresounidadmedida(Double egresounidadmedida) {
+        this.egresounidadmedida = egresounidadmedida;
+    }
+
+    public Double getTotalunidadmedida() {
+        return totalunidadmedida;
+    }
+
+    public void setTotalunidadmedida(Double totalunidadmedida) {
+        this.totalunidadmedida = totalunidadmedida;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -210,5 +232,5 @@ public class Detallematerial implements Serializable {
     public String toString() {
         return "global.mix.sm.api.entity.Detallematerial[ iddetallematerial=" + iddetallematerial + " ]";
     }
-    
+
 }

@@ -29,6 +29,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -52,7 +53,7 @@ import org.primefaces.model.StreamedContent;
 @ViewScoped
 public class RegistroPedidoMB implements Serializable {
 
-    private static final Logger log = Logger.getLogger(RegistroPedidoMB.class);
+ private static final Logger log = Logger.getLogger(RegistroPedidoMB.class);
 
     @EJB
     private PedidosBeanLocal pedidoBean;
@@ -421,23 +422,77 @@ public class RegistroPedidoMB implements Serializable {
         for (Detallepedidonormal det : listDetallePedido) {
             if (det.getCantidadaditivo() != null) {
                 Material matAditvio = catalogoBean.findMaterialById(det.getIdaditivo());
-                matAditvio.setExistenciainicial(matAditvio.getExistenciainicial() - det.getCantidadaditivo());
-                if (matAditvio.getExistenciainicial() <= 0) {
-                    Double resto = det.getCantidadaditivo() - matAditvio.getExistenciainicial();
-                    matAditvio.setExistenciainicial(0.0);
-                    Material responseUpdate = materialBean.updateMaterial(matAditvio, SesionUsuarioMB.getUserName());
+                //matAditvio.setExistenciainicial(matAditvio.getExistenciainicial() - det.getCantidadaditivo());
+                if (matAditvio.getIdunidadmedida().getIdkilogramo() != null) {
+                    Double cantidadConvertida = det.getCantidadaditivo() / matAditvio.getIdunidadmedida().getIdkilogramo().getValor();
+                    matAditvio.setExistenciainicial(matAditvio.getExistenciainicial() - cantidadConvertida);
+                    matAditvio.setUnidadmedidaexistencia(matAditvio.getUnidadmedidaexistencia() - det.getCantidadaditivo());
+                } else {
+                    matAditvio.setExistenciainicial(matAditvio.getExistenciainicial() - det.getCantidadaditivo());
+                    matAditvio.setUnidadmedidaexistencia(matAditvio.getUnidadmedidaexistencia() - det.getCantidadaditivo());
+                }
 
-                    Detallematerial detalle = new Detallematerial();
-                    detalle.setExistenciaActual(matAditvio.getExistenciainicial());
-                    detalle.setIdmaterial(matAditvio);
-                    detalle.setEgreso(det.getCantidadaditivo());
-                    detalle.setTotal(matAditvio.getExistenciainicial() * matAditvio.getValorneto());
-                    Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+                if (matAditvio.getUnidadmedidaexistencia() <= 0) {
+                    if (matAditvio.getIdunidadmedida().getIdkilogramo() != null) {
+                        Double cantidadConvertida = det.getCantidadaditivo() / matAditvio.getIdunidadmedida().getIdkilogramo().getValor();
+                        Double resto = cantidadConvertida - matAditvio.getExistenciainicial();
+                        Double restoUnidad = det.getCantidadaditivo() - matAditvio.getExistenciainicial();
+                        matAditvio.setExistenciainicial(0.0);
+                        matAditvio.setUnidadmedidaexistencia(0.0);
+                        Material responseUpdate = materialBean.updateMaterial(matAditvio, SesionUsuarioMB.getUserName());
 
-                    Material matAditvioOtro = catalogoBean.findMaterialExistenciaMayorCeroById(det.getIdaditivo());
-                    matAditvioOtro.setExistenciainicial(resto);
-                    Material responseUpdateOtro = materialBean.updateMaterial(matAditvioOtro, SesionUsuarioMB.getUserName());
+                        Detallematerial detalle = new Detallematerial();
+                        detalle.setExistenciaActual(matAditvio.getExistenciainicial());
+                        detalle.setIdmaterial(matAditvio);
+                        detalle.setEgreso(det.getCantidadaditivo());
+                        detalle.setEgresounidadmedida(restoUnidad);
 
+                        if (matAditvio.getIdunidadmedida().getIdkilogramo() != null) {
+                            detalle.setEgresounidadmedida(cantidadConvertida);
+                        } else {
+                            detalle.setEgresounidadmedida(det.getCantidadaditivo());
+                        }
+
+                        detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matAditvio.getValorneto());
+                        detalle.setTotal(matAditvio.getExistenciainicial() * matAditvio.getValorneto());
+                        Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+
+                        Material matAditvioOtro = catalogoBean.findMaterialExistenciaMayorCeroById(det.getIdaditivo());
+                        if (matAditvioOtro != null) {
+                            matAditvioOtro.setExistenciainicial(resto);
+                            matAditvioOtro.setUnidadmedidaexistencia(restoUnidad);
+                            Material responseUpdateOtro = materialBean.updateMaterial(matAditvioOtro, SesionUsuarioMB.getUserName());
+                        }
+                    } else {
+                        Double resto = det.getCantidadaditivo() - matAditvio.getExistenciainicial();
+                        matAditvio.setExistenciainicial(0.0);
+                        matAditvio.setUnidadmedidaexistencia(0.0);
+                        Material responseUpdate = materialBean.updateMaterial(matAditvio, SesionUsuarioMB.getUserName());
+
+                        Detallematerial detalle = new Detallematerial();
+                        detalle.setExistenciaActual(matAditvio.getExistenciainicial());
+                        detalle.setIdmaterial(matAditvio);
+                        detalle.setEgreso(det.getCantidadaditivo());
+                        detalle.setEgresounidadmedida(det.getCantidadaditivo());
+
+                        if (matAditvio.getIdunidadmedida().getIdkilogramo() != null) {
+                            Double cantidadConvertida = det.getCantidadaditivo() / matAditvio.getIdunidadmedida().getIdkilogramo().getValor();
+                            detalle.setEgresounidadmedida(cantidadConvertida);
+                        } else {
+                            detalle.setEgresounidadmedida(det.getCantidadaditivo());
+                        }
+
+                        detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matAditvio.getValorneto());
+                        detalle.setTotal(matAditvio.getExistenciainicial() * matAditvio.getValorneto());
+                        Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+
+                        Material matAditvioOtro = catalogoBean.findMaterialExistenciaMayorCeroById(det.getIdaditivo());
+                        if (matAditvioOtro != null) {
+                            matAditvioOtro.setExistenciainicial(resto);
+                            matAditvioOtro.setUnidadmedidaexistencia(resto);
+                            Material responseUpdateOtro = materialBean.updateMaterial(matAditvioOtro, SesionUsuarioMB.getUserName());
+                        }
+                    }
                 } else {
                     Material responseUpdate = materialBean.updateMaterial(matAditvio, SesionUsuarioMB.getUserName());
 
@@ -445,6 +500,15 @@ public class RegistroPedidoMB implements Serializable {
                     detalle.setExistenciaActual(matAditvio.getExistenciainicial());
                     detalle.setIdmaterial(matAditvio);
                     detalle.setEgreso(det.getCantidadaditivo());
+
+                    if (matAditvio.getIdunidadmedida().getIdkilogramo() != null) {
+                        Double cantidadConvertida = det.getCantidadaditivo() / matAditvio.getIdunidadmedida().getIdkilogramo().getValor();
+                        detalle.setEgresounidadmedida(cantidadConvertida);
+                    } else {
+                        detalle.setEgresounidadmedida(det.getCantidadaditivo());
+                    }
+
+                    detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matAditvio.getValorneto());
                     detalle.setTotal(matAditvio.getExistenciainicial() * matAditvio.getValorneto());
                     Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
                 }
@@ -452,58 +516,368 @@ public class RegistroPedidoMB implements Serializable {
 
             if (det.getCantidadagua() != null) {
                 Material matAgua = catalogoBean.findMaterialById(det.getIdagua());
-                matAgua.setExistenciainicial(matAgua.getExistenciainicial() - det.getCantidadagua());
 
-                Material responseUpdate = materialBean.updateMaterial(matAgua, SesionUsuarioMB.getUserName());
+                if (matAgua.getIdunidadmedida().getIdkilogramo() != null) {
+                    Double cantidadConvertida = det.getCantidadagua() / matAgua.getIdunidadmedida().getIdkilogramo().getValor();
+                    matAgua.setExistenciainicial(matAgua.getExistenciainicial() - cantidadConvertida);
+                    matAgua.setUnidadmedidaexistencia(matAgua.getUnidadmedidaexistencia() - det.getCantidadagua());
+                } else {
+                    matAgua.setExistenciainicial(matAgua.getExistenciainicial() - det.getCantidadagua());
+                    matAgua.setUnidadmedidaexistencia(matAgua.getUnidadmedidaexistencia() - det.getCantidadagua());
+                }
 
-                Detallematerial detalle = new Detallematerial();
-                detalle.setExistenciaActual(matAgua.getExistenciainicial());
-                detalle.setIdmaterial(matAgua);
-                detalle.setEgreso(det.getCantidadagua());
-                detalle.setTotal(matAgua.getExistenciainicial() * matAgua.getValorneto());
-                Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+                if (matAgua.getUnidadmedidaexistencia() <= 0) {
+                    if (matAgua.getIdunidadmedida().getIdkilogramo() != null) {
+                        Double cantidadConvertida = det.getCantidadagua() / matAgua.getIdunidadmedida().getIdkilogramo().getValor();
+                        Double resto = cantidadConvertida - matAgua.getExistenciainicial();
+                        Double restoUnidad = det.getCantidadagua() - matAgua.getExistenciainicial();
+                        matAgua.setExistenciainicial(0.0);
+                        matAgua.setUnidadmedidaexistencia(0.0);
+                        Material responseUpdate = materialBean.updateMaterial(matAgua, SesionUsuarioMB.getUserName());
+
+                        Detallematerial detalle = new Detallematerial();
+                        detalle.setExistenciaActual(matAgua.getExistenciainicial());
+                        detalle.setIdmaterial(matAgua);
+                        detalle.setEgreso(det.getCantidadagua());
+
+                        if (matAgua.getIdunidadmedida().getIdkilogramo() != null) {
+                            detalle.setEgresounidadmedida(cantidadConvertida);
+                        } else {
+                            detalle.setEgresounidadmedida(det.getCantidadagua());
+                        }
+
+                        detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matAgua.getValorneto());
+                        detalle.setTotal(matAgua.getExistenciainicial() * matAgua.getValorneto());
+                        Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+
+                        Material matAguaOtro = catalogoBean.findMaterialExistenciaMayorCeroById(det.getIdaditivo());
+                        if (matAguaOtro != null) {
+                            matAguaOtro.setExistenciainicial(resto);
+                            matAguaOtro.setUnidadmedidaexistencia(restoUnidad);
+                            Material responseUpdateOtro = materialBean.updateMaterial(matAguaOtro, SesionUsuarioMB.getUserName());
+                        }
+                    } else {
+                        Double resto = det.getCantidadagua() - matAgua.getExistenciainicial();
+                        matAgua.setExistenciainicial(0.0);
+                        matAgua.setUnidadmedidaexistencia(0.0);
+                        Material responseUpdate = materialBean.updateMaterial(matAgua, SesionUsuarioMB.getUserName());
+                        Double cantidadConvertida = det.getCantidadagua() / matAgua.getIdunidadmedida().getIdkilogramo().getValor();
+
+                        Detallematerial detalle = new Detallematerial();
+                        detalle.setExistenciaActual(matAgua.getExistenciainicial());
+                        detalle.setIdmaterial(matAgua);
+                        detalle.setEgreso(det.getCantidadagua());
+
+                        if (matAgua.getIdunidadmedida().getIdkilogramo() != null) {
+                            detalle.setEgresounidadmedida(cantidadConvertida);
+                        } else {
+                            detalle.setEgresounidadmedida(det.getCantidadagua());
+                        }
+
+                        detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matAgua.getValorneto());
+                        detalle.setTotal(matAgua.getExistenciainicial() * matAgua.getValorneto());
+                        Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+
+                        Material matAguaOtro = catalogoBean.findMaterialExistenciaMayorCeroById(det.getIdaditivo());
+                        if (matAguaOtro != null) {
+                            matAguaOtro.setExistenciainicial(resto);
+                            matAguaOtro.setUnidadmedidaexistencia(resto);
+                            Material responseUpdateOtro = materialBean.updateMaterial(matAguaOtro, SesionUsuarioMB.getUserName());
+                        }
+                    }
+                } else {
+                    Material responseUpdate = materialBean.updateMaterial(matAgua, SesionUsuarioMB.getUserName());
+
+                    Detallematerial detalle = new Detallematerial();
+                    detalle.setExistenciaActual(matAgua.getExistenciainicial());
+                    detalle.setIdmaterial(matAgua);
+                    detalle.setEgreso(det.getCantidadagua());
+
+                    if (matAgua.getIdunidadmedida().getIdkilogramo() != null) {
+                        Double cantidadConvertida = det.getCantidadagua() / matAgua.getIdunidadmedida().getIdkilogramo().getValor();
+                        detalle.setEgresounidadmedida(cantidadConvertida);
+                    } else {
+                        detalle.setEgresounidadmedida(det.getCantidadagua());
+                    }
+
+                    detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matAgua.getValorneto());
+                    detalle.setTotal(matAgua.getExistenciainicial() * matAgua.getValorneto());
+                    Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+                }
             }
 
             if (det.getCantidadarena() != null) {
                 Material matAren = catalogoBean.findMaterialById(det.getIdarena());
-                matAren.setExistenciainicial(matAren.getExistenciainicial() - det.getCantidadarena());
+                if (matAren.getIdunidadmedida().getIdkilogramo() != null) {
+                    Double cantidadConvertida = det.getCantidadarena() / matAren.getIdunidadmedida().getIdkilogramo().getValor();
+                    matAren.setExistenciainicial(matAren.getExistenciainicial() - cantidadConvertida);
+                    matAren.setUnidadmedidaexistencia(matAren.getUnidadmedidaexistencia() - det.getCantidadarena());
+                } else {
+                    matAren.setExistenciainicial(matAren.getExistenciainicial() - det.getCantidadarena());
+                    matAren.setUnidadmedidaexistencia(matAren.getUnidadmedidaexistencia() - det.getCantidadarena());
+                }
 
-                Material responseUpdate = materialBean.updateMaterial(matAren, SesionUsuarioMB.getUserName());
+                if (matAren.getUnidadmedidaexistencia() <= 0) {
+                    if (matAren.getIdunidadmedida().getIdkilogramo() != null) {
+                        Double cantidadConvertida = det.getCantidadarena() / matAren.getIdunidadmedida().getIdkilogramo().getValor();
+                        Double resto = cantidadConvertida - matAren.getExistenciainicial();
+                        Double restoUnidad = det.getCantidadarena() - matAren.getExistenciainicial();
+                        matAren.setExistenciainicial(0.0);
+                        matAren.setUnidadmedidaexistencia(0.0);
+                        Material responseUpdate = materialBean.updateMaterial(matAren, SesionUsuarioMB.getUserName());
 
-                Detallematerial detalle = new Detallematerial();
-                detalle.setExistenciaActual(matAren.getExistenciainicial());
-                detalle.setIdmaterial(matAren);
-                detalle.setEgreso(det.getCantidadarena());
-                detalle.setTotal(matAren.getExistenciainicial() * matAren.getValorneto());
-                Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+                        Detallematerial detalle = new Detallematerial();
+                        detalle.setExistenciaActual(matAren.getExistenciainicial());
+                        detalle.setIdmaterial(matAren);
+                        detalle.setEgreso(det.getCantidadarena());
+
+                        if (matAren.getIdunidadmedida().getIdkilogramo() != null) {
+                            detalle.setEgresounidadmedida(cantidadConvertida);
+                        } else {
+                            detalle.setEgresounidadmedida(det.getCantidadarena());
+                        }
+
+                        detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matAren.getValorneto());
+                        detalle.setTotal(matAren.getExistenciainicial() * matAren.getValorneto());
+                        Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+
+                        Material matArenaOtro = catalogoBean.findMaterialExistenciaMayorCeroById(det.getIdaditivo());
+                        if (matArenaOtro != null) {
+                            matArenaOtro.setExistenciainicial(resto);
+                            matArenaOtro.setUnidadmedidaexistencia(restoUnidad);
+                            Material responseUpdateOtro = materialBean.updateMaterial(matArenaOtro, SesionUsuarioMB.getUserName());
+                        }
+                    } else {
+                        Double resto = det.getCantidadarena() - matAren.getExistenciainicial();
+                        matAren.setExistenciainicial(0.0);
+                        matAren.setUnidadmedidaexistencia(0.0);
+                        Material responseUpdate = materialBean.updateMaterial(matAren, SesionUsuarioMB.getUserName());
+
+                        Detallematerial detalle = new Detallematerial();
+                        detalle.setExistenciaActual(matAren.getExistenciainicial());
+                        detalle.setIdmaterial(matAren);
+                        detalle.setEgreso(det.getCantidadarena());
+
+                        if (matAren.getIdunidadmedida().getIdkilogramo() != null) {
+                            Double cantidadConvertida = det.getCantidadarena() / matAren.getIdunidadmedida().getIdkilogramo().getValor();
+                            detalle.setEgresounidadmedida(cantidadConvertida);
+                        } else {
+                            detalle.setEgresounidadmedida(det.getCantidadarena());
+                        }
+
+                        detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matAren.getValorneto());
+                        detalle.setTotal(matAren.getExistenciainicial() * matAren.getValorneto());
+                        Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+
+                        Material matArenaOtro = catalogoBean.findMaterialExistenciaMayorCeroById(det.getIdaditivo());
+                        if (matArenaOtro != null) {
+                            matArenaOtro.setExistenciainicial(resto);
+                            matArenaOtro.setUnidadmedidaexistencia(resto);
+                            Material responseUpdateOtro = materialBean.updateMaterial(matArenaOtro, SesionUsuarioMB.getUserName());
+                        }
+                    }
+                } else {
+                    Material responseUpdate = materialBean.updateMaterial(matAren, SesionUsuarioMB.getUserName());
+
+                    Detallematerial detalle = new Detallematerial();
+                    detalle.setExistenciaActual(matAren.getExistenciainicial());
+                    detalle.setIdmaterial(matAren);
+                    detalle.setEgreso(det.getCantidadarena());
+
+                    if (matAren.getIdunidadmedida().getIdkilogramo() != null) {
+                        Double cantidadConvertida = det.getCantidadarena() / matAren.getIdunidadmedida().getIdkilogramo().getValor();
+                        detalle.setEgresounidadmedida(cantidadConvertida);
+                    } else {
+                        detalle.setEgresounidadmedida(det.getCantidadarena());
+                    }
+
+                    detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matAren.getValorneto());
+                    detalle.setTotal(matAren.getExistenciainicial() * matAren.getValorneto());
+                    Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+                }
             }
 
             if (det.getCantidadcemento() != null) {
-                Material matCem = catalogoBean.findMaterialById(det.getIdarena());
-                matCem.setExistenciainicial(matCem.getExistenciainicial() - det.getCantidadcemento());
+                Material matCem = catalogoBean.findMaterialById(det.getIdcemento());
 
-                Material responseUpdate = materialBean.updateMaterial(matCem, SesionUsuarioMB.getUserName());
+                if (matCem.getIdunidadmedida().getIdkilogramo() != null) {
+                    Double cantidadConvertida = det.getCantidadcemento() / matCem.getIdunidadmedida().getIdkilogramo().getValor();
+                    matCem.setExistenciainicial(matCem.getExistenciainicial() - cantidadConvertida);
+                    matCem.setUnidadmedidaexistencia(matCem.getUnidadmedidaexistencia() - det.getCantidadcemento());
+                } else {
+                    matCem.setExistenciainicial(matCem.getExistenciainicial() - det.getCantidadcemento());
+                    matCem.setUnidadmedidaexistencia(matCem.getUnidadmedidaexistencia() - det.getCantidadcemento());
+                }
 
-                Detallematerial detalle = new Detallematerial();
-                detalle.setExistenciaActual(matCem.getExistenciainicial());
-                detalle.setIdmaterial(matCem);
-                detalle.setEgreso(det.getCantidadcemento());
-                detalle.setTotal(matCem.getExistenciainicial() * matCem.getValorneto());
-                Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+                if (matCem.getUnidadmedidaexistencia() <= 0) {
+                    if (matCem.getIdunidadmedida().getIdkilogramo() != null) {
+                        Double cantidadConvertida = det.getCantidadcemento() / matCem.getIdunidadmedida().getIdkilogramo().getValor();
+                        Double resto = cantidadConvertida - matCem.getExistenciainicial();
+                        Double restoUnidad = det.getCantidadcemento() - matCem.getExistenciainicial();
+                        matCem.setExistenciainicial(0.0);
+                        matCem.setUnidadmedidaexistencia(0.0);
+                        Material responseUpdate = materialBean.updateMaterial(matCem, SesionUsuarioMB.getUserName());
+
+                        Detallematerial detalle = new Detallematerial();
+                        detalle.setExistenciaActual(matCem.getExistenciainicial());
+                        detalle.setIdmaterial(matCem);
+                        detalle.setEgreso(det.getCantidadcemento());
+
+                        if (matCem.getIdunidadmedida().getIdkilogramo() != null) {
+                            detalle.setEgresounidadmedida(cantidadConvertida);
+                        } else {
+                            detalle.setEgresounidadmedida(det.getCantidadcemento());
+                        }
+
+                        detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matCem.getValorneto());
+                        detalle.setTotal(matCem.getExistenciainicial() * matCem.getValorneto());
+                        Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+
+                        Material matCementoOtro = catalogoBean.findMaterialExistenciaMayorCeroById(det.getIdaditivo());
+                        if (matCementoOtro != null) {
+                            matCementoOtro.setExistenciainicial(resto);
+                            matCementoOtro.setUnidadmedidaexistencia(restoUnidad);
+                            Material responseUpdateOtro = materialBean.updateMaterial(matCementoOtro, SesionUsuarioMB.getUserName());
+                        }
+                    } else {
+                        Double resto = det.getCantidadcemento() - matCem.getExistenciainicial();
+                        matCem.setExistenciainicial(0.0);
+                        matCem.setUnidadmedidaexistencia(0.0);
+                        Material responseUpdate = materialBean.updateMaterial(matCem, SesionUsuarioMB.getUserName());
+
+                        Detallematerial detalle = new Detallematerial();
+                        detalle.setExistenciaActual(matCem.getExistenciainicial());
+                        detalle.setIdmaterial(matCem);
+                        detalle.setEgreso(det.getCantidadcemento());
+
+                        if (matCem.getIdunidadmedida().getIdkilogramo() != null) {
+                            Double cantidadConvertida = det.getCantidadcemento() / matCem.getIdunidadmedida().getIdkilogramo().getValor();
+                            detalle.setEgresounidadmedida(cantidadConvertida);
+                        } else {
+                            detalle.setEgresounidadmedida(det.getCantidadcemento());
+                        }
+
+                        detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matCem.getValorneto());
+                        detalle.setTotal(matCem.getExistenciainicial() * matCem.getValorneto());
+                        Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+
+                        Material matCementoOtro = catalogoBean.findMaterialExistenciaMayorCeroById(det.getIdaditivo());
+                        if (matCementoOtro != null) {
+                            matCementoOtro.setExistenciainicial(resto);
+                            matCementoOtro.setUnidadmedidaexistencia(resto);
+                            Material responseUpdateOtro = materialBean.updateMaterial(matCementoOtro, SesionUsuarioMB.getUserName());
+                        }
+                    }
+                } else {
+                    Material responseUpdate = materialBean.updateMaterial(matCem, SesionUsuarioMB.getUserName());
+
+                    Detallematerial detalle = new Detallematerial();
+                    detalle.setExistenciaActual(matCem.getExistenciainicial());
+                    detalle.setIdmaterial(matCem);
+                    detalle.setEgreso(det.getCantidadcemento());
+
+                    if (matCem.getIdunidadmedida().getIdkilogramo() != null) {
+                        Double cantidadConvertida = det.getCantidadcemento() / matCem.getIdunidadmedida().getIdkilogramo().getValor();
+                        detalle.setEgresounidadmedida(cantidadConvertida);
+                    } else {
+                        detalle.setEgresounidadmedida(det.getCantidadcemento());
+                    }
+
+                    detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matCem.getValorneto());
+                    detalle.setTotal(matCem.getExistenciainicial() * matCem.getValorneto());
+                    Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+                }
             }
 
             if (det.getCantidadpiedrin() != null) {
-                Material matPie = catalogoBean.findMaterialById(det.getIdarena());
-                matPie.setExistenciainicial(matPie.getExistenciainicial() - det.getCantidadpiedrin());
+                Material matPie = catalogoBean.findMaterialById(det.getIdpiedrin());
+                if (matPie.getIdunidadmedida().getIdkilogramo() != null) {
+                    Double cantidadConvertida = det.getCantidadpiedrin() / matPie.getIdunidadmedida().getIdkilogramo().getValor();
+                    matPie.setExistenciainicial(matPie.getExistenciainicial() - cantidadConvertida);
+                    matPie.setUnidadmedidaexistencia(matPie.getUnidadmedidaexistencia() - det.getCantidadpiedrin());
+                } else {
+                    matPie.setExistenciainicial(matPie.getExistenciainicial() - det.getCantidadpiedrin());
+                    matPie.setUnidadmedidaexistencia(matPie.getUnidadmedidaexistencia() - det.getCantidadpiedrin());
+                }
 
-                Material responseUpdate = materialBean.updateMaterial(matPie, SesionUsuarioMB.getUserName());
+                if (matPie.getUnidadmedidaexistencia() <= 0) {
+                    if (matPie.getIdunidadmedida().getIdkilogramo() != null) {
+                        Double cantidadConvertida = det.getCantidadpiedrin() / matPie.getIdunidadmedida().getIdkilogramo().getValor();
+                        Double resto = cantidadConvertida - matPie.getExistenciainicial();
+                        Double restoUnidad = det.getCantidadpiedrin() - matPie.getExistenciainicial();
+                        matPie.setExistenciainicial(0.0);
+                        matPie.setUnidadmedidaexistencia(0.0);
+                        Material responseUpdate = materialBean.updateMaterial(matPie, SesionUsuarioMB.getUserName());
 
-                Detallematerial detalle = new Detallematerial();
-                detalle.setExistenciaActual(matPie.getExistenciainicial());
-                detalle.setIdmaterial(matPie);
-                detalle.setEgreso(det.getCantidadpiedrin());
-                detalle.setTotal(matPie.getExistenciainicial() * matPie.getValorneto());
-                Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+                        Detallematerial detalle = new Detallematerial();
+                        detalle.setExistenciaActual(matPie.getExistenciainicial());
+                        detalle.setIdmaterial(matPie);
+                        detalle.setEgreso(det.getCantidadpiedrin());
+
+                        if (matPie.getIdunidadmedida().getIdkilogramo() != null) {
+                            detalle.setEgresounidadmedida(cantidadConvertida);
+                        } else {
+                            detalle.setEgresounidadmedida(det.getCantidadpiedrin());
+                        }
+
+                        detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matPie.getValorneto());
+                        detalle.setTotal(matPie.getExistenciainicial() * matPie.getValorneto());
+                        Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+
+                        Material matPiedrinOtro = catalogoBean.findMaterialExistenciaMayorCeroById(det.getIdaditivo());
+                        if (matPiedrinOtro != null) {
+                            matPiedrinOtro.setExistenciainicial(resto);
+                            matPiedrinOtro.setUnidadmedidaexistencia(restoUnidad);
+                            Material responseUpdateOtro = materialBean.updateMaterial(matPiedrinOtro, SesionUsuarioMB.getUserName());
+                        }
+                    } else {
+                        Double resto = det.getCantidadpiedrin() - matPie.getExistenciainicial();
+                        matPie.setExistenciainicial(0.0);
+                        matPie.setUnidadmedidaexistencia(0.0);
+                        Material responseUpdate = materialBean.updateMaterial(matPie, SesionUsuarioMB.getUserName());
+
+                        Detallematerial detalle = new Detallematerial();
+                        detalle.setExistenciaActual(matPie.getExistenciainicial());
+                        detalle.setIdmaterial(matPie);
+                        detalle.setEgreso(det.getCantidadpiedrin());
+
+                        if (matPie.getIdunidadmedida().getIdkilogramo() != null) {
+                            Double cantidadConvertida = det.getCantidadpiedrin() / matPie.getIdunidadmedida().getIdkilogramo().getValor();
+                            detalle.setEgresounidadmedida(cantidadConvertida);
+                        } else {
+                            detalle.setEgresounidadmedida(det.getCantidadpiedrin());
+                        }
+
+                        detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matPie.getValorneto());
+                        detalle.setTotal(matPie.getExistenciainicial() * matPie.getValorneto());
+                        Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+
+                        Material matPiedrinOtro = catalogoBean.findMaterialExistenciaMayorCeroById(det.getIdaditivo());
+                        if (matPiedrinOtro != null) {
+                            matPiedrinOtro.setExistenciainicial(resto);
+                            matPiedrinOtro.setUnidadmedidaexistencia(resto);
+                            Material responseUpdateOtro = materialBean.updateMaterial(matPiedrinOtro, SesionUsuarioMB.getUserName());
+                        }
+                    }
+                } else {
+                    Material responseUpdate = materialBean.updateMaterial(matPie, SesionUsuarioMB.getUserName());
+
+                    Detallematerial detalle = new Detallematerial();
+                    detalle.setExistenciaActual(matPie.getExistenciainicial());
+                    detalle.setIdmaterial(matPie);
+                    detalle.setEgreso(det.getCantidadpiedrin());
+
+                    if (matPie.getIdunidadmedida().getIdkilogramo() != null) {
+                        Double cantidadConvertida = det.getCantidadpiedrin() / matPie.getIdunidadmedida().getIdkilogramo().getValor();
+                        detalle.setEgresounidadmedida(cantidadConvertida);
+                    } else {
+                        detalle.setEgresounidadmedida(det.getCantidadpiedrin());
+                    }
+
+                    detalle.setTotalunidadmedida(detalle.getEgresounidadmedida() * matPie.getValorneto());
+                    detalle.setTotal(matPie.getExistenciainicial() * matPie.getValorneto());
+                    Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
+                }
             }
 
             if (det.getIdpiedrin() != null) {
@@ -722,8 +1096,7 @@ public class RegistroPedidoMB implements Serializable {
             System.out.println(fechaComoCadena);
 
             SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
-            String hora = sdf2.format(detalle.getIdpedido().getFechapedido());
-            System.out.println(hora);
+            String hora = sdf2.format(new Date());
 
             parametros.put("horaPedido", hora);
             parametros.put("fechaPedido", fechaComoCadena);

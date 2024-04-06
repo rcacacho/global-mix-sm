@@ -71,6 +71,9 @@ public class Material implements Serializable {
     @Column(name = "costo", precision = 22)
     private Double costo;
 
+    @Column(name = "unidadmedidaexistencia", precision = 22, scale = 0)
+    private Double unidadmedidaexistencia;
+
     @Basic(optional = false)
     @Column(name = "fechacreacion", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -227,6 +230,14 @@ public class Material implements Serializable {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public Double getUnidadmedidaexistencia() {
+        return unidadmedidaexistencia;
+    }
+
+    public void setUnidadmedidaexistencia(Double unidadmedidaexistencia) {
+        this.unidadmedidaexistencia = unidadmedidaexistencia;
     }
 
     @XmlTransient
