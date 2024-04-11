@@ -29,7 +29,7 @@ import org.primefaces.event.RowEditEvent;
 @ViewScoped
 public class ListaMaterialMB implements Serializable {
 
-    private static final Logger log = Logger.getLogger(ListaMaterialMB.class);
+ private static final Logger log = Logger.getLogger(ListaMaterialMB.class);
 
     @EJB
     private MaterialBeanLocal materialBean;
@@ -148,9 +148,11 @@ public class ListaMaterialMB implements Serializable {
         Material responseSave = materialBean.saveMaterial(mat, SesionUsuarioMB.getUserName());
         if (responseSave != null) {
             Detallematerial detalle = new Detallematerial();
+            Double cantidadConvertida = mat.getExistenciainicial() * mat.getIdunidadmedida().getIdkilogramo().getValor();
             detalle.setExistenciaActual(mat.getExistenciainicial());
             detalle.setIdmaterial(mat);
             detalle.setIngreso(mat.getExistenciainicial());
+            detalle.setIngresounidadmedida(cantidadConvertida);
             detalle.setTotal(mat.getExistenciainicial() * mat.getValorneto());
             Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
 
@@ -212,7 +214,9 @@ public class ListaMaterialMB implements Serializable {
         Material responseSave = materialBean.updateMaterial(materialAgregar, SesionUsuarioMB.getUserName());
         if (responseSave != null) {
             Detallematerial detalle = new Detallematerial();
+            Double cantidadConvertida = mat.getExistenciainicial() * mat.getIdunidadmedida().getIdkilogramo().getValor();
             detalle.setExistenciaActual(mat.getExistenciainicial());
+            detalle.setIngresounidadmedida(cantidadConvertida);
             detalle.setIdmaterial(mat);
             detalle.setIngreso(existencia);
             Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
@@ -322,5 +326,4 @@ public class ListaMaterialMB implements Serializable {
     public void setUnidadMedida(Unidadmedida unidadMedida) {
         this.unidadMedida = unidadMedida;
     }
-
 }

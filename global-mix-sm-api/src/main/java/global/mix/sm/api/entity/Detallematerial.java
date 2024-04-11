@@ -56,6 +56,9 @@ public class Detallematerial implements Serializable {
     @Column(name = "egreso", precision = 22)
     private Double egreso;
 
+    @Column(name = "ingresounidadmedida", precision = 22, scale = 0)
+    private Double ingresounidadmedida;
+
     @Column(name = "egresounidadmedida", precision = 22, scale = 0)
     private Double egresounidadmedida;
 
@@ -182,6 +185,14 @@ public class Detallematerial implements Serializable {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public Double getIngresounidadmedida() {
+        return ingresounidadmedida;
+    }
+
+    public void setIngresounidadmedida(Double ingresounidadmedida) {
+        this.ingresounidadmedida = ingresounidadmedida;
     }
 
     public Material getIdmaterial() {
