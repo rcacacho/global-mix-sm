@@ -47,8 +47,8 @@ public class SesionUsuarioMB {
 
     public static boolean getRootUsuario() {
         HttpSession session = getSession();
-        if (session.getAttribute("root") != null) {
-            return (boolean) session.getAttribute("root");
+        if (session.getAttribute("administrador") != null) {
+            return (boolean) session.getAttribute("administrador");
         }
         return false;
     }
