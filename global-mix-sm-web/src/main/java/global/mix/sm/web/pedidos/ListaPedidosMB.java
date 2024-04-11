@@ -169,6 +169,7 @@ public class ListaPedidosMB implements Serializable {
                 if (fechaInicio != null) {
                     Calendar c = Calendar.getInstance();
                     c.setTime(fechaInicio);
+                    c.add(Calendar.DATE, -6);
                     c.set(Calendar.HOUR_OF_DAY, 0);
                     c.set(Calendar.MINUTE, 0);
                     c.set(Calendar.SECOND, 0);
@@ -570,7 +571,7 @@ public class ListaPedidosMB implements Serializable {
         if (listaPedidos != null) {
             ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
             String realPath = servletContext.getRealPath("/");
-            String nombre = "rptPedidos2";            
+            String nombre = "rptPedidos2";
             final List<WrapperPedidos> data = new ArrayList<>();
 
             for (Pedidos pedido : listaPedidos) {
@@ -888,6 +889,5 @@ public class ListaPedidosMB implements Serializable {
     public void setPedidoSelected(Pedidos pedidoSelected) {
         this.pedidoSelected = pedidoSelected;
     }
-
 
 }
