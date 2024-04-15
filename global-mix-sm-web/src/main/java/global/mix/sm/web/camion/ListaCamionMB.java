@@ -35,6 +35,10 @@ public class ListaCamionMB implements Serializable {
     private List<Camion> listCamionFiltrado;
     private Camion camion;
 
+    public ListaCamionMB() {
+        camion = new Camion();
+    }
+
     @PostConstruct
     void cargarDatos() {
         List<Camion> list = camionBean.ListCamiones();
