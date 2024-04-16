@@ -112,11 +112,11 @@ public class Camion implements Serializable {
         this.idcamion = idcamion;
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
