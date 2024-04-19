@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -70,6 +71,10 @@ public class Material implements Serializable {
 
     @Column(name = "costo", precision = 22)
     private Double costo;
+
+    @Size(max = 250)
+    @Column(name = "numerofactura", length = 250)
+    private String numerofactura;
 
     @Column(name = "unidadmedidaexistencia", precision = 22, scale = 0)
     private Double unidadmedidaexistencia;
@@ -238,6 +243,14 @@ public class Material implements Serializable {
 
     public void setUnidadmedidaexistencia(Double unidadmedidaexistencia) {
         this.unidadmedidaexistencia = unidadmedidaexistencia;
+    }
+
+    public String getNumerofactura() {
+        return numerofactura;
+    }
+
+    public void setNumerofactura(String numerofactura) {
+        this.numerofactura = numerofactura;
     }
 
     @XmlTransient
