@@ -69,36 +69,42 @@
                     </p:row>     
                     <p:row>       
                         <p:column>
-                            <p:outputLabel value="Valor factura" style="font-weight: bold;" />
+                            <p:outputLabel value="Número de factura" style="font-weight: bold;" />
                         </p:column>
                         <p:column >
-                            <p:outputLabel value="Valor neto" style="font-weight: bold; "/>
+                            <p:outputLabel value="Valor factura" style="font-weight: bold; "/>
                         </p:column>
                         <p:column >
-                            <p:outputLabel value="Fecha creación" style="font-weight: bold;"/>
+                            <p:outputLabel value="Valor neto" style="font-weight: bold;"/>
                         </p:column>
                     </p:row>
                     <p:row>
                         <p:column style=" width: 30%; ">
-                            <p:outputLabel value="#{detalleMaterialMB.material.valor}"  />
+                            <p:outputLabel value="#{detalleMaterialMB.material.numerofactura}"  />
                         </p:column>
                         <p:column >
-                            <p:outputLabel value="#{detalleMaterialMB.material.valorneto}"/>
+                            <p:outputLabel value="#{detalleMaterialMB.material.valor}"/>
                         </p:column>  
+                        <p:outputLabel value="#{detalleMaterialMB.material.valorneto}"/>
                         <p:column>
-                            <p:outputLabel value="#{detalleMaterialMB.material.fechacreacion}">
-                                <f:convertDateTime pattern="dd/MM/yyyy"/>
-                            </p:outputLabel>
                         </p:column>
                     </p:row> 
                     <p:row>              
                         <p:column >
                             <p:outputLabel value="Usuario creación" style="font-weight: bold;"/>
                         </p:column>
+                        <p:column >
+                            <p:outputLabel value="Fecha creación" style="font-weight: bold;"/>
+                        </p:column>
                     </p:row>
                     <p:row>                      
                         <p:column>
                             <p:outputLabel value="#{detalleMaterialMB.material.usuariocreacion}"/>
+                        </p:column>
+                        <p:column>
+                            <p:outputLabel value="#{detalleMaterialMB.material.fechacreacion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </p:outputLabel>
                         </p:column>
                     </p:row>
                 </p:panelGrid>
@@ -123,11 +129,11 @@
                     </p:column>
 
                     <p:column headerText="Ingresos" width="7%">
-                        <p:outputLabel value="#{det.ingreso}"/>
+                        <p:outputLabel value="#{det.ingresounidadmedida}"/>
                     </p:column>
 
                     <p:column headerText="Egresos" width="7%">
-                        <p:outputLabel value="#{det.egreso}"/>
+                        <p:outputLabel value="#{det.egresounidadmedida}"/>
                     </p:column>
 
                     <p:column headerText="Total" width="6%" >

@@ -148,11 +148,16 @@ public class ListaMaterialMB implements Serializable {
         Material responseSave = materialBean.saveMaterial(mat, SesionUsuarioMB.getUserName());
         if (responseSave != null) {
             Detallematerial detalle = new Detallematerial();
-            Double cantidadConvertida = mat.getExistenciainicial() * mat.getIdunidadmedida().getIdkilogramo().getValor();
+            if (mat.getIdunidadmedida().getIdkilogramo() != null) {
+                Double cantidadConvertida = mat.getExistenciainicial() * mat.getIdunidadmedida().getIdkilogramo().getValor();
+                detalle.setIngresounidadmedida(cantidadConvertida);
+            } else {
+                detalle.setIngresounidadmedida(mat.getExistenciainicial());
+            }
+
             detalle.setExistenciaActual(mat.getExistenciainicial());
             detalle.setIdmaterial(mat);
             detalle.setIngreso(mat.getExistenciainicial());
-            detalle.setIngresounidadmedida(cantidadConvertida);
             detalle.setTotal(mat.getExistenciainicial() * mat.getValorneto());
             Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
 
@@ -214,10 +219,15 @@ public class ListaMaterialMB implements Serializable {
         Material responseSave = materialBean.updateMaterial(materialAgregar, SesionUsuarioMB.getUserName());
         if (responseSave != null) {
             Detallematerial detalle = new Detallematerial();
-            Double cantidadConvertida = mat.getExistenciainicial() * mat.getIdunidadmedida().getIdkilogramo().getValor();
-            detalle.setExistenciaActual(mat.getExistenciainicial());
-            detalle.setIngresounidadmedida(cantidadConvertida);
-            detalle.setIdmaterial(mat);
+            if (materialAgregar.getIdunidadmedida().getIdkilogramo() != null) {
+                Double cantidadConvertida = materialAgregar.getExistenciainicial() * materialAgregar.getIdunidadmedida().getIdkilogramo().getValor();
+                detalle.setIngresounidadmedida(cantidadConvertida);
+            } else {
+                detalle.setIngresounidadmedida(materialAgregar.getExistenciainicial());
+            }
+
+            detalle.setExistenciaActual(materialAgregar.getExistenciainicial());
+            detalle.setIdmaterial(materialAgregar);
             detalle.setIngreso(existencia);
             Detallematerial responseDetalle = materialBean.saveDetalleMaterial(detalle, SesionUsuarioMB.getUserName());
 

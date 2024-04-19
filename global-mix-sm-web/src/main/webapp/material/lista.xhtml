@@ -104,6 +104,7 @@
                                      rowIndexVar="rowId" style="width: 100%;" editable="true"
                                      widgetVar="wv_material" filteredValue="#{listaMaterialMB.listMaterialFiltrado}">
 
+                            <p:ajax event="rowEdit" listener="#{listaMaterialMB.onRowEditMaterial}" update=":frm_material:tab_table:dt_material" />
                             <p:column headerText="No." style="width: 5%;">
                                 #{rowId+1}
                             </p:column>
@@ -128,6 +129,22 @@
                                 <p:outputLabel value="#{mate.existenciainicial}"/>
                             </p:column>
 
+                            <p:column headerText="Existencia unidades" width="7%">
+                                <p:outputLabel value="#{mate.unidadmedidaexistencia}"/>
+                            </p:column>
+
+                            <p:column headerText="Número factura" width="7%" filterMatchMode="contains"  
+                                      filterBy="#{mate.numerofactura}" filterStyle="width: 100%">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <p:outputLabel value="#{mate.numerofactura}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText  value="#{mate.numerofactura}" style="width: 100px;"/>
+                                    </f:facet>
+                                </p:cellEditor>                                
+                            </p:column>
+
                             <p:column headerText="Valor factura" width="7%" filterMatchMode="contains"  
                                       filterBy="#{mate.valor}" filterStyle="width: 100%">
                                 <p:outputLabel value="#{mate.valor}"/>
@@ -138,15 +155,15 @@
                                 <p:outputLabel value="#{mate.valorneto}"/>
                             </p:column>  
 
-                            <p:column headerText="Kilogramos" width="10%" >
+                            <p:column headerText="Kilogramos" width="9%" >
                                 <p:outputLabel value="#{mate.idunidadmedida.idkilogramo.valor}"/>
                             </p:column>  
 
-                            <p:column headerText="Costo material" width="8%" >                                
+                            <p:column headerText="Costo material" width="7%" >                                
                                 <p:outputLabel value="#{mate.costo}"/>
                             </p:column>  
 
-                            <p:column headerText="Fecha ingreso" width="7%">
+                            <p:column headerText="Fecha ingreso" width="6%">
                                 <p:outputLabel value="#{mate.fechacreacion}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </p:outputLabel>
@@ -194,13 +211,21 @@
 
                     <p:inputText value="#{listaMaterialMB.mat.existenciainicial}" style="width: 220px;" 
                                  placeholder="(ingrese la cantidad)">
-                        <p:ajax event="blur"  />
+                        <p:ajax event="blur" />
                     </p:inputText>
 
                     <p:inputText value="#{listaMaterialMB.mat.valor}" style="width: 220px;"  
                                  placeholder="(ingrese el valor)">
                         <p:ajax event="blur" />
                     </p:inputText>                  
+
+                    <p:outputLabel value="Número de factura:" style="font-weight: bold;" />
+                    <p:outputLabel value="" style="font-weight: bold;" />
+
+                    <p:inputText value="#{listaMaterialMB.mat.numerofactura}" style="width: 220px;"  
+                                 placeholder="(ingrese el valor)">
+                        <p:ajax event="blur" />
+                    </p:inputText>                 
                 </p:panelGrid> 
 
                 <p:commandButton value="Cancelar" process="@this" 
@@ -208,7 +233,7 @@
                                  class="boton boton-imgtxt-16 b-gris4 icon-cancelar-cerrar"
                                  onclick="PF('dlgRegistro').hide();"/>
 
-                <p:commandButton value="Guardar" process="@this"
+                <p:commandButton value="Guardar" 
                                  class="boton boton-imgtxt-16 b-gris4 icon-guardar"
                                  style="float: right; margin-right: 10px; margin-bottom: 10px; margin-top: 10px"       
                                  action="#{listaMaterialMB.registroMaterial()}" onstart="start();" oncomplete="stop();"
@@ -247,6 +272,13 @@
                     <p:inputText value="#{listaMaterialMB.materialAgregar.valor}" style="width: 220px;"  
                                  placeholder="(ingrese el valor)">
                     </p:inputText>
+
+                    <p:outputLabel value="Número factura:" style="font-weight: bold;" />  
+                    <p:outputLabel value="" style="font-weight: bold;" />  
+
+                    <p:inputText value="#{listaMaterialMB.materialAgregar.numerofactura}" style="width: 220px;"  
+                                 placeholder="(ingrese el valor)">
+                    </p:inputText>                      
                 </p:panelGrid> 
 
                 <p:commandButton value="Cancelar" process="@this" 
