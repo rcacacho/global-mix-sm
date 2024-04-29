@@ -577,16 +577,13 @@ public class ListaPedidosMB implements Serializable {
             for (Pedidos pedido : listaPedidos) {
                 WrapperPedidos wrapper = new WrapperPedidos();
                 wrapper.setAsesor(pedido.getIdasesor().getNombres() + ' ' + pedido.getIdasesor().getApellidos());
-                if (pedido.getBombeo().equals("Si")) {
-                    wrapper.setBombeo("Con bombeo");
-                } else {
-                    wrapper.setBombeo("Sin bombeo");
-                }
+                wrapper.setBombeo(pedido.getDirbom());
                 wrapper.setCliente(pedido.getIdcliente().getNombres() + ' ' + pedido.getIdcliente().getApellidos());
+                
                 if (pedido.getColocado().equals("Si")) {
-                    wrapper.setBombeo("Con colocado");
+                    wrapper.setColocado("Con colocado");
                 } else {
-                    wrapper.setBombeo("Sin colocado");
+                    wrapper.setColocado("Sin colocado");
                 }
                 wrapper.setElemento(pedido.getElemento());
                 wrapper.setEstado(pedido.getIdestadopedido().getEstado());

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptPedidos" pageWidth="1370" pageHeight="595" orientation="Landscape" columnWidth="1330" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2217c0e0-b4b1-4c32-b9db-e539dda861b6">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptPedidos" pageWidth="1410" pageHeight="595" orientation="Landscape" columnWidth="1370" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2217c0e0-b4b1-4c32-b9db-e539dda861b6">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<parameter name="DIRECTORIO" class="java.lang.String"/>
 	<parameter name="IMAGE" class="java.lang.String"/>
 	<parameter name="usuario" class="java.lang.String"/>
@@ -258,7 +258,7 @@
 				<text><![CDATA[ESTADO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="1230" y="0" width="100" height="19" forecolor="#FFFFFF" backcolor="#345AC2" uuid="ebd01267-976f-4574-8d87-6e5f7f7bbed3">
+				<reportElement mode="Opaque" x="1230" y="0" width="140" height="19" forecolor="#FFFFFF" backcolor="#345AC2" uuid="ebd01267-976f-4574-8d87-6e5f7f7bbed3">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="local_mesure_unitwidth" value="pixel"/>
@@ -273,14 +273,14 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[FECHA]]></text>
+				<text><![CDATA[FECHA Y HORA PEDIDO]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="16" splitType="Stretch">
 			<staticText>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="1330" height="16" backcolor="#D9DBDB" uuid="bcb8c885-b24f-4a18-a391-eebfaf9deecf">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="1370" height="16" backcolor="#D9DBDB" uuid="bcb8c885-b24f-4a18-a391-eebfaf9deecf">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<printWhenExpression><![CDATA[new Boolean( $V{PAGE_COUNT}.intValue() % 2 ==0 )]]></printWhenExpression>
@@ -365,13 +365,13 @@
 				<textFieldExpression><![CDATA[$F{elemento}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="1230" y="0" width="100" height="16" uuid="7220c86a-9f13-46fb-af1d-7d89211cbbd7">
+				<reportElement stretchType="RelativeToTallestObject" x="1230" y="0" width="140" height="16" uuid="7220c86a-9f13-46fb-af1d-7d89211cbbd7">
 					<property name="local_mesure_unity" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{fecha})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy HH:mm").format($F{fecha})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="830" y="0" width="100" height="16" uuid="d8d0c804-5f64-4c57-a37d-5489481fff81">
@@ -468,7 +468,7 @@
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date())]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1182" y="2" width="100" height="22" uuid="3400686c-19a4-4152-8908-a64242a08e0e">
+				<reportElement x="1222" y="2" width="100" height="22" uuid="3400686c-19a4-4152-8908-a64242a08e0e">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -478,7 +478,7 @@
 				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="1282" y="2" width="48" height="22" uuid="2a94caaf-389f-4ef3-87dc-df681eebb50d">
+				<reportElement x="1322" y="2" width="48" height="22" uuid="2a94caaf-389f-4ef3-87dc-df681eebb50d">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
